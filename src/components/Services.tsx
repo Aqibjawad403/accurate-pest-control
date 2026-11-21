@@ -7,11 +7,13 @@ export default function Services({
   showViewAll = true,
   background = "gray",
   overlapCards = false,
+  overlapStyle = "cards",
   limit,
 }: {
   showViewAll?: boolean;
   background?: "gray" | "white";
   overlapCards?: boolean;
+  overlapStyle?: "cards" | "dividers";
   limit?: number;
 }) {
   const services = (limit ? pestTreatments.slice(0, limit) : pestTreatments).map(
@@ -21,6 +23,7 @@ export default function Services({
       href: `/services?pest=${index}`,
     }),
   );
+  const useDividers = !overlapCards || overlapStyle === "dividers";
 
   return (
     <section
@@ -47,7 +50,9 @@ export default function Services({
       </div>
 
       <div
-        className={`mt-14 flex flex-col ${overlapCards ? "gap-4" : ""}`}
+        className={`mt-14 flex flex-col ${
+          overlapCards && overlapStyle === "cards" ? "gap-4" : ""
+        }`}
         data-gsap-overlap-cards={overlapCards ? "" : undefined}
       >
         {services.map((service, index) => (
@@ -55,8 +60,10 @@ export default function Services({
             key={service.number}
             className={`grid grid-cols-1 items-center gap-8 py-10 lg:grid-cols-[1fr_minmax(280px,640px)_1fr] lg:gap-10 ${
               overlapCards
-                ? "sticky rounded-[20px] border border-[#D8D8D8] bg-white px-6 shadow-[0_16px_40px_rgba(0,0,0,0.08)] max-sm:!top-3 max-sm:gap-5 max-sm:py-6 motion-reduce:!static motion-reduce:!transform-none"
-                : "border-b border-[#D8D8D8] last:border-b-0"
+                ? useDividers
+                  ? "sticky border-b border-[#D9D9D9] bg-white last:border-b-0 max-sm:!top-3 max-sm:gap-5 max-sm:py-6 motion-reduce:!static motion-reduce:!transform-none"
+                  : "sticky rounded-[20px] border border-[#D8D8D8] bg-white px-6 shadow-[0_16px_40px_rgba(0,0,0,0.08)] max-sm:!top-3 max-sm:gap-5 max-sm:py-6 motion-reduce:!static motion-reduce:!transform-none"
+                : "border-b border-[#D9D9D9] last:border-b-0"
             }`}
             style={
               overlapCards

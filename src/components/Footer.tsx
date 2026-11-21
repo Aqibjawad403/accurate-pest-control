@@ -221,13 +221,13 @@ export default function Footer() {
           <div className={styles.contactLinks}>
             <a href="tel:+9718008725" className={styles.contactLink}>
               <span className={styles.contactIcon}>
-                <ContactIcon kind="whatsapp" />
+                <ContactIcon kind="phone" />
               </span>
               <span>+971 800 8725,&nbsp; +971 4 375 6435</span>
             </a>
             <a href="tel:+971524496173" className={styles.contactLink}>
               <span className={styles.contactIcon}>
-                <ContactIcon kind="phone" />
+                <ContactIcon kind="whatsapp" />
               </span>
               <span>+971 52 449 6173,&nbsp; +971 52 152 8725</span>
             </a>

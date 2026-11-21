@@ -131,8 +131,8 @@ export default function OurTeam({
                 <h3 className="align-bottom text-[32px] leading-none font-semibold tracking-[0.2px] text-white max-sm:text-[24px]">
                   {member.name}
                 </h3>
-                <div className="flex items-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
-                  {member.contacts.map((contact) => (
+                <div className="flex items-center gap-2 overflow-hidden">
+                  {member.contacts.map((contact, contactIndex) => (
                     <a
                       key={contact.href}
                       href={contact.href}
@@ -145,7 +145,8 @@ export default function OurTeam({
                           : undefined
                       }
                       aria-label={contact.label}
-                      className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#32A849] transition-transform duration-300 hover:scale-110 focus-visible:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                      style={{ transitionDelay: `${contactIndex * 60}ms` }}
+                      className="inline-flex h-9 w-9 shrink-0 translate-y-full items-center justify-center rounded-full bg-[#32A849] opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 hover:scale-110 focus-visible:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                     >
                       <Image
                         src={contact.icon}

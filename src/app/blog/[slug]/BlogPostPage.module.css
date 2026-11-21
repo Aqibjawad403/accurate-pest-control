@@ -91,7 +91,7 @@
   line-height: 1.55;
 }
 
-.articleBody h1 {
+.articleTitle {
   margin: 0 0 12px;
   color: #222222;
   font-size: 25px;
@@ -453,7 +453,7 @@
     font-size: 16px;
   }
 
-  .articleBody h1 {
+  .articleTitle {
     font-size: 22px;
   }
 

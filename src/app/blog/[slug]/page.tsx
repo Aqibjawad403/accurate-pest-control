@@ -3,6 +3,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import HomeAnimations from "@/components/HomeAnimations";
+import Navbar from "@/components/Navbar";
 import styles from "./BlogPostPage.module.css";
 
 const featuredImage =
@@ -250,7 +252,49 @@ async function BlogPostContent({
     .slice(0, 5);
 
   return (
-    <main className={styles.page}>
+    <HomeAnimations>
+      <section
+        className="relative w-full pt-5 has-[#mobile-navigation-menu]:z-[100]"
+        data-gsap-section="hero"
+      >
+        <div
+          className="relative h-[420px] w-full rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]"
+          data-gsap-hero="shell"
+        >
+          <div data-gsap-hero="nav">
+            <Navbar activeHref="/blog" />
+          </div>
+          <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
+
+          <div
+            className="absolute top-[270px] right-16 left-16 text-white max-sm:relative max-sm:top-auto max-sm:right-auto max-sm:left-auto max-sm:px-6"
+            data-gsap-hero="copy"
+          >
+            <h1
+              className="text-[55px] leading-none font-bold max-sm:text-[36px]"
+              data-gsap-split
+            >
+              Blogs
+            </h1>
+            <p className="mt-3 text-[18px] leading-[var(--line-height-normal)] font-normal max-sm:text-[15px]">
+              <Link href="/" className="transition-opacity hover:opacity-80">
+                Home
+              </Link>
+              <span aria-hidden="true"> &gt; </span>
+              <Link
+                href="/blog"
+                className="transition-opacity hover:opacity-80"
+              >
+                Blogs
+              </Link>
+              <span aria-hidden="true"> &gt; </span>
+              <span aria-current="page">{post.cardTitle}</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <main className={styles.page}>
       <div className={styles.columns}>
         <div className={styles.mainColumn}>
           <article>
@@ -276,7 +320,7 @@ async function BlogPostContent({
               </ol>
             </nav>
             <div className={styles.articleBody}>
-              <h1>{post.title}</h1>
+              <h2 className={styles.articleTitle}>{post.title}</h2>
               <p>{post.intro}</p>
               {sections.map((section, index) => (
                 <section
@@ -480,6 +524,7 @@ async function BlogPostContent({
         </aside>
       </div>
     </main>
+    </HomeAnimations>
   );
 }
 

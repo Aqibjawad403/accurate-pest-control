@@ -35,6 +35,7 @@ export default function PestsPage() {
           showViewAll={false}
           background="white"
           overlapCards
+          overlapStyle="dividers"
         />
       </div>
       <ContactSection />
