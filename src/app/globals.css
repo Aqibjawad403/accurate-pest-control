@@ -174,6 +174,36 @@ body {
   color: #fff;
 }
 
+/* White CTA: green text default, invert to green bg + white text on hover */
+.btn-white {
+  border: 1px solid transparent;
+  background-color: #fff;
+  color: #32a849;
+  transition:
+    background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease;
+}
+
+.btn-white:hover {
+  background-color: #32a849;
+  color: #fff;
+  border-color: #32a849;
+}
+
+/* Default: green circle + white arrow on white button */
+.btn-white .arrow-dot {
+  background-color: #32a849 !important;
+  color: #fff !important;
+}
+
+/* Hover: white circle + green arrow when button inverts */
+.btn-white:hover .arrow-dot {
+  background-color: #fff !important;
+  color: #32a849 !important;
+}
+
 /* Bugfree-style arrow circle (dot) hover */
 .arrow-dot {
   transition:
@@ -317,6 +347,8 @@ button:hover .arrow-dot__ripple,
 @media (prefers-reduced-motion: reduce) {
   .btn-green,
   .btn-green .arrow-dot,
+  .btn-white,
+  .btn-white .arrow-dot,
   .arrow-dot,
   .arrow-dot__icon,
   .arrow-dot__ripple {

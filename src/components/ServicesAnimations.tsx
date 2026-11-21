@@ -96,12 +96,12 @@ export default function ServicesAnimations({
         .fromTo(
           "[data-gsap-hero='shell']",
           { opacity: 0, scale: 1.04 },
-          { opacity: 1, scale: 1, duration: 1 },
+          { opacity: 1, scale: 1, duration: 1, clearProps: "transform" },
         )
         .fromTo(
           "[data-gsap-hero='nav']",
           { y: -36, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.65 },
+          { y: 0, opacity: 1, duration: 0.65, clearProps: "transform" },
           "-=0.7",
         )
         .fromTo(

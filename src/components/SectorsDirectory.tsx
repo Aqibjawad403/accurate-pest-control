@@ -85,7 +85,7 @@ function InspectionForm() {
 
         <button
           type="submit"
-          className="mt-auto inline-flex h-[54px] w-[132px] items-center justify-between gap-2.5 rounded-[27px] bg-white py-3 pr-3 pl-5 text-[18px] leading-none font-normal text-[#32A849] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white font-['Inter',var(--font-plus-jakarta),sans-serif]"
+          className="btn-white group mt-auto inline-flex h-[54px] w-[132px] items-center justify-between gap-2.5 rounded-[27px] py-3 pr-3 pl-5 text-[18px] leading-none font-normal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white font-['Inter',var(--font-plus-jakarta),sans-serif]"
         >
           <span>Submit</span>
           <ArrowDot variant="green" />

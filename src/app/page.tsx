@@ -19,7 +19,7 @@ export default function Home() {
         data-gsap-section="hero"
       >
         <div
-          className="relative h-[min(720px,78vh)] min-h-[620px] w-full rounded-[28px] bg-[#005F13] opacity-100 max-sm:h-auto max-sm:min-h-[560px] max-sm:pb-8 sm:h-[800px] sm:rounded-[40px]"
+          className="relative h-[min(720px,78vh)] min-h-[620px] w-full overflow-visible rounded-[28px] bg-[#005F13] opacity-100 max-sm:h-auto max-sm:min-h-[560px] max-sm:pb-8 sm:h-[800px] sm:rounded-[40px]"
           data-gsap-hero="shell"
         >
           <div data-gsap-hero="nav">
@@ -58,10 +58,10 @@ export default function Home() {
 
                 <Link
                   href="/contact"
-                  className="group inline-flex h-[54px] w-[218px] shrink-0 items-center justify-between gap-2.5 rounded-[27px] bg-white py-3 pr-3 pl-5 font-['Inter',var(--font-plus-jakarta),sans-serif] text-center text-[18px] leading-none font-normal tracking-normal text-[#32A849] opacity-100 transition-opacity hover:opacity-95"
+                  className="btn-white group relative z-10 inline-flex h-[54px] w-fit shrink-0 items-center justify-between gap-2.5 whitespace-nowrap rounded-[27px] py-3 pr-3 pl-5 font-['Inter',var(--font-plus-jakarta),sans-serif] text-center text-[18px] leading-none font-normal tracking-normal opacity-100"
                   data-gsap-hero="button"
                 >
-                  <span>Get a Free Quote</span>
+                  <span className="whitespace-nowrap">Get a Free Quote</span>
                   <ArrowDot variant="green" />
                 </Link>
               </div>

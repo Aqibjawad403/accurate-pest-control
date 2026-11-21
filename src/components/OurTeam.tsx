@@ -1,15 +1,20 @@
+import Image from "next/image";
+
 const team = [
   {
     name: "Catherine Li",
     role: "Customer Service Executive/ Admin",
+    image: "/team/team%201.png",
   },
   {
     name: "Team Member",
     role: "Role / Position",
+    image: "/team/team%202.png",
   },
   {
     name: "Team Member",
     role: "Role / Position",
+    image: "/team/team%203.png",
   },
 ];
 
@@ -61,6 +66,15 @@ export default function OurTeam({
             className="relative flex h-[400px] w-full max-w-[420px] flex-col justify-end gap-2 overflow-hidden rounded-[20px] bg-[#D9D9D9] px-6 pb-6 opacity-100 max-sm:h-[340px] xl:max-w-none"
             data-gsap-card
           >
+            <Image
+              src={member.image}
+              alt={member.name}
+              fill
+              unoptimized
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+              className="object-cover object-top"
+            />
+
             <div
               className="pointer-events-none absolute inset-0 rounded-[20px]"
               style={{

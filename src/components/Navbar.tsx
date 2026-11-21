@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowDot } from "@/components/ArrowButton";
 
 const navLinks = [
@@ -17,13 +17,28 @@ const navLinks = [
 
 export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
   const normalizedActiveHref =
     activeHref === "/services" ? "/pests" : activeHref;
+
+  useEffect(() => {
+    const onScroll = () => {
+      setIsSticky(window.scrollY > 8);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <nav
       aria-label="Main navigation"
-      className="absolute top-10 right-16 left-16 z-50 flex h-[100px] items-center justify-between gap-4 rounded-[50px] border border-black/10 bg-white px-[30px] opacity-100 max-xl:top-5 max-xl:right-4 max-xl:left-4 max-xl:h-[76px] max-xl:gap-2 max-xl:px-4 max-[360px]:right-3 max-[360px]:left-3"
+      className={`${
+        isSticky
+          ? "fixed top-5 bg-[#FFFFFF4D] backdrop-blur-[15px]"
+          : "absolute top-10 bg-white max-xl:top-5"
+      } right-16 left-16 z-50 flex h-[100px] items-center justify-between gap-4 rounded-[50px] border border-black/10 px-[30px] max-xl:right-4 max-xl:left-4 max-xl:h-[76px] max-xl:gap-2 max-xl:px-4 max-[360px]:right-3 max-[360px]:left-3`}
     >
       <Link href="/" className="shrink-0">
         <Image

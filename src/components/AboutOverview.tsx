@@ -52,7 +52,7 @@ export default function AboutOverview() {
                 <span>Company Profile</span>
                 <ArrowDot variant="white" size="sm" />
               </span>
-              <span className="inline-flex h-[56px] w-[286px] items-center justify-between gap-2.5 rounded-[27px] border border-[#32A849] bg-white py-3 pr-3 pl-5 font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-none font-normal text-[#32A849] max-sm:w-full">
+              <span className="btn-white group inline-flex h-[56px] w-[286px] items-center justify-between gap-2.5 rounded-[27px] border border-[#32A849] py-3 pr-3 pl-5 font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-none font-normal max-sm:w-full">
                 <span>Pre-Qualification Termite</span>
                 <ArrowDot variant="green" size="sm" />
               </span>

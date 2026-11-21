@@ -90,35 +90,66 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
 
       /* Hero entrance — title handled by SplitText above */
       if (mainRef.current?.querySelector("[data-gsap-hero='shell']")) {
-        const hero = gsap.timeline({ defaults: { ease: "power3.out" } });
+        const heroButton =
+          mainRef.current.querySelector<HTMLElement>(
+            "[data-gsap-hero='button']",
+          );
+
+        const hero = gsap.timeline({
+          defaults: { ease: "power3.out" },
+          onComplete: () => {
+            // Hard guarantee: CTA never stays stuck invisible after remounts
+            if (heroButton) {
+              gsap.set(heroButton, {
+                opacity: 1,
+                visibility: "visible",
+                clearProps: "transform",
+              });
+            }
+          },
+        });
         hero
-          .from("[data-gsap-hero='shell']", {
-            opacity: 0,
-            scale: 1.04,
-            duration: 1.1,
-          })
-          .from(
+          .fromTo(
+            "[data-gsap-hero='shell']",
+            { opacity: 0, scale: 1.04 },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 1.1,
+              clearProps: "transform",
+            },
+          )
+          .fromTo(
             "[data-gsap-hero='nav']",
-            { y: -40, opacity: 0, duration: 0.7 },
+            { y: -40, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.7,
+              clearProps: "transform",
+            },
             "-=0.75",
           )
-          .from(
+          .fromTo(
             "[data-gsap-hero='badge']",
-            { x: -30, opacity: 0, duration: 0.55 },
+            { x: -30, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.55, clearProps: "transform" },
             "-=0.35",
           )
-          .from(
+          .fromTo(
             "[data-gsap-hero='copy']",
-            { y: 35, opacity: 0, duration: 0.75 },
+            { y: 35, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.75, clearProps: "transform" },
             "-=0.2",
           )
-          .from(
+          .fromTo(
             "[data-gsap-hero='button']",
+            { scale: 0.85, opacity: 0 },
             {
-              scale: 0.85,
-              opacity: 0,
+              scale: 1,
+              opacity: 1,
               duration: 0.55,
-              clearProps: "transform",
+              clearProps: "transform,opacity",
             },
             "-=0.35",
           );
