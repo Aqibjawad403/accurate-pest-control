@@ -1,20 +1,62 @@
 import Image from "next/image";
 
-const team = [
+type ContactAction = {
+  type: "whatsapp" | "call" | "email";
+  href: string;
+  label: string;
+  icon: string;
+};
+
+const team: {
+  name: string;
+  role: string;
+  image: string;
+  contacts: ContactAction[];
+}[] = [
   {
     name: "Catherine Li",
     role: "Customer Service Executive/ Admin",
     image: "/team/team%201.png",
+    contacts: [
+      {
+        type: "whatsapp",
+        href: "https://wa.me/971521528725",
+        label: "WhatsApp +971 52 152 8725",
+        icon: "/whastapp.svg",
+      },
+      {
+        type: "call",
+        href: "tel:8008725",
+        label: "Call 800 8725",
+        icon: "/call.svg",
+      },
+    ],
   },
   {
     name: "Team Member",
     role: "Role / Position",
     image: "/team/team%202.png",
+    contacts: [
+      {
+        type: "email",
+        href: "mailto:info@accuratepestcontrol.ae",
+        label: "Email info@accuratepestcontrol.ae",
+        icon: "/email.svg",
+      },
+    ],
   },
   {
     name: "Team Member",
     role: "Role / Position",
     image: "/team/team%203.png",
+    contacts: [
+      {
+        type: "email",
+        href: "mailto:operations@accuratepestcontrol.ae",
+        label: "Email operations@accuratepestcontrol.ae",
+        icon: "/email.svg",
+      },
+    ],
   },
 ];
 
@@ -63,7 +105,7 @@ export default function OurTeam({
         {team.map((member, index) => (
           <article
             key={`${member.name}-${index}`}
-            className="relative flex h-[400px] w-full max-w-[420px] flex-col justify-end gap-2 overflow-hidden rounded-[20px] bg-[#D9D9D9] px-6 pb-6 opacity-100 max-sm:h-[340px] xl:max-w-none"
+            className="group relative flex h-[400px] w-full max-w-[420px] flex-col justify-end gap-2 overflow-hidden rounded-[20px] bg-[#D9D9D9] px-6 pb-6 opacity-100 max-sm:h-[340px] xl:max-w-none"
             data-gsap-card
           >
             <Image
@@ -72,7 +114,7 @@ export default function OurTeam({
               fill
               unoptimized
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-              className="object-cover object-top"
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
             />
 
             <div
@@ -85,9 +127,37 @@ export default function OurTeam({
             />
 
             <div className="relative z-10 flex flex-col gap-2">
-              <h3 className="align-bottom text-[32px] leading-none font-semibold tracking-[0.2px] text-white max-sm:text-[24px]">
-                {member.name}
-              </h3>
+              <div className="flex items-center gap-3">
+                <h3 className="align-bottom text-[32px] leading-none font-semibold tracking-[0.2px] text-white max-sm:text-[24px]">
+                  {member.name}
+                </h3>
+                <div className="flex items-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
+                  {member.contacts.map((contact) => (
+                    <a
+                      key={contact.href}
+                      href={contact.href}
+                      target={
+                        contact.type === "whatsapp" ? "_blank" : undefined
+                      }
+                      rel={
+                        contact.type === "whatsapp"
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      aria-label={contact.label}
+                      className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#32A849] transition-transform duration-300 hover:scale-110 focus-visible:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                    >
+                      <Image
+                        src={contact.icon}
+                        alt=""
+                        width={18}
+                        height={18}
+                        className="h-[18px] w-[18px] object-contain"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
               <p className="align-bottom text-[16px] leading-none font-normal tracking-[0.2px] text-white">
                 {member.role}
               </p>

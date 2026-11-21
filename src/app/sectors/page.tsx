@@ -1,9 +1,18 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import HomeAnimations from "@/components/HomeAnimations";
 import Navbar from "@/components/Navbar";
 import SectorsDirectory from "@/components/SectorsDirectory";
 
-export default function SectorsPage() {
+type SearchParams = Promise<{
+  sector?: string;
+}>;
+
+type SectorsPageProps = {
+  searchParams: SearchParams;
+};
+
+function SectorsShell({ sector }: { sector: string | null }) {
   return (
     <HomeAnimations>
       <section
@@ -32,7 +41,25 @@ export default function SectorsPage() {
         </div>
       </section>
 
-      <SectorsDirectory />
+      <SectorsDirectory sector={sector} />
     </HomeAnimations>
+  );
+}
+
+async function SectorsFromParams({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
+  const params = await searchParams;
+
+  return <SectorsShell sector={params.sector ?? null} />;
+}
+
+export default function SectorsPage({ searchParams }: SectorsPageProps) {
+  return (
+    <Suspense fallback={<SectorsShell sector={null} />}>
+      <SectorsFromParams searchParams={searchParams} />
+    </Suspense>
   );
 }

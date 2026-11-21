@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ArrowDot } from "@/components/ArrowButton";
+import DirectorySidebarList from "@/components/DirectorySidebarList";
 import ServicesFaq from "@/components/ServicesFaq";
 import {
   formatPestTypeName,
@@ -28,60 +29,6 @@ function parseIndex(raw: string | null, max: number): number | null {
 type ActiveSelection =
   | { group: "pest"; index: number }
   | { group: "service"; index: number };
-
-function SidebarList({
-  items,
-  activeIndex,
-  onSelect,
-}: {
-  items: readonly { title: string }[];
-  activeIndex: number | null;
-  onSelect: (index: number) => void;
-}) {
-  return (
-    <ul className="w-full max-w-[416px] overflow-hidden rounded-[20px] border border-[#D9D9D9] bg-white">
-      {items.map((item, index) => {
-        const isActive = index === activeIndex;
-        const isLast = index === items.length - 1;
-
-        return (
-          <li key={item.title} className="w-full" data-gsap-sidebar-item>
-            <button
-              type="button"
-              aria-pressed={isActive}
-              onClick={() => onSelect(index)}
-              className={`flex h-[70px] w-full items-center justify-between gap-4 text-left font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-none transition-colors duration-300 max-sm:text-[16px] ${
-                isActive
-                  ? "rounded-[20px] bg-[#32A849] px-5 font-semibold text-white opacity-100"
-                  : "px-[25px] font-normal text-[#222222] hover:text-[#32A849]"
-              }`}
-            >
-              <span>{item.title}</span>
-              <span
-                className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-transform duration-300 ${
-                  isActive
-                    ? "scale-105 bg-white"
-                    : "bg-[#32A849] group-hover:scale-105"
-                }`}
-              >
-                <Image
-                  src={isActive ? "/arrow.svg" : "/arrow-white.svg"}
-                  alt=""
-                  width={12}
-                  height={11}
-                  aria-hidden
-                />
-              </span>
-            </button>
-            {!isLast ? (
-              <div className="mx-auto h-0 w-[366px] max-w-[calc(100%-50px)] border-t border-[#D9D9D9] opacity-100" />
-            ) : null}
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
 
 function useDetailReveal(title: string) {
   const detailRef = useRef<HTMLElement>(null);
@@ -435,7 +382,7 @@ export default function ServicesDirectory({
               <h2 className="mb-4 text-[28px] leading-none font-bold text-[#111111] max-sm:text-[24px]">
                 Types of {pluralName}
               </h2>
-              <SidebarList
+              <DirectorySidebarList
                 items={typeItems}
                 activeIndex={typeFromUrl}
                 onSelect={(index) => {
@@ -489,7 +436,7 @@ export default function ServicesDirectory({
             <h2 className="mb-4 text-[28px] leading-none font-bold text-[#111111] max-sm:text-[24px]">
               Pest Treatments
             </h2>
-            <SidebarList
+            <DirectorySidebarList
               items={pestTreatments}
               activeIndex={active.group === "pest" ? active.index : null}
               onSelect={(index) => {
@@ -503,7 +450,7 @@ export default function ServicesDirectory({
             <h2 className="mb-4 text-[28px] leading-none font-bold text-[#111111] max-sm:text-[24px]">
               Our Services
             </h2>
-            <SidebarList
+            <DirectorySidebarList
               items={serviceOptions}
               activeIndex={active.group === "service" ? active.index : null}
               onSelect={(index) => {

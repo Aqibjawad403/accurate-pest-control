@@ -1,9 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import { ArrowDot } from "@/components/ArrowButton";
+import DirectorySidebarList from "@/components/DirectorySidebarList";
 import { sectors } from "@/data/sectors";
+
+function parseIndex(raw: string | null, max: number): number | null {
+  if (raw == null || raw === "") return null;
+  const index = Number.parseInt(raw, 10);
+  if (!Number.isFinite(index) || index < 0 || index >= max) return null;
+  return index;
+}
 
 function InspectionForm() {
   return (
@@ -95,11 +104,21 @@ function InspectionForm() {
   );
 }
 
-export default function SectorsDirectory() {
-  const [activeIndex, setActiveIndex] = useState(0);
+export default function SectorsDirectory({
+  sector: sectorParam = null,
+}: {
+  sector?: string | null;
+}) {
+  const router = useRouter();
+  const sectorFromUrl = parseIndex(sectorParam, sectors.length) ?? 0;
+  const [activeIndex, setActiveIndex] = useState(sectorFromUrl);
   const activeSector = sectors[activeIndex];
   const sectorContentRef = useRef<HTMLElement>(null);
   const previousActiveIndex = useRef(activeIndex);
+
+  useEffect(() => {
+    setActiveIndex(sectorFromUrl);
+  }, [sectorFromUrl]);
 
   useEffect(() => {
     if (previousActiveIndex.current === activeIndex) return;
@@ -123,72 +142,36 @@ export default function SectorsDirectory() {
 
   return (
     <section
-      className="bg-white px-16 pt-[80px] pb-[100px] max-lg:px-10 max-md:px-6 max-md:pt-14 max-md:pb-14"
+      className="bg-white pt-[107px] pb-[100px] pl-16 max-lg:pl-10 max-md:px-6 max-md:pt-14 max-md:pb-14"
       data-gsap-section="sectors-directory"
     >
-      <div className="grid w-full grid-cols-[minmax(0,416px)_minmax(0,1fr)] items-start gap-20 max-lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)] max-lg:gap-12 max-md:grid-cols-1 max-md:gap-10">
+      <div className="grid w-full grid-cols-[minmax(0,416px)_minmax(0,1fr)] items-start gap-20 pr-16 max-lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)] max-lg:gap-12 max-lg:pr-10 max-md:grid-cols-1 max-md:gap-10 max-md:pr-0">
         <div
           className="flex w-full max-w-[416px] flex-col gap-10"
           data-gsap-sector-sidebar
         >
-          <nav aria-label="Sectors">
-            <h1 className="mb-4 text-[28px] leading-none font-bold text-[#111111] max-sm:text-[24px]">
+          <nav aria-label="Sectors" data-gsap-sidebar>
+            <h2 className="mb-4 text-[28px] leading-none font-bold text-[#111111] max-sm:text-[24px]">
               Sectors
-            </h1>
-            <ul className="w-full overflow-hidden rounded-[20px] border border-[#D9D9D9] bg-white">
-              {sectors.map((sector, index) => {
-                const isActive = index === activeIndex;
-
-                return (
-                  <li key={sector.title} className="w-full">
-                    <button
-                      type="button"
-                      aria-pressed={isActive}
-                      onClick={() => setActiveIndex(index)}
-                      className={`flex h-[70px] w-full items-center justify-between gap-4 text-left font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-none transition-colors duration-300 max-sm:h-[56px] max-sm:text-[16px] ${
-                        isActive
-                          ? "rounded-[20px] bg-[#32A849] px-5 font-semibold text-white"
-                          : "px-[25px] font-normal text-[#222222] hover:text-[#32A849]"
-                      }`}
-                    >
-                      <span>{sector.title}</span>
-                      <span
-                        className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${
-                          isActive ? "bg-white" : "bg-[#32A849]"
-                        }`}
-                      >
-                        <svg
-                          viewBox="0 0 12 11"
-                          className={`h-[11px] w-3 ${isActive ? "text-[#32A849]" : "text-white"}`}
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M1 5.5h9m0 0L6 1.5m4 4-4 4"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </span>
-                    </button>
-                    {index < sectors.length - 1 ? (
-                      <div className="mx-auto h-0 w-[366px] max-w-[calc(100%-50px)] border-t border-[#D9D9D9]" />
-                    ) : null}
-                  </li>
-                );
-              })}
-            </ul>
+            </h2>
+            <DirectorySidebarList
+              items={sectors}
+              activeIndex={activeIndex}
+              onSelect={(index) => {
+                setActiveIndex(index);
+                router.push(`/sectors?sector=${index}`, { scroll: false });
+              }}
+            />
           </nav>
 
           <InspectionForm />
         </div>
 
+        {/* Offset matches sidebar h2 (28px) + mb-4 so detail lines up with the list */}
         <article
           key={activeSector.title}
           ref={sectorContentRef}
-          className="min-w-0"
+          className="mt-11 min-w-0 max-md:mt-0"
           aria-live="polite"
           data-gsap-sector-content
         >

@@ -66,13 +66,19 @@ export default function ClientsPage() {
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="clients-heading">
+      <section
+        className={styles.section}
+        aria-labelledby="clients-heading"
+        data-gsap-section="clients"
+      >
         <div className={styles.intro}>
-          <span className={styles.badge}>Trusted Partnerships</span>
+          <span className={styles.badge} data-gsap-badge>
+            Trusted Partnerships
+          </span>
           <h2 className={styles.heading} id="clients-heading" data-gsap-split>
             Organizations That Trust Us
           </h2>
-          <p className={styles.description}>
+          <p className={styles.description} data-gsap-copy>
             We are proud to protect the people, places, and businesses of our
             clients across the UAE.
           </p>
@@ -80,7 +86,11 @@ export default function ClientsPage() {
 
         <div className={styles.logoGrid} aria-label="Client logos">
           {clientLogos.map((file, index) => (
-            <div className={`${styles.logoCell} image-zoom`} key={file}>
+            <div
+              className={`${styles.logoCell} image-zoom`}
+              key={file}
+              data-gsap-card
+            >
               <Image
                 src={`/client%20logos/${encodeURIComponent(file)}`}
                 alt={getLogoAlt(file, index)}

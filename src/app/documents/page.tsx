@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import HomeAnimations from "@/components/HomeAnimations";
 import Navbar from "@/components/Navbar";
+import { getOfficialDocuments } from "@/data/official-documents";
 import styles from "./DocumentsPage.module.css";
 
 export const metadata: Metadata = {
@@ -13,18 +14,6 @@ export const metadata: Metadata = {
     "View the official licenses, certifications, and documents of Accurate Pest Control Services LLC.",
 };
 
-const imageDirectory = path.join(
-  process.cwd(),
-  "public",
-  "documents",
-  "images",
-);
-const pdfDirectory = path.join(
-  process.cwd(),
-  "public",
-  "documents",
-  "documents",
-);
 const chemicalDocuments = [
   { name: "Ajman Approved Chemical List", validity: "17-Jan-2025 to 16-Jan-2026" },
   { name: "Ecotrol IC3", validity: "01-Mar-2026" },
@@ -73,36 +62,8 @@ const chemicalPdfs = {
   ),
 };
 
-function getDocuments() {
-  const imageFiles = readdirSync(imageDirectory).filter((file) =>
-    /\.(?:svg|png|jpe?g|webp)$/i.test(file),
-  );
-  const pdfFiles = readdirSync(pdfDirectory).filter((file) =>
-    /\.pdf$/i.test(file),
-  );
-  const pdfByName = new Map(
-    pdfFiles.map((file) => [path.parse(file).name.toLowerCase(), file]),
-  );
-
-  return imageFiles
-    .map((image) => {
-      const name = path.parse(image).name;
-
-      return {
-        image,
-        pdf: pdfByName.get(name.toLowerCase()),
-        title: name.replace(/[_-]+/g, " "),
-      };
-    })
-    .sort((a, b) => a.title.localeCompare(b.title));
-}
-
-function documentUrl(file: string, type: "images" | "documents") {
-  return `/documents/${type}/${encodeURIComponent(file)}`;
-}
-
 export default function DocumentsPage() {
-  const documents = getDocuments();
+  const documents = getOfficialDocuments();
 
   return (
     <HomeAnimations>
@@ -162,17 +123,17 @@ export default function DocumentsPage() {
             <div className={styles.documentGrid}>
               {documents.map((document) => (
                 <article className={styles.documentCard} key={document.image}>
-                  {document.pdf ? (
+                  {document.pdfUrl ? (
                     <a
                       className={styles.documentLink}
-                      href={documentUrl(document.pdf, "documents")}
+                      href={document.pdfUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`View ${document.title} PDF`}
                     >
                       <span className={`${styles.preview} image-zoom`}>
                         <Image
-                          src={documentUrl(document.image, "images")}
+                          src={document.imageUrl}
                           alt={`${document.title} preview`}
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 417px"
@@ -184,7 +145,7 @@ export default function DocumentsPage() {
                     <>
                       <span className={`${styles.preview} image-zoom`}>
                         <Image
-                          src={documentUrl(document.image, "images")}
+                          src={document.imageUrl}
                           alt={`${document.title} preview`}
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 417px"

@@ -367,6 +367,42 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
               duration: 0.65,
               ease: "power3.out",
             });
+          } else if (name === "clients") {
+            const cards = gsap.utils.toArray<HTMLElement>(
+              section.querySelectorAll("[data-gsap-card]"),
+            );
+
+            gsap
+              .timeline({ scrollTrigger: trigger })
+              .from(section.querySelector("[data-gsap-badge]"), {
+                y: 18,
+                opacity: 0,
+                scale: 0.92,
+                duration: 0.5,
+                ease: "back.out(1.6)",
+              })
+              .from(
+                section.querySelector("[data-gsap-copy]"),
+                { y: 28, opacity: 0, duration: 0.65, ease: "power3.out" },
+                "-=0.2",
+              )
+              .from(
+                cards,
+                {
+                  opacity: 0,
+                  y: 36,
+                  scale: 0.88,
+                  filter: "blur(10px)",
+                  duration: 0.75,
+                  ease: "power3.out",
+                  stagger: {
+                    amount: 1.15,
+                    grid: "auto",
+                    from: "start",
+                  },
+                },
+                "-=0.25",
+              );
           } else if (name === "contact") {
             gsap
               .timeline({ scrollTrigger: trigger })
