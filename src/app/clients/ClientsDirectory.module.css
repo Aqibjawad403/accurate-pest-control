@@ -1,0 +1,173 @@
+.section {
+  width: 100%;
+  padding: 80px 64px 100px;
+  background: #ffffff;
+}
+
+.intro {
+  max-width: 760px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 16px;
+  border: 1px solid #d5d5d5;
+  border-radius: 999px;
+  background: #ededed;
+  color: #444444;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.heading {
+  margin: 22px 0 14px;
+  color: #222222;
+  font-size: 45px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.description {
+  margin: 0;
+  color: #666666;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.logoGrid {
+  display: grid;
+  width: 100%;
+  max-width: 1312px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1.5px solid transparent;
+  border-image: linear-gradient(
+      90deg,
+      #ffffff 0%,
+      #a6a6a6 30.29%,
+      #a6a6a6 70.19%,
+      #ffffff 100%
+    )
+    1;
+}
+
+.logoCell {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  height: 150px;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.logoCell::after,
+.logoCell::before {
+  position: absolute;
+  z-index: 1;
+  content: "";
+  pointer-events: none;
+}
+
+.logoCell::after {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #a6a6a6 30.29%,
+    #a6a6a6 70.19%,
+    #ffffff 100%
+  );
+}
+
+.logoCell::before {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #a6a6a6 30.29%,
+    #a6a6a6 70.19%,
+    #ffffff 100%
+  );
+}
+
+.logoCell:nth-child(6n)::after,
+.logoCell:nth-last-child(-n + 6)::before {
+  display: none;
+}
+
+.logo {
+  object-fit: contain;
+  padding: 14px;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 64px 40px 80px;
+  }
+
+  .logoGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .logoCell:nth-child(6n)::after {
+    display: block;
+  }
+
+  .logoCell:nth-child(3n)::after,
+  .logoCell:nth-last-child(-n + 3)::before {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 52px 20px 64px;
+  }
+
+  .intro {
+    margin-bottom: 32px;
+  }
+
+  .heading {
+    font-size: 32px;
+  }
+
+  .description {
+    font-size: 15px;
+  }
+
+  .logoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .logoCell {
+    height: 118px;
+    padding: 8px;
+  }
+
+  .logoCell:nth-child(3n)::after {
+    display: block;
+  }
+
+  .logoCell:nth-child(2n)::after,
+  .logoCell:nth-last-child(-n + 2)::before {
+    display: none;
+  }
+
+  .logo {
+    padding: 12px;
+  }
+}

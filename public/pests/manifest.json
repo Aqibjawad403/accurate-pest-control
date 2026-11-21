@@ -1,0 +1,436 @@
+{
+  "ants": [
+    {
+      "source": "/assets/Professional_Exterminator_Performing_Home_Kitchen_Pest_Control-B5-y8AKB.webp",
+      "local": "/pests/ants/Professional_Exterminator_Performing_Home_Kitchen_Pest_Control-B5-y8AKB.webp"
+    },
+    {
+      "source": "/assets/Red_Ants_Crawling_on_Spilled_Sugar_from_Glass_Container-CIrc5Rkk.webp",
+      "local": "/pests/ants/Red_Ants_Crawling_on_Spilled_Sugar_from_Glass_Container-CIrc5Rkk.webp"
+    },
+    {
+      "source": "/assets/Argentine_Ants_Gathering_on_a_Surface_Near_Food_Remains-1C07zQUI.webp",
+      "local": "/pests/ants/Argentine_Ants_Gathering_on_a_Surface_Near_Food_Remains-1C07zQUI.webp"
+    },
+    {
+      "source": "/assets/Pavement_Ant_Close-Up_Crawling_on_Rocky_Outdoor_Surface-xbOSSqrz.webp",
+      "local": "/pests/ants/Pavement_Ant_Close-Up_Crawling_on_Rocky_Outdoor_Surface-xbOSSqrz.webp"
+    },
+    {
+      "source": "/assets/Pharaoh_Ants_Moving_in_Group_Formation_on_Indoor_Surface-BF7hHqrC.webp",
+      "local": "/pests/ants/Pharaoh_Ants_Moving_in_Group_Formation_on_Indoor_Surface-BF7hHqrC.webp"
+    },
+    {
+      "source": "/assets/Carpenter_Ant_Close-Up_on_Indoor_Surface_Floor-CAOi_tXH.webp",
+      "local": "/pests/ants/Carpenter_Ant_Close-Up_on_Indoor_Surface_Floor-CAOi_tXH.webp"
+    },
+    {
+      "source": "/Pests/Ant/Red_Ants_Infestation_on_Wood_Surface–Pest_Control_Inspection.webp",
+      "local": "/pests/ants/Red_Ants_Infestation_on_Wood_Surface–Pest_Control_Inspection.webp"
+    },
+    {
+      "source": "/heroes/routes/ant.webp",
+      "local": "/pests/ants/ant.webp"
+    }
+  ],
+  "cockroaches": [
+    {
+      "source": "/assets/Professional_Cockroach_Exterminator_Treating_Infested_Area-DuRsDWTd.webp",
+      "local": "/pests/cockroaches/Professional_Cockroach_Exterminator_Treating_Infested_Area-DuRsDWTd.webp"
+    },
+    {
+      "source": "/assets/Cockroaches_in_Dubai_Contaminating_Food_on_Table-BzJf_6gs.webp",
+      "local": "/pests/cockroaches/Cockroaches_in_Dubai_Contaminating_Food_on_Table-BzJf_6gs.webp"
+    },
+    {
+      "source": "/assets/A_Close-Up_Image_of_a_German_Cockroach_on_Leaf-CbbxhcCv.webp",
+      "local": "/pests/cockroaches/A_Close-Up_Image_of_a_German_Cockroach_on_Leaf-CbbxhcCv.webp"
+    },
+    {
+      "source": "/assets/Brown-Banded_Cockroach_Close-Up_on_Indoor_Surface-BHA5Tuhf.webp",
+      "local": "/pests/cockroaches/Brown-Banded_Cockroach_Close-Up_on_Indoor_Surface-BHA5Tuhf.webp"
+    },
+    {
+      "source": "/assets/Smokybrown_Cockroach_Resting_on_a_Green_Leaf_Surface-l98kKixZ.webp",
+      "local": "/pests/cockroaches/Smokybrown_Cockroach_Resting_on_a_Green_Leaf_Surface-l98kKixZ.webp"
+    },
+    {
+      "source": "/assets/Oriental_Cockroach_Crawling_on_Damp_Surface-3y66mqtN.webp",
+      "local": "/pests/cockroaches/Oriental_Cockroach_Crawling_on_Damp_Surface-3y66mqtN.webp"
+    },
+    {
+      "source": "/Pests/Cockroch/Group_of_Cockroaches_on_White_Surface_Close-Up.webp",
+      "local": "/pests/cockroaches/Group_of_Cockroaches_on_White_Surface_Close-Up.webp"
+    },
+    {
+      "source": "/heroes/routes/cockroch.webp",
+      "local": "/pests/cockroaches/cockroch.webp"
+    },
+    {
+      "source": "/heroes/routes/cockroach.webp",
+      "local": "/pests/cockroaches/cockroach.webp"
+    }
+  ],
+  "bedbugs": [
+    {
+      "source": "/assets/Professional_Bed_Bug_Exterminator_Treating_Mattress-B_BoGLd6.webp",
+      "local": "/pests/bedbugs/Professional_Bed_Bug_Exterminator_Treating_Mattress-B_BoGLd6.webp"
+    },
+    {
+      "source": "/assets/Bed_Bugs_Bite_Marks_on_Child%E2%80%99s_Back_Skin-Chlxm4zr.webp",
+      "local": "/pests/bedbugs/Bed_Bugs_Bite_Marks_on_Child’s_Back_Skin-Chlxm4zr.webp"
+    },
+    {
+      "source": "/assets/Close-Up_of_Cimex_lectularius_Bed_Bug_on_Fabric-B-2htMy2.webp",
+      "local": "/pests/bedbugs/Close-Up_of_Cimex_lectularius_Bed_Bug_on_Fabric-B-2htMy2.webp"
+    },
+    {
+      "source": "/assets/Close-Up_View_of_Cimex_hemipterus_on_Fabric_Surface-BnuKtd88.webp",
+      "local": "/pests/bedbugs/Close-Up_View_of_Cimex_hemipterus_on_Fabric_Surface-BnuKtd88.webp"
+    },
+    {
+      "source": "/assets/Close-Up_of_Bat_Bug_Cimex_adjunctus_on_Wood_Surface-D4vq902l.webp",
+      "local": "/pests/bedbugs/Close-Up_of_Bat_Bug_Cimex_adjunctus_on_Wood_Surface-D4vq902l.webp"
+    },
+    {
+      "source": "/Pests/RedBug/bedbug_Crawling_on_Mattress_Seams_Close-Up_Image.webp",
+      "local": "/pests/bedbugs/bedbug_Crawling_on_Mattress_Seams_Close-Up_Image.webp"
+    },
+    {
+      "source": "/heroes/routes/bedbug.webp",
+      "local": "/pests/bedbugs/bedbug.webp"
+    }
+  ],
+  "rodents": [
+    {
+      "source": "/assets/Big_Rat_Caught_Inside_Humane_Metal_Cage_Trap-BsG_8ZGZ.webp",
+      "local": "/pests/rodents/Big_Rat_Caught_Inside_Humane_Metal_Cage_Trap-BsG_8ZGZ.webp"
+    },
+    {
+      "source": "/assets/Rodent_Chewing_on_Damaged_Household_Cable_Wire-k__v_w7c.webp",
+      "local": "/pests/rodents/Rodent_Chewing_on_Damaged_Household_Cable_Wire-k__v_w7c.webp"
+    },
+    {
+      "source": "/assets/Small_House_Mouse_on_Outdoor_Ground-B6KRN0JU.webp",
+      "local": "/pests/rodents/Small_House_Mouse_on_Outdoor_Ground-B6KRN0JU.webp"
+    },
+    {
+      "source": "/assets/Roof_Rat_on_a_Building_Surface-DTjRpoCK.webp",
+      "local": "/pests/rodents/Roof_Rat_on_a_Building_Surface-DTjRpoCK.webp"
+    },
+    {
+      "source": "/assets/Bandicoot_Rat_on_Ground-D6xNxCsr.webp",
+      "local": "/pests/rodents/Bandicoot_Rat_on_Ground-D6xNxCsr.webp"
+    },
+    {
+      "source": "/assets/Norway_Rat_Sitting_Indoors-gE1YlM1e.webp",
+      "local": "/pests/rodents/Norway_Rat_Sitting_Indoors-gE1YlM1e.webp"
+    },
+    {
+      "source": "/Pests/Rodent/Rodents_Eating_Food_Scraps_on_Indoor_Floor_Surface.webp",
+      "local": "/pests/rodents/Rodents_Eating_Food_Scraps_on_Indoor_Floor_Surface.webp"
+    },
+    {
+      "source": "/heroes/routes/rodents.webp",
+      "local": "/pests/rodents/rodents.webp"
+    }
+  ],
+  "flies": [
+    {
+      "source": "/assets/Group_of_Flies_Gathering_on_Indoor_Surface_Close-Up-D23Ydcjm.webp",
+      "local": "/pests/flies/Group_of_Flies_Gathering_on_Indoor_Surface_Close-Up-D23Ydcjm.webp"
+    },
+    {
+      "source": "/assets/Flies_Feeding_on_Sugary_Food_Surface_Indoors-DMFvTPLr.webp",
+      "local": "/pests/flies/Flies_Feeding_on_Sugary_Food_Surface_Indoors-DMFvTPLr.webp"
+    },
+    {
+      "source": "/assets/Close-Up_View_of_a_House_Fly_Resting_on_a_Leaf-DAZ2LLmD.webp",
+      "local": "/pests/flies/Close-Up_View_of_a_House_Fly_Resting_on_a_Leaf-DAZ2LLmD.webp"
+    },
+    {
+      "source": "/assets/Cluster_Fly_Resting_on_Bright_Green_Leaf_Surface-BxZf3aPq.webp",
+      "local": "/pests/flies/Cluster_Fly_Resting_on_Bright_Green_Leaf_Surface-BxZf3aPq.webp"
+    },
+    {
+      "source": "/assets/Fruit_Fly_Standing_on_Soft_Organic_Surface-DIicEmDv.webp",
+      "local": "/pests/flies/Fruit_Fly_Standing_on_Soft_Organic_Surface-DIicEmDv.webp"
+    },
+    {
+      "source": "/Pests/Flies/Close-Up_View_of_Fly_on_Leaf_Surface_in_Nature.webp",
+      "local": "/pests/flies/Close-Up_View_of_Fly_on_Leaf_Surface_in_Nature.webp"
+    },
+    {
+      "source": "/heroes/routes/flies.webp",
+      "local": "/pests/flies/flies.webp"
+    }
+  ],
+  "mosquitoes": [
+    {
+      "source": "/assets/Professional_Fogger_in_Dubai_Conducting_Outdoor_Fumigation-DGdALBBW.webp",
+      "local": "/pests/mosquitoes/Professional_Fogger_in_Dubai_Conducting_Outdoor_Fumigation-DGdALBBW.webp"
+    },
+    {
+      "source": "/assets/Mosquitoes_Biting_Hand_Causing_Irritation_and_Discomfort-CheHsKpc.webp",
+      "local": "/pests/mosquitoes/Mosquitoes_Biting_Hand_Causing_Irritation_and_Discomfort-CheHsKpc.webp"
+    },
+    {
+      "source": "/assets/Aedes_Mosquito_Feeding_on_Human_Skin_Surface-BKw65ZKU.webp",
+      "local": "/pests/mosquitoes/Aedes_Mosquito_Feeding_on_Human_Skin_Surface-BKw65ZKU.webp"
+    },
+    {
+      "source": "/assets/Anopheles_Mosquito_Drawing_Blood_from_Human_Skin-DzK3o2Li.webp",
+      "local": "/pests/mosquitoes/Anopheles_Mosquito_Drawing_Blood_from_Human_Skin-DzK3o2Li.webp"
+    },
+    {
+      "source": "/Pests/mosquito/Mosquitos_Flying_Around_Plants_in_Outdoor_Area.webp",
+      "local": "/pests/mosquitoes/Mosquitos_Flying_Around_Plants_in_Outdoor_Area.webp"
+    },
+    {
+      "source": "/heroes/routes/mosquito.webp",
+      "local": "/pests/mosquitoes/mosquito.webp"
+    }
+  ],
+  "spiders": [
+    {
+      "source": "/assets/Removing_Spider_Webs_from_Home_Corners_Safely-EAkzEu1S.webp",
+      "local": "/pests/spiders/Removing_Spider_Webs_from_Home_Corners_Safely-EAkzEu1S.webp"
+    },
+    {
+      "source": "/assets/Jumping_Spider_Resting_Calmly_on_Green_Leaf_Surface-DcE_FSQ0.webp",
+      "local": "/pests/spiders/Jumping_Spider_Resting_Calmly_on_Green_Leaf_Surface-DcE_FSQ0.webp"
+    },
+    {
+      "source": "/Pests/Spider/Spider_on_Web_in_Dark_Environment_Close_View.webp",
+      "local": "/pests/spiders/Spider_on_Web_in_Dark_Environment_Close_View.webp"
+    },
+    {
+      "source": "/heroes/routes/spider.webp",
+      "local": "/pests/spiders/spider.webp"
+    }
+  ],
+  "termites": [
+    {
+      "source": "/assets/Termite_Exterminator_Inspecting_Home_Furniture_in_Dubai-Dyk-uWQP.webp",
+      "local": "/pests/termites/Termite_Exterminator_Inspecting_Home_Furniture_in_Dubai-Dyk-uWQP.webp"
+    },
+    {
+      "source": "/assets/Termite_Damage_on_Wooden_Staircase_Inside_the_House-BWxVREfI.webp",
+      "local": "/pests/termites/Termite_Damage_on_Wooden_Staircase_Inside_the_House-BWxVREfI.webp"
+    },
+    {
+      "source": "/assets/Close-Up_View_of_Subterranean_Termite_on_Outdoor_Surface-MQ0u9Q5k.webp",
+      "local": "/pests/termites/Close-Up_View_of_Subterranean_Termite_on_Outdoor_Surface-MQ0u9Q5k.webp"
+    },
+    {
+      "source": "/assets/Drywood_Termites_Colony_Inside_Wood_Structure-BSKy2i_d.webp",
+      "local": "/pests/termites/Drywood_Termites_Colony_Inside_Wood_Structure-BSKy2i_d.webp"
+    },
+    {
+      "source": "/assets/Formosan_Termites_Active_on_Wooden_Surface_Texture-DiarcTnP.webp",
+      "local": "/pests/termites/Formosan_Termites_Active_on_Wooden_Surface_Texture-DiarcTnP.webp"
+    },
+    {
+      "source": "/assets/Close-Up_View_of_Dampwood_Termite_on_Wood_Surface-C9AOd3Z1.webp",
+      "local": "/pests/termites/Close-Up_View_of_Dampwood_Termite_on_Wood_Surface-C9AOd3Z1.webp"
+    },
+    {
+      "source": "/Pests/Termite/Subterranean_Termites_Infestation_on_Wood_Surface.webp",
+      "local": "/pests/termites/Subterranean_Termites_Infestation_on_Wood_Surface.webp"
+    },
+    {
+      "source": "/heroes/routes/termites.webp",
+      "local": "/pests/termites/termites.webp"
+    }
+  ],
+  "venomous": [
+    {
+      "source": "/assets/Snake_Safely_Captured_Using_Professional_Pest_Control-Ch_750dd.webp",
+      "local": "/pests/venomous/Snake_Safely_Captured_Using_Professional_Pest_Control-Ch_750dd.webp"
+    },
+    {
+      "source": "/assets/Snake_Bite_Incident_on_Indoor_Wooden_Floor_Surface-CZVh3pSA.webp",
+      "local": "/pests/venomous/Snake_Bite_Incident_on_Indoor_Wooden_Floor_Surface-CZVh3pSA.webp"
+    },
+    {
+      "source": "/assets/Arabian_Cobra_Displaying_Hood_in_Natural_Habitat-DJel6wTG.webp",
+      "local": "/pests/venomous/Arabian_Cobra_Displaying_Hood_in_Natural_Habitat-DJel6wTG.webp"
+    },
+    {
+      "source": "/assets/Spotted_Sand_Boa_Resting_on_Desert_Sand_Surface-CFfwCfWn.webp",
+      "local": "/pests/venomous/Spotted_Sand_Boa_Resting_on_Desert_Sand_Surface-CFfwCfWn.webp"
+    },
+    {
+      "source": "/assets/Arabian_Horned_Viper_Resting_on_Desert_Sand_Surface-DyKunnkr.webp",
+      "local": "/pests/venomous/Arabian_Horned_Viper_Resting_on_Desert_Sand_Surface-DyKunnkr.webp"
+    },
+    {
+      "source": "/Pests/Venomous/Close-Up_View_of_a_Snake_Resting_on_Natural_Ground.webp",
+      "local": "/pests/venomous/Close-Up_View_of_a_Snake_Resting_on_Natural_Ground.webp"
+    },
+    {
+      "source": "/heroes/routes/venomous.webp",
+      "local": "/pests/venomous/venomous.webp"
+    },
+    {
+      "source": "/heroes/routes/snake.webp",
+      "local": "/pests/venomous/snake.webp"
+    }
+  ],
+  "birds": [
+    {
+      "source": "/assets/House_Sparrows_Nesting_Near_a_Building_Window-UwHkBtNF.webp",
+      "local": "/pests/birds/House_Sparrows_Nesting_Near_a_Building_Window-UwHkBtNF.webp"
+    },
+    {
+      "source": "/assets/Bird_Nests_on_Rooftop_Can_Lead_to_Wasp_Nest_Issues-x6Ety_Rl.webp",
+      "local": "/pests/birds/Bird_Nests_on_Rooftop_Can_Lead_to_Wasp_Nest_Issues-x6Ety_Rl.webp"
+    },
+    {
+      "source": "/assets/Close-Up_of_a_Common_Myna_Bird_on_Park_Bench-DlnJQH0G.webp",
+      "local": "/pests/birds/Close-Up_of_a_Common_Myna_Bird_on_Park_Bench-DlnJQH0G.webp"
+    },
+    {
+      "source": "/assets/House_Sparrow_Resting_on_a_Branch_in_Natural_Habitat-Cd4R0ley.webp",
+      "local": "/pests/birds/House_Sparrow_Resting_on_a_Branch_in_Natural_Habitat-Cd4R0ley.webp"
+    },
+    {
+      "source": "/assets/Pigeon_Standing_on_Ledge_in_an_Urban_Outdoor_Area-DCjSuWtl.webp",
+      "local": "/pests/birds/Pigeon_Standing_on_Ledge_in_an_Urban_Outdoor_Area-DCjSuWtl.webp"
+    },
+    {
+      "source": "/Pests/Bird/Group_of_Pigeons_Perched_on_a_Rooftop_Surface.webp",
+      "local": "/pests/birds/Group_of_Pigeons_Perched_on_a_Rooftop_Surface.webp"
+    },
+    {
+      "source": "/heroes/routes/bird.webp",
+      "local": "/pests/birds/bird.webp"
+    }
+  ],
+  "lizards": [
+    {
+      "source": "/assets/Big_House_Lizard_Resting_on_Indoor_Wooden_Surface-C2jI8N4P.webp",
+      "local": "/pests/lizards/Big_House_Lizard_Resting_on_Indoor_Wooden_Surface-C2jI8N4P.webp"
+    },
+    {
+      "source": "/assets/Lizard_Near_Kitchen_Sink_Drain_on_Stainless_Surface-DnbyoxQc.webp",
+      "local": "/pests/lizards/Lizard_Near_Kitchen_Sink_Drain_on_Stainless_Surface-DnbyoxQc.webp"
+    },
+    {
+      "source": "/assets/Mediterranean_Gecko_Resting_on_Indoor_Wall_Surface-CzmUYJQ3.webp",
+      "local": "/pests/lizards/Mediterranean_Gecko_Resting_on_Indoor_Wall_Surface-CzmUYJQ3.webp"
+    },
+    {
+      "source": "/assets/Yellow-bellied_House_Gecko_on_Dark_Background-BLY8swcg.webp",
+      "local": "/pests/lizards/Yellow-bellied_House_Gecko_on_Dark_Background-BLY8swcg.webp"
+    },
+    {
+      "source": "/Pests/Lizard/House_Gecko_on_Wall_Surface_with_Distinct_Orange_Spots.webp",
+      "local": "/pests/lizards/House_Gecko_on_Wall_Surface_with_Distinct_Orange_Spots.webp"
+    },
+    {
+      "source": "/heroes/routes/lizard.webp",
+      "local": "/pests/lizards/lizard.webp"
+    }
+  ],
+  "ticks": [
+    {
+      "source": "/assets/Professional_Tick_Exterminator_at_Work_in_Dubai-Dk0BcM6p.webp",
+      "local": "/pests/ticks/Professional_Tick_Exterminator_at_Work_in_Dubai-Dk0BcM6p.webp"
+    },
+    {
+      "source": "/assets/Tick_Bite_Reaction_on_Human_Skin_in_Dubai-D77uurYv.webp",
+      "local": "/pests/ticks/Tick_Bite_Reaction_on_Human_Skin_in_Dubai-D77uurYv.webp"
+    },
+    {
+      "source": "/assets/Lone_Star_Tick_Crawling_on_Yellow_Surface-VEZTrnUF.webp",
+      "local": "/pests/ticks/Lone_Star_Tick_Crawling_on_Yellow_Surface-VEZTrnUF.webp"
+    },
+    {
+      "source": "/Pests/Tick/Tick_Insect_Crawling_on_Leaf_Surface_in_Dubai.webp",
+      "local": "/pests/ticks/Tick_Insect_Crawling_on_Leaf_Surface_in_Dubai.webp"
+    },
+    {
+      "source": "/heroes/routes/tick.webp",
+      "local": "/pests/ticks/tick.webp"
+    }
+  ],
+  "earwig": [
+    {
+      "source": "/assets/Close-Up_of_an_Earwig_Insect_on_a_Garden_Leaf-DmnpEffM.webp",
+      "local": "/pests/earwig/Close-Up_of_an_Earwig_Insect_on_a_Garden_Leaf-DmnpEffM.webp"
+    },
+    {
+      "source": "/assets/Earwig_Hiding_Between_Garden_Leaves_Close-Up_View-Bb_ShWAo.webp",
+      "local": "/pests/earwig/Earwig_Hiding_Between_Garden_Leaves_Close-Up_View-Bb_ShWAo.webp"
+    },
+    {
+      "source": "/assets/European_Earwig_Close-Up_on_Smooth_Surface-Cmcpv9TJ.webp",
+      "local": "/pests/earwig/European_Earwig_Close-Up_on_Smooth_Surface-Cmcpv9TJ.webp"
+    },
+    {
+      "source": "/assets/Perrisia_Earwig_Resting_on_Leaf_Surface_Close-Up-i4_xTwSI.webp",
+      "local": "/pests/earwig/Perrisia_Earwig_Resting_on_Leaf_Surface_Close-Up-i4_xTwSI.webp"
+    },
+    {
+      "source": "/Pests/Earwig/Close-Up_Macro_View_of_an_Earwig_Insect_on_a_Stem.webp",
+      "local": "/pests/earwig/Close-Up_Macro_View_of_an_Earwig_Insect_on_a_Stem.webp"
+    },
+    {
+      "source": "/heroes/routes/earwig.webp",
+      "local": "/pests/earwig/earwig.webp"
+    }
+  ],
+  "wasps": [
+    {
+      "source": "/assets/Removing_a_Wasp_Nest_from_House_Exterior_Safely-ClYL_zBL.webp",
+      "local": "/pests/wasps/Removing_a_Wasp_Nest_from_House_Exterior_Safely-ClYL_zBL.webp"
+    },
+    {
+      "source": "/assets/Swollen_Eye_Reaction_After_a_Wasp_Sting_Incident-r_4ce_zh.webp",
+      "local": "/pests/wasps/Swollen_Eye_Reaction_After_a_Wasp_Sting_Incident-r_4ce_zh.webp"
+    },
+    {
+      "source": "/assets/Paper_Wasp_Nest_Built_Under_Roof_Eaves_Area-D1Xniwpp.webp",
+      "local": "/pests/wasps/Paper_Wasp_Nest_Built_Under_Roof_Eaves_Area-D1Xniwpp.webp"
+    },
+    {
+      "source": "/assets/Close-Up_View_of_a_Yellowjacket_Wasp_on_a_Surface--b6HLRSG.webp",
+      "local": "/pests/wasps/Close-Up_View_of_a_Yellowjacket_Wasp_on_a_Surface--b6HLRSG.webp"
+    },
+    {
+      "source": "/assets/Hornets_Wasp_Resting_on_Leaf_Branch_in_Natural_Light-D8Ee2DZS.webp",
+      "local": "/pests/wasps/Hornets_Wasp_Resting_on_Leaf_Branch_in_Natural_Light-D8Ee2DZS.webp"
+    },
+    {
+      "source": "/assets/Arabian_Paper_Wasp_Displaying_Bright_Yellow_Body-Dm8oR56E.webp",
+      "local": "/pests/wasps/Arabian_Paper_Wasp_Displaying_Bright_Yellow_Body-Dm8oR56E.webp"
+    },
+    {
+      "source": "/Pests/Wasp/Close-Up_View_of_Paper_Wasp_on_Leaf_Background.webp",
+      "local": "/pests/wasps/Close-Up_View_of_Paper_Wasp_on_Leaf_Background.webp"
+    },
+    {
+      "source": "/heroes/routes/wasp.webp",
+      "local": "/pests/wasps/wasp.webp"
+    }
+  ],
+  "fumigation": [
+    {
+      "source": "/assets/Professional_Fumigation_Spray_Services_in_Dubai-zmYFgde6.webp",
+      "local": "/pests/fumigation/Professional_Fumigation_Spray_Services_in_Dubai-zmYFgde6.webp"
+    },
+    {
+      "source": "/assets/Professional_House_Fumigation_Service_in_Dubai-CfMbryIB.webp",
+      "local": "/pests/fumigation/Professional_House_Fumigation_Service_in_Dubai-CfMbryIB.webp"
+    },
+    {
+      "source": "/Pests/fumigation/Professional_Fumigation_Service_in_Action.webp",
+      "local": "/pests/fumigation/Professional_Fumigation_Service_in_Action.webp"
+    },
+    {
+      "source": "/heroes/routes/fumigation.webp",
+      "local": "/pests/fumigation/fumigation.webp"
+    }
+  ]
+}

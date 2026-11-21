@@ -1,0 +1,294 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f3f6f4;
+  --foreground: #171717;
+  --brand-green: #0b5c28;
+  --brand-green-deep: #08461e;
+  --brand-accent: #2f9e45;
+  --brand-accent-dark: #26853a;
+  --brand-accent-soft: #e8f7ec;
+  /* Site-wide body/copy line-height (16–18px text) */
+  --line-height-normal: 25px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-plus-jakarta);
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+main,
+section,
+article,
+nav,
+aside {
+  min-width: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-plus-jakarta), "Segoe UI", sans-serif;
+  line-height: var(--line-height-normal);
+}
+
+.page-loader {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #005f13;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition:
+    opacity 240ms ease,
+    visibility 240ms ease;
+}
+
+.page-loader--visible {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.page-loader__animation {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  display: grid;
+  place-items: center;
+}
+
+.page-loader__orbit {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: page-loader-spin 2.4s linear infinite;
+}
+
+.page-loader__arc {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-dasharray: 76 213;
+}
+
+.page-loader__arc--two {
+  transform: rotate(180deg);
+  transform-origin: center;
+  stroke-dasharray: 54 235;
+}
+
+.page-loader__logo {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.page-loader__logo-img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+@keyframes page-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader__orbit {
+    animation-duration: 8s;
+  }
+}
+
+/* Bugfree-style SplitText line wrappers */
+.split-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+[data-gsap-reveal] {
+  will-change: clip-path;
+}
+
+/* Bugfree-style arrow circle (dot) hover */
+.arrow-dot {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.arrow-dot__icon {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.arrow-dot__ripple {
+  color: inherit;
+  background: currentColor;
+  transform: scale(0);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.45s ease;
+}
+
+a:hover .arrow-dot,
+button:hover .arrow-dot,
+.arrow-btn:hover .arrow-dot,
+.group:hover .arrow-dot {
+  transform: scale(1.08);
+}
+
+a:hover .arrow-dot__icon,
+button:hover .arrow-dot__icon,
+.arrow-btn:hover .arrow-dot__icon,
+.group:hover .arrow-dot__icon {
+  transform: translate(2px, -2px);
+}
+
+a:hover .arrow-dot__ripple,
+button:hover .arrow-dot__ripple,
+.arrow-btn:hover .arrow-dot__ripple,
+.group:hover .arrow-dot__ripple {
+  transform: scale(1.6);
+  opacity: 0.18;
+}
+
+/* Magic cursor ball */
+#magic-cursor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1000000;
+}
+
+#ball {
+  position: fixed;
+  display: block;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  border: none;
+  background: #32a849;
+  opacity: 0.85;
+  width: 6px !important;
+  height: 6px !important;
+  mix-blend-mode: normal;
+}
+
+@media (max-width: 1024px) {
+  #magic-cursor {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --line-height-normal: 23px;
+  }
+
+  body {
+    min-width: 320px;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    max-width: 100%;
+  }
+}
+
+/* Photo hover: zoom in, blur then clear, ease back on leave */
+@keyframes image-hover-blur {
+  0% {
+    filter: blur(0);
+  }
+
+  30% {
+    filter: blur(8px);
+  }
+
+  100% {
+    filter: blur(0);
+  }
+}
+
+.image-zoom {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-zoom > img,
+.image-zoom > .image-zoom__media {
+  transform: scale(1);
+  transform-origin: center center;
+  filter: blur(0);
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s ease;
+}
+
+.image-zoom:hover > img,
+.image-zoom:hover > .image-zoom__media {
+  transform: scale(1.14);
+  animation: image-hover-blur 0.9s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow-dot,
+  .arrow-dot__icon,
+  .arrow-dot__ripple {
+    transition: none;
+  }
+
+  a:hover .arrow-dot__icon,
+  button:hover .arrow-dot__icon,
+  .arrow-btn:hover .arrow-dot__icon,
+  .group:hover .arrow-dot__icon {
+    transform: none;
+  }
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}

@@ -1,0 +1,241 @@
+.main {
+  width: 100%;
+  padding: 72px 64px 100px;
+  background: #ffffff;
+}
+
+.formCard {
+  width: 100%;
+  max-width: 1312px;
+  min-height: 1036px;
+  margin: 0 auto;
+  padding: 48px 48px 52px;
+  border: 2px solid #c3c3c3;
+  border-radius: 30px;
+  background: #ffffff;
+}
+
+.formTitle {
+  margin: 0 0 38px;
+  overflow: hidden;
+  color: #111111;
+  font-family: Inter, sans-serif;
+  font-size: 45px;
+  font-weight: 700;
+  line-height: 100%;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 30px;
+  row-gap: 22px;
+}
+
+.field,
+.resumeField {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: #444444;
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  border: 1px solid #d2d2d2;
+  border-radius: 10px;
+  background: #f2f2f2;
+  color: #444444;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.input,
+.select {
+  height: 55px;
+  padding: 0 18px;
+}
+
+.textarea {
+  height: 140px;
+  resize: vertical;
+  padding: 18px;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #b6b6b6;
+  opacity: 1;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus,
+.uploadArea:focus-within {
+  border-color: #32a849;
+  box-shadow: 0 0 0 3px rgba(50, 168, 73, 0.12);
+}
+
+.select {
+  appearance: auto;
+  cursor: pointer;
+}
+
+.uploadArea {
+  position: relative;
+  display: flex;
+  height: 188px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #d2d2d2;
+  border-radius: 10px;
+  background: #f2f2f2;
+  cursor: pointer;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.uploadIcon {
+  width: 32px;
+  height: 40px;
+  margin-bottom: 10px;
+  object-fit: contain;
+}
+
+.uploadTitle {
+  color: #444444;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.uploadHint {
+  color: #b6b6b6;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.fileInput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.submitButton {
+  display: inline-flex;
+  width: fit-content;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 6px;
+  padding: 7px 8px 7px 20px;
+  border: 0;
+  border-radius: 28px;
+  background: #32a849;
+  color: #ffffff;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background: #278f3d;
+}
+
+.submitButton:focus-visible {
+  outline: 3px solid rgba(50, 168, 73, 0.28);
+  outline-offset: 3px;
+}
+
+.submitArrow {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #32a849;
+}
+
+.submitArrow svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 1024px) {
+  .main {
+    padding: 56px 40px 80px;
+  }
+
+  .formCard {
+    min-height: auto;
+    padding: 40px 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding: 32px 16px 64px;
+  }
+
+  .formCard {
+    padding: 32px 18px;
+    border-radius: 22px;
+  }
+
+  .formTitle {
+    margin-bottom: 28px;
+    font-size: 32px;
+  }
+
+  .fieldGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .label {
+    font-size: 16px;
+  }
+
+  .uploadArea {
+    height: 180px;
+  }
+
+  .submitButton {
+    width: 100%;
+  }
+}
