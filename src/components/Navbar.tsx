@@ -56,7 +56,7 @@ export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
 
       <Link
         href="/contact"
-        className="group hidden h-[54px] w-[223px] shrink-0 items-center justify-between gap-2.5 rounded-[27px] bg-[#32A849] py-3 pr-3 pl-5 text-[18px] leading-none font-normal text-white transition-opacity hover:opacity-95 xl:inline-flex"
+        className="btn-green group hidden h-[54px] w-[223px] shrink-0 items-center justify-between gap-2.5 rounded-[27px] py-3 pr-3 pl-5 text-[18px] leading-none font-normal xl:inline-flex"
       >
         <span>Let’s Talk With Us</span>
         <ArrowDot variant="white" size="md" />
@@ -123,7 +123,7 @@ export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
           <Link
             href="/contact"
             onClick={() => setIsMenuOpen(false)}
-            className="group mt-2 inline-flex h-[54px] w-full items-center justify-between gap-2.5 rounded-[27px] bg-[#32A849] py-3 pr-3 pl-5 text-[17px] leading-none font-normal text-white transition-opacity hover:opacity-95"
+            className="btn-green group mt-2 inline-flex h-[54px] w-full items-center justify-between gap-2.5 rounded-[27px] py-3 pr-3 pl-5 text-[17px] leading-none font-normal"
           >
             <span>Let’s Talk With Us</span>
             <ArrowDot variant="white" size="md" />

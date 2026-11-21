@@ -31,12 +31,12 @@ const pestLinks = [
 ];
 
 const socialLinks = [
-  { name: "Facebook", href: "https://facebook.com" },
-  { name: "Instagram", href: "https://instagram.com" },
-  { name: "TikTok", href: "https://tiktok.com" },
-  { name: "X", href: "https://x.com" },
-  { name: "YouTube", href: "https://youtube.com" },
-  { name: "Pinterest", href: "https://pinterest.com" },
+  { name: "Facebook", href: "https://www.facebook.com/accuratepestcontrolservices/" },
+  { name: "Instagram", href: "https://www.instagram.com/accuratepestcontrolservices" },
+  { name: "TikTok", href: "https://www.tiktok.com/@accuratepestcontrol" },
+  { name: "X", href: "https://twitter.com/AccuratePestC" },
+  { name: "YouTube", href: "https://youtube.com/@AccuratePestControlServices" },
+  { name: "Pinterest", href: "https://www.pinterest.com/accuratepestcontrolservice/" },
 ] as const;
 
 function SocialIcon({ name }: { name: (typeof socialLinks)[number]["name"] }) {

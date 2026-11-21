@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { ArrowDot } from "@/components/ArrowButton";
 import HomeAnimations from "@/components/HomeAnimations";
 import Navbar from "@/components/Navbar";
 import EventDateFilter from "./EventDateFilter";
@@ -218,17 +219,11 @@ async function EventsContent({
               </ul>
 
               <Link
-                className={styles.detailsButton}
+                className={`${styles.detailsButton} group`}
                 href="/events/big-5-global-2026"
               >
                 <span>View Event Details</span>
-                <Image
-                  src="/arrow-white.svg"
-                  alt=""
-                  width={12}
-                  height={11}
-                  aria-hidden="true"
-                />
+                <ArrowDot variant="white" />
               </Link>
             </div>
           </article>

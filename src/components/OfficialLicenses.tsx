@@ -21,7 +21,7 @@ export default function OfficialLicenses() {
             Our Official Licenses &amp; Certifications
           </h2>
           <span
-            className="inline-flex h-[54px] w-[163px] shrink-0 items-center justify-between gap-2.5 rounded-[27px] bg-[#32A849] py-3 pr-3 pl-5 font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-none font-normal text-white"
+            className="btn-green group inline-flex h-[54px] w-[163px] shrink-0 items-center justify-between gap-2.5 rounded-[27px] py-3 pr-3 pl-5 font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-none font-normal"
             data-gsap-action
           >
             <span>View More</span>

@@ -144,13 +144,52 @@ body {
   will-change: clip-path;
 }
 
+/* Green CTA: white arrow default, border + invert on hover */
+.btn-green {
+  border: 1px solid transparent;
+  background-color: #32a849;
+  color: #fff;
+  transition:
+    background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease;
+}
+
+.btn-green:hover {
+  background-color: #fff;
+  color: #32a849;
+  border-color: #32a849;
+}
+
+/* Default: white circle + green straight arrow on green button */
+.btn-green .arrow-dot {
+  background-color: #fff;
+  color: #32a849;
+}
+
+/* Hover: green circle + white arrow when button inverts */
+.btn-green:hover .arrow-dot {
+  background-color: #32a849;
+  color: #fff;
+}
+
 /* Bugfree-style arrow circle (dot) hover */
 .arrow-dot {
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .arrow-dot__icon {
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.arrow-dot__icon--straight {
+  opacity: 0;
 }
 
 .arrow-dot__ripple {
@@ -169,11 +208,21 @@ button:hover .arrow-dot,
   transform: scale(1.08);
 }
 
-a:hover .arrow-dot__icon,
-button:hover .arrow-dot__icon,
-.arrow-btn:hover .arrow-dot__icon,
-.group:hover .arrow-dot__icon {
+/* Hover: swap diagonal → straight arrow */
+a:hover .arrow-dot__icon--diagonal,
+button:hover .arrow-dot__icon--diagonal,
+.arrow-btn:hover .arrow-dot__icon--diagonal,
+.group:hover .arrow-dot__icon--diagonal {
+  opacity: 0;
   transform: translate(2px, -2px);
+}
+
+a:hover .arrow-dot__icon--straight,
+button:hover .arrow-dot__icon--straight,
+.arrow-btn:hover .arrow-dot__icon--straight,
+.group:hover .arrow-dot__icon--straight {
+  opacity: 1;
+  transform: translateX(2px);
 }
 
 a:hover .arrow-dot__ripple,
@@ -266,6 +315,8 @@ button:hover .arrow-dot__ripple,
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .btn-green,
+  .btn-green .arrow-dot,
   .arrow-dot,
   .arrow-dot__icon,
   .arrow-dot__ripple {
@@ -275,7 +326,15 @@ button:hover .arrow-dot__ripple,
   a:hover .arrow-dot__icon,
   button:hover .arrow-dot__icon,
   .arrow-btn:hover .arrow-dot__icon,
-  .group:hover .arrow-dot__icon {
+  .group:hover .arrow-dot__icon,
+  a:hover .arrow-dot__icon--diagonal,
+  button:hover .arrow-dot__icon--diagonal,
+  .arrow-btn:hover .arrow-dot__icon--diagonal,
+  .group:hover .arrow-dot__icon--diagonal,
+  a:hover .arrow-dot__icon--straight,
+  button:hover .arrow-dot__icon--straight,
+  .arrow-btn:hover .arrow-dot__icon--straight,
+  .group:hover .arrow-dot__icon--straight {
     transform: none;
   }
 }

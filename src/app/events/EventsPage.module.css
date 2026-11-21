@@ -339,6 +339,7 @@
   justify-content: space-between;
   gap: 10px;
   padding: 12px 12px 12px 20px;
+  border: 1px solid transparent;
   border-radius: 27px;
   background: #32a849;
   color: #ffffff;
@@ -347,15 +348,26 @@
   font-weight: 400;
   line-height: 1;
   text-decoration: none;
-  transition: background-color 160ms ease;
+  transition:
+    background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .detailsButton:hover {
-  background: #278f3d;
+  background: #fff;
+  color: #32a849;
+  border-color: #32a849;
 }
 
-.detailsButton img {
-  flex: 0 0 auto;
+.detailsButton .arrow-dot {
+  background-color: #fff;
+  color: #32a849;
+}
+
+.detailsButton:hover .arrow-dot {
+  background-color: #32a849;
+  color: #fff;
 }
 
 .visuallyHidden {

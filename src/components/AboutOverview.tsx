@@ -48,7 +48,7 @@ export default function AboutOverview() {
               className="mt-8 flex w-full flex-wrap items-center gap-3 max-sm:flex-col max-sm:items-stretch"
               data-gsap-action
             >
-              <span className="inline-flex h-[54px] w-[212px] items-center justify-between gap-2.5 rounded-[27px] bg-[#32A849] py-3 pr-3 pl-5 font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-none font-normal text-white max-sm:w-full">
+              <span className="btn-green group inline-flex h-[54px] w-[212px] items-center justify-between gap-2.5 rounded-[27px] py-3 pr-3 pl-5 font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-none font-normal max-sm:w-full">
                 <span>Company Profile</span>
                 <ArrowDot variant="white" size="sm" />
               </span>

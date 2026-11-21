@@ -303,7 +303,7 @@ function PestDetailContent({
       ) : (
         <Link
           href="/#contact"
-          className="group mt-8 inline-flex h-[54px] shrink-0 items-center justify-between gap-2.5 rounded-[27px] bg-[#32A849] py-3 pr-3 pl-5 text-[18px] leading-none font-normal text-white transition-opacity hover:opacity-95"
+          className="btn-green group mt-8 inline-flex h-[54px] shrink-0 items-center justify-between gap-2.5 rounded-[27px] py-3 pr-3 pl-5 text-[18px] leading-none font-normal"
         >
           <span>Get {shortName} Treatment</span>
           <ArrowDot variant="white" />

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
 
 type ArrowButtonProps = {
@@ -7,6 +6,50 @@ type ArrowButtonProps = {
   arrowBg?: "white" | "green";
   arrowSize?: "sm" | "md";
 };
+
+/** Diagonal NE arrow (↗) — default */
+function ArrowDiagonal({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 12 12"
+      width={12}
+      height={12}
+      className={className}
+      fill="none"
+      aria-hidden
+    >
+      <path
+        d="M3 9L9 3M9 3H4.5M9 3V7.5"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/** Straight right arrow (→) — hover */
+function ArrowStraight({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 14 12"
+      width={14}
+      height={12}
+      className={className}
+      fill="none"
+      aria-hidden
+    >
+      <path
+        d="M1.25 6H11.5M11.5 6L7.75 2.25M11.5 6L7.75 9.75"
+        stroke="currentColor"
+        strokeWidth="1.85"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 /** Circular arrow "dot" with Bugfree-style hover motion */
 export function ArrowDot({
@@ -27,13 +70,10 @@ export function ArrowDot({
       aria-hidden
     >
       <span className="arrow-dot__ripple absolute inset-0 rounded-full bg-current opacity-0" />
-      <Image
-        src={isWhite ? "/arrow.svg" : "/arrow-white.svg"}
-        alt=""
-        width={12}
-        height={11}
-        className="arrow-dot__icon relative z-[1] h-[11px] w-3"
-      />
+      <span className="arrow-dot__icons relative z-[1] inline-grid h-3 w-3 place-items-center">
+        <ArrowDiagonal className="arrow-dot__icon arrow-dot__icon--diagonal col-start-1 row-start-1 h-3 w-3" />
+        <ArrowStraight className="arrow-dot__icon arrow-dot__icon--straight col-start-1 row-start-1 h-3 w-[14px]" />
+      </span>
     </span>
   );
 }

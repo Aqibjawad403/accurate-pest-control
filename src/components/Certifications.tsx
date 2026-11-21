@@ -2,23 +2,23 @@ import Image from "next/image";
 
 const certificates = [
   {
-    src: "/certifications/npma.png",
+    src: "/home/client%201.png",
     alt: "NPMA — National Pest Management Association",
   },
   {
-    src: "/certifications/foodwatch.png",
-    alt: "FOODWATCH",
+    src: "/home/client%202.png",
+    alt: "DineSecure",
   },
   {
-    src: "/certifications/bpca.png",
+    src: "/home/client%203.png",
     alt: "BPCA — British Pest Control Association Observer",
   },
   {
-    src: "/certifications/iso-9001.png",
+    src: "/home/client%204.png",
     alt: "ISO 9001:2015 Certified Company",
   },
   {
-    src: "/certifications/haccp.png",
+    src: "/home/client%205.png",
     alt: "HACCP Certified",
   },
 ];

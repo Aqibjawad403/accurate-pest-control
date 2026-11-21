@@ -115,7 +115,7 @@ export default function Services({
         <div className="mt-10 flex justify-center">
           <Link
             href="/pests"
-            className="group inline-flex h-[54px] w-[218px] shrink-0 items-center justify-between gap-2.5 rounded-[27px] bg-[#32A849] py-3 pr-3 pl-5 text-[18px] leading-none font-normal text-white transition-opacity hover:opacity-95"
+            className="btn-green group inline-flex h-[54px] w-[218px] shrink-0 items-center justify-between gap-2.5 rounded-[27px] py-3 pr-3 pl-5 text-[18px] leading-none font-normal"
           >
             <span>View All Services</span>
             <ArrowDot variant="white" />

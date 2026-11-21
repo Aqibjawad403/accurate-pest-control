@@ -82,7 +82,7 @@ export default function AboutUs({
           {!showFullDescription && (
             <Link
               href="/about"
-              className="group inline-flex h-[54px] w-[200px] shrink-0 items-center justify-between gap-2.5 rounded-[27px] bg-[#32A849] py-3 pr-3 pl-5 text-[18px] leading-none font-normal text-white transition-opacity hover:opacity-95"
+              className="btn-green group inline-flex h-[54px] w-[200px] shrink-0 items-center justify-between gap-2.5 rounded-[27px] py-3 pr-3 pl-5 text-[18px] leading-none font-normal"
             >
               <span>More About Us</span>
               <ArrowDot variant="white" />
