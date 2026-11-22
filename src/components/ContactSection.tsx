@@ -1,3 +1,7 @@
+"use client";
+
+import FormStatusMessage from "@/components/FormStatusMessage";
+import { useMailForm } from "@/hooks/useMailForm";
 import styles from "./ContactSection.module.css";
 
 const pestConcerns = [
@@ -48,6 +52,10 @@ function ArrowIcon() {
 }
 
 export default function ContactSection() {
+  const { status, isSubmitting, handleSubmit, clearStatus } = useMailForm({
+    subject: "Website Contact Request",
+  });
+
   return (
     <section
       id="contact"
@@ -76,12 +84,10 @@ export default function ContactSection() {
 
       <div className={styles.card} data-gsap-card>
         <h3 className={styles.formHeading}>Get in Touch</h3>
-        <form
-          className={styles.form}
-          action="mailto:info@accuratepestcontrol.ae?subject=Website%20Contact%20Request"
-          method="post"
-          encType="text/plain"
-        >
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <input type="hidden" name="_honey" value="" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_subject" value="Website Contact Request" />
           <input type="hidden" name="Country Code" value="+971" />
           <div className={styles.fields}>
             <label className={styles.visuallyHidden} htmlFor="contact-name">
@@ -120,7 +126,12 @@ export default function ContactSection() {
               Pest Concern
             </label>
             <div className={styles.selectControl}>
-              <select id="contact-pest" name="Pest Concern" defaultValue="" required>
+              <select
+                id="contact-pest"
+                name="Pest Concern"
+                defaultValue=""
+                required
+              >
                 <option value="" disabled>
                   Select Pest Concern
                 </option>
@@ -167,10 +178,15 @@ export default function ContactSection() {
             />
           </div>
 
-          <button className={styles.submitButton} type="submit">
-            <span>Submit Now</span>
+          <button
+            className={styles.submitButton}
+            type="submit"
+            disabled={isSubmitting}
+          >
+            <span>{isSubmitting ? "Sending..." : "Submit Now"}</span>
             <ArrowIcon />
           </button>
+          <FormStatusMessage status={status} onClear={clearStatus} />
         </form>
       </div>
     </section>

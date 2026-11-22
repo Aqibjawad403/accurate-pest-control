@@ -1,29 +1,29 @@
 import { Suspense } from "react";
 import Link from "next/link";
+import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import HomeAnimations from "@/components/HomeAnimations";
 import Navbar from "@/components/Navbar";
 import SectorsDirectory from "@/components/SectorsDirectory";
 
-type SearchParams = Promise<{
-  sector?: string;
-}>;
-
-type SectorsPageProps = {
-  searchParams: SearchParams;
-};
-
-function SectorsShell({ sector }: { sector: string | null }) {
+export default function SectorsPage() {
   return (
     <HomeAnimations>
       <section
         className="relative w-full pt-5 has-[#mobile-navigation-menu]:z-[100]"
         data-gsap-section="hero"
       >
-        <div className="relative h-[420px] w-full rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]">
-          <Navbar activeHref="/sectors" />
+        <div className="relative h-[420px] w-full overflow-hidden rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]">
+          <BannerMedia
+            src={bannerImages.sectors}
+            alt="Modern commercial buildings across city sectors"
+            priority
+          />
+          <div className="relative z-10">
+            <Navbar activeHref="/sectors" />
+          </div>
           <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
 
-          <div className="absolute top-[270px] right-16 left-16 text-white max-sm:relative max-sm:top-auto max-sm:right-auto max-sm:left-auto max-sm:px-6">
+          <div className="absolute top-[270px] right-16 left-16 z-10 text-white max-sm:relative max-sm:top-auto max-sm:right-auto max-sm:left-auto max-sm:px-6">
             <h1
               className="text-[55px] leading-none font-bold max-sm:text-[36px]"
               data-gsap-split
@@ -41,25 +41,9 @@ function SectorsShell({ sector }: { sector: string | null }) {
         </div>
       </section>
 
-      <SectorsDirectory sector={sector} />
+      <Suspense fallback={null}>
+        <SectorsDirectory />
+      </Suspense>
     </HomeAnimations>
-  );
-}
-
-async function SectorsFromParams({
-  searchParams,
-}: {
-  searchParams: SearchParams;
-}) {
-  const params = await searchParams;
-
-  return <SectorsShell sector={params.sector ?? null} />;
-}
-
-export default function SectorsPage({ searchParams }: SectorsPageProps) {
-  return (
-    <Suspense fallback={<SectorsShell sector={null} />}>
-      <SectorsFromParams searchParams={searchParams} />
-    </Suspense>
   );
 }

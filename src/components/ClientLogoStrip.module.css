@@ -1,44 +1,79 @@
 .section {
   box-sizing: border-box;
   width: 100%;
-  padding: 0 64px 64px;
+  padding: 0 0 64px;
   background: #ffffff;
+  overflow: hidden;
 }
 
 .divider {
   height: 0;
-  margin: 0;
+  margin: 0 64px;
   border: 0;
   border-top: 1px solid #e7e7e7;
 }
 
-.cards {
-  display: grid;
+.viewport {
+  position: relative;
   width: 100%;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  justify-content: space-between;
-  gap: 24px;
   padding: 30px 0;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+
+.marquee {
+  --marquee-gap: 24px;
+  display: flex;
+  width: max-content;
+  gap: var(--marquee-gap);
+  animation: logo-marquee 55s linear infinite;
+  will-change: transform;
+}
+
+.track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--marquee-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .card {
   box-sizing: border-box;
   display: flex;
-  width: 100%;
-  max-width: 260px;
+  flex: 0 0 auto;
+  width: 220px;
   height: 110px;
-  justify-self: center;
   align-items: center;
   justify-content: center;
   border: 1px solid #e7e7e7;
   border-radius: 15px;
   background: #f2f2f2;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
 }
 
 .logoWrap {
   box-sizing: border-box;
   display: flex;
-  width: 197px;
+  width: 170px;
   height: 70px;
   align-items: center;
   justify-content: center;
@@ -50,24 +85,110 @@
   height: auto;
   max-height: 100%;
   object-fit: contain;
+  filter: grayscale(0.15);
+  transition:
+    filter 0.35s ease,
+    transform 0.35s ease;
+}
+
+.viewport:hover .marquee {
+  animation-play-state: paused;
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.03);
+  border-color: #d2d2d2;
+  box-shadow: 0 10px 24px rgb(0 0 0 / 8%);
+}
+
+.card:hover .logo {
+  filter: grayscale(0);
+  transform: scale(1.04);
+}
+
+@keyframes logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    /* one full track + the gap between duplicated tracks */
+    transform: translateX(calc(-50% - (var(--marquee-gap) / 2)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+
+  .viewport {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .marquee {
+    width: 100%;
+  }
+
+  .track:last-child {
+    display: none;
+  }
+
+  .track {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 0 20px;
+  }
 }
 
 @media (max-width: 1100px) {
-  .cards {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    justify-content: space-around;
+  .divider {
+    margin: 0 32px;
+  }
+
+  .card {
+    width: 190px;
+    height: 100px;
+  }
+
+  .logoWrap {
+    width: 150px;
+    height: 60px;
+  }
+
+  .marquee {
+    animation-duration: 48s;
   }
 }
 
 @media (max-width: 640px) {
   .section {
-    padding: 0 20px 48px;
+    padding: 0 0 48px;
   }
 
-  .cards {
-    grid-template-columns: minmax(0, 260px);
-    justify-content: center;
-    gap: 16px;
+  .divider {
+    margin: 0 20px;
+  }
+
+  .viewport {
     padding: 24px 0;
+  }
+
+  .card {
+    width: 160px;
+    height: 90px;
+  }
+
+  .logoWrap {
+    width: 128px;
+    height: 52px;
+  }
+
+  .marquee {
+    --marquee-gap: 16px;
+    animation-duration: 40s;
   }
 }

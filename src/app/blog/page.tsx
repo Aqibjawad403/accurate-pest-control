@@ -1,8 +1,10 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import HomeAnimations from "@/components/HomeAnimations";
 import InsightsSection from "@/components/InsightsSection";
 import Navbar from "@/components/Navbar";
+import { getBlogListingPosts } from "@/data/blogs";
 
 export const metadata: Metadata = {
   title: "Blogs | Accurate Pest Control Services LLC",
@@ -10,40 +12,9 @@ export const metadata: Metadata = {
     "Practical pest control tips and insights for a pest-free home and business.",
 };
 
-const posts = [
-  {
-    title: "Effective Ways to Keep Your Home Pest-Free",
-    href: "/blog/keep-home-pest-free",
-    image: "",
-  },
-  {
-    title: "Why Regular Pest Control Matters for Businesses",
-    href: "/blog/pest-control-for-businesses",
-    image: "",
-  },
-  {
-    title: "Understanding Integrated Pest Management (IPM)",
-    href: "/blog/understanding-ipm",
-    image: "",
-  },
-  {
-    title: "Effective Ways to Keep Your Home Pest-Free",
-    href: "/blog/keep-home-pest-free",
-    image: "",
-  },
-  {
-    title: "Why Regular Pest Control Matters for Businesses",
-    href: "/blog/pest-control-for-businesses",
-    image: "",
-  },
-  {
-    title: "Understanding Integrated Pest Management (IPM)",
-    href: "/blog/understanding-ipm",
-    image: "",
-  },
-];
-
 export default function BlogPage() {
+  const posts = getBlogListingPosts();
+
   return (
     <HomeAnimations>
       <section
@@ -51,16 +22,21 @@ export default function BlogPage() {
         data-gsap-section="hero"
       >
         <div
-          className="relative h-[420px] w-full rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]"
+          className="relative h-[420px] w-full overflow-hidden rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]"
           data-gsap-hero="shell"
         >
-          <div data-gsap-hero="nav">
+          <BannerMedia
+            src={bannerImages.blog}
+            alt="Writing and research for pest control insights"
+            priority
+          />
+          <div className="relative z-10" data-gsap-hero="nav">
             <Navbar activeHref="/blog" />
           </div>
           <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
 
           <div
-            className="absolute top-[270px] right-16 left-16 text-white max-sm:relative max-sm:top-auto max-sm:right-auto max-sm:left-auto max-sm:px-6"
+            className="absolute top-[270px] right-16 left-16 z-10 text-white max-sm:relative max-sm:top-auto max-sm:right-auto max-sm:left-auto max-sm:px-6"
             data-gsap-hero="copy"
           >
             <h1

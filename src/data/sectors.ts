@@ -1,5 +1,6 @@
 export type Sector = {
   title: string;
+  image: string;
   intro: string;
   howWeHelpTitle: string;
   points: string[];
@@ -9,6 +10,7 @@ export type Sector = {
 export const sectors: Sector[] = [
   {
     title: "Hotels & Hospitality",
+    image: "/sectors/hotels-service.webp",
     intro:
       "In the hospitality business, guest satisfaction is everything. A single pest sighting can result in bad reviews, health code violations, or even room closures. Our hospitality pest control service ensures your guests enjoy a clean, comfortable stay every time.",
     howWeHelpTitle: "How We Help Hotels:",
@@ -27,6 +29,7 @@ export const sectors: Sector[] = [
   },
   {
     title: "Shopping Malls",
+    image: "/sectors/malls-service.webp",
     intro:
       "High foot traffic, food courts, and storage areas make malls a prime target for pest issues. Left untreated, they can disrupt operations, drive away customers, and impact store reputations. Our safe pest control services are designed to work behind the scenes without affecting your visitors' experience.",
     howWeHelpTitle: "How We Help Shopping Malls:",
@@ -42,6 +45,7 @@ export const sectors: Sector[] = [
   },
   {
     title: "Restaurants",
+    image: "/sectors/restaurants-service.webp",
     intro:
       "In the food industry, even a small pest problem can shut down your kitchen and ruin your reputation. Our specialised restaurant pest control services are designed to keep your premises safe, hygienic, and fully compliant with food safety standards.",
     howWeHelpTitle: "How We Help Restaurants:",
@@ -57,6 +61,7 @@ export const sectors: Sector[] = [
   },
   {
     title: "Manufacturing Units",
+    image: "/sectors/manufacturing-service.webp",
     intro:
       "Factories and production facilities are highly at risk of pest issues due to machinery warmth, raw materials, and large storage spaces. Our pest control services for the manufacturing sector guarantee that operations remain free from pest problems.",
     howWeHelpTitle: "How We Help Manufacturing Units:",
@@ -74,6 +79,7 @@ export const sectors: Sector[] = [
   },
   {
     title: "Hospitals",
+    image: "/sectors/hospitals-service.webp",
     intro:
       "In medical environments, cleanliness is nonnegotiable. A single pest observation may harm patient health, violate regulations, and destroy public confidence in your facility. Our expert follows Dubai municipality pest control regulations to keep your spaces hygienic and secure.",
     howWeHelpTitle: "How We Help Hospitals:",
@@ -89,6 +95,7 @@ export const sectors: Sector[] = [
   },
   {
     title: "Commercial Buildings",
+    image: "/sectors/commercial-service.webp",
     intro:
       "Shared workspaces, elevators, storage rooms, and restrooms in commercial buildings create multiple entry points for pests. Our reliable commercial pest control services are designed to handle these dynamic environments without disrupting daily operations.",
     howWeHelpTitle: "How We Help Commercial Properties:",
@@ -106,6 +113,7 @@ export const sectors: Sector[] = [
   },
   {
     title: "Offices",
+    image: "/sectors/offices-service.webp",
     intro:
       "Workplace pests can cause workers to have health problems, interfere with productivity, and harm electronics. Maintaining a neat, business-appropriate workspace that meets your standards is made easier with our proactive office pest control service.",
     howWeHelpTitle: "How We Help Offices:",
@@ -124,6 +132,7 @@ export const sectors: Sector[] = [
   },
   {
     title: "Schools",
+    image: "/sectors/schools-service.webp",
     intro:
       "Homes and educational institutions require gentle yet effective pest control solutions. Safety comes first, whether it's in a classroom or a child's bedroom. Our trusted residential pest control services are designed with families and students in mind.",
     howWeHelpTitle: "How We Help Schools:",
@@ -140,6 +149,7 @@ export const sectors: Sector[] = [
   },
   {
     title: "Warehouse",
+    image: "/sectors/warehouse-service.webp",
     intro:
       "Warehouses are high-risk zones for pest infestations due to large storage spaces, frequent shipments, and limited foot traffic. All storage areas are kept clean, and your inventory is protected by our professional warehouse pest control services.",
     howWeHelpTitle: "How We Help Warehouses:",

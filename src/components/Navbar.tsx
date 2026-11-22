@@ -15,11 +15,23 @@ const navLinks = [
   { label: "Contact Us", href: "/contact" },
 ];
 
+const moreLinks = [
+  { label: "Documents", href: "/documents" },
+  { label: "Careers", href: "/careers" },
+  { label: "Blogs", href: "/blog" },
+];
+
 export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const normalizedActiveHref =
     activeHref === "/services" ? "/pests" : activeHref;
+  const isMoreActive = moreLinks.some(
+    (link) =>
+      normalizedActiveHref === link.href ||
+      normalizedActiveHref.startsWith(`${link.href}/`),
+  );
 
   useEffect(() => {
     const onScroll = () => {
@@ -67,13 +79,94 @@ export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
             </li>
           );
         })}
+        <li
+          className="relative"
+          onMouseEnter={() => setIsMoreOpen(true)}
+          onMouseLeave={() => setIsMoreOpen(false)}
+          onFocus={() => setIsMoreOpen(true)}
+          onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+              setIsMoreOpen(false);
+            }
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") setIsMoreOpen(false);
+          }}
+        >
+          <button
+            type="button"
+            aria-expanded={isMoreOpen}
+            aria-haspopup="menu"
+            aria-controls="more-navigation-menu"
+            onClick={() => setIsMoreOpen((open) => !open)}
+            className={`inline-flex items-center gap-1.5 text-center text-[18px] leading-none font-normal whitespace-nowrap transition-colors ${
+              isMoreActive || isMoreOpen
+                ? "text-[#32A849]"
+                : "text-[#444444] hover:text-[#32A849]"
+            }`}
+          >
+            More
+            <svg
+              viewBox="0 0 12 8"
+              className={`h-2.5 w-2.5 transition-transform duration-200 ${
+                isMoreOpen ? "rotate-180" : ""
+              }`}
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M1 1.5 6 6.5 11 1.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+
+          <div
+            id="more-navigation-menu"
+            role="menu"
+            aria-hidden={!isMoreOpen}
+            className={`absolute top-full left-1/2 z-50 w-[200px] -translate-x-1/2 pt-3 transition-all duration-200 ${
+              isMoreOpen
+                ? "pointer-events-auto visible opacity-100"
+                : "pointer-events-none invisible opacity-0"
+            }`}
+          >
+            <ul className="rounded-2xl border border-black/10 bg-white p-2 shadow-[0_16px_40px_rgba(0,0,0,0.16)]">
+              {moreLinks.map((link) => {
+                const isActive =
+                  normalizedActiveHref === link.href ||
+                  normalizedActiveHref.startsWith(`${link.href}/`);
+                return (
+                  <li key={link.href} role="none">
+                    <Link
+                      href={link.href}
+                      role="menuitem"
+                      onClick={() => setIsMoreOpen(false)}
+                      aria-current={isActive ? "page" : undefined}
+                      className={`block rounded-xl px-4 py-2.5 text-[16px] leading-none font-normal transition-colors ${
+                        isActive
+                          ? "bg-[#E8F7EC] text-[#32A849]"
+                          : "text-[#444444] hover:bg-[#F3F6F4] hover:text-[#32A849]"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </li>
       </ul>
 
       <Link
         href="/contact"
-        className="btn-green group hidden h-[54px] w-[223px] shrink-0 items-center justify-between gap-2.5 rounded-[27px] py-3 pr-3 pl-5 text-[18px] leading-none font-normal xl:inline-flex"
+        className="btn-green group hidden h-[54px] w-fit shrink-0 items-center justify-between gap-2.5 whitespace-nowrap rounded-[27px] py-3 pr-3 pl-5 text-[18px] leading-none font-normal xl:inline-flex"
       >
-        <span>Let’s Talk With Us</span>
+        <span className="whitespace-nowrap">Let’s Talk With Us</span>
         <ArrowDot variant="white" size="md" />
       </Link>
 
@@ -134,6 +227,34 @@ export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
                 </li>
               );
             })}
+            <li className="mt-1 border-t border-black/5 pt-1">
+              <p className="px-4 py-2 text-[13px] font-semibold tracking-wide text-[#888888] uppercase">
+                More
+              </p>
+              <ul className="flex flex-col">
+                {moreLinks.map((link) => {
+                  const isActive =
+                    normalizedActiveHref === link.href ||
+                    normalizedActiveHref.startsWith(`${link.href}/`);
+                  return (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        aria-current={isActive ? "page" : undefined}
+                        className={`block rounded-xl px-4 py-3 text-[16px] font-medium transition-colors ${
+                          isActive
+                            ? "bg-[#E8F7EC] text-[#32A849]"
+                            : "text-[#444444] hover:bg-[#F3F6F4] hover:text-[#32A849]"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
           </ul>
           <Link
             href="/contact"

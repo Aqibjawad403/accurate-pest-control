@@ -1,10 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import gsap from "gsap";
 import { ArrowDot } from "@/components/ArrowButton";
 import DirectorySidebarList from "@/components/DirectorySidebarList";
+import FormStatusMessage from "@/components/FormStatusMessage";
+import { useMailForm } from "@/hooks/useMailForm";
 import { sectors } from "@/data/sectors";
 
 function parseIndex(raw: string | null, max: number): number | null {
@@ -15,6 +18,10 @@ function parseIndex(raw: string | null, max: number): number | null {
 }
 
 function InspectionForm() {
+  const { status, isSubmitting, handleSubmit, clearStatus } = useMailForm({
+    subject: "Free Inspection Request",
+  });
+
   return (
     <section
       aria-labelledby="inspection-heading"
@@ -27,11 +34,12 @@ function InspectionForm() {
         Get a Free Inspection
       </h2>
       <form
-        action="mailto:info@accuratepestcontrol.ae?subject=Free%20Inspection%20Request"
-        method="post"
-        encType="text/plain"
+        onSubmit={handleSubmit}
         className="flex flex-1 flex-col gap-5"
       >
+        <input type="hidden" name="_honey" value="" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_subject" value="Free Inspection Request" />
         <label className="sr-only" htmlFor="sector-service">
           Service type
         </label>
@@ -94,22 +102,22 @@ function InspectionForm() {
 
         <button
           type="submit"
-          className="btn-white group mt-auto inline-flex h-[54px] w-[132px] items-center justify-between gap-2.5 rounded-[27px] py-3 pr-3 pl-5 text-[18px] leading-none font-normal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white font-['Inter',var(--font-plus-jakarta),sans-serif]"
+          disabled={isSubmitting}
+          className="btn-white group mt-auto inline-flex h-[54px] w-[132px] items-center justify-between gap-2.5 rounded-[27px] py-3 pr-3 pl-5 text-[18px] leading-none font-normal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white font-['Inter',var(--font-plus-jakarta),sans-serif] disabled:opacity-60"
         >
-          <span>Submit</span>
+          <span>{isSubmitting ? "Sending..." : "Submit"}</span>
           <ArrowDot variant="green" />
         </button>
+        <FormStatusMessage status={status} onClear={clearStatus} />
       </form>
     </section>
   );
 }
 
-export default function SectorsDirectory({
-  sector: sectorParam = null,
-}: {
-  sector?: string | null;
-}) {
+export default function SectorsDirectory() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const sectorParam = searchParams.get("sector");
   const sectorFromUrl = parseIndex(sectorParam, sectors.length) ?? 0;
   const [activeIndex, setActiveIndex] = useState(sectorFromUrl);
   const activeSector = sectors[activeIndex];
@@ -175,11 +183,16 @@ export default function SectorsDirectory({
           aria-live="polite"
           data-gsap-sector-content
         >
-          <div
-            className="h-[320px] w-full rounded-[20px] bg-[#D9D9D9] max-sm:h-[220px]"
-            role="img"
-            aria-label={`${activeSector.title} pest control`}
-          />
+          <div className="relative h-[320px] w-full overflow-hidden rounded-[20px] bg-[#D9D9D9] max-sm:h-[220px]">
+            <Image
+              src={activeSector.image}
+              alt={`${activeSector.title} pest control`}
+              fill
+              sizes="(max-width: 768px) 100vw, 60vw"
+              className="object-cover"
+              priority={activeIndex === 0}
+            />
+          </div>
           <h2 className="mt-4 text-[40px] leading-[1.15] font-bold text-[#222222] max-sm:text-[28px]">
             {activeSector.title}
           </h2>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowDot } from "@/components/ArrowButton";
 import AboutUs from "@/components/AboutUs";
+import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import Certifications from "@/components/Certifications";
 import ClientLogoStrip from "@/components/ClientLogoStrip";
 import ContactSection from "@/components/ContactSection";
@@ -22,11 +23,17 @@ export default function Home() {
           className="relative h-[min(720px,78vh)] min-h-[620px] w-full overflow-visible rounded-[28px] bg-[#005F13] opacity-100 max-sm:h-auto max-sm:min-h-[560px] max-sm:pb-8 sm:h-[800px] sm:rounded-[40px]"
           data-gsap-hero="shell"
         >
-          <div data-gsap-hero="nav">
+          <BannerMedia
+            src={bannerImages.home}
+            alt="Professional pest control technician treating a residential property"
+            priority
+            overlayOpacity={68}
+          />
+          <div className="relative z-10" data-gsap-hero="nav">
             <Navbar activeHref="/" />
           </div>
 
-          <div className="absolute right-16 bottom-12 left-16 flex flex-col gap-4 max-sm:right-5 max-sm:bottom-6 max-sm:left-5">
+          <div className="absolute right-16 bottom-12 left-16 z-10 flex flex-col gap-4 max-sm:right-5 max-sm:bottom-6 max-sm:left-5">
             <div
               className="flex min-h-[38px] w-[370px] items-center justify-center gap-2.5 rounded-[30px] border-[0.5px] border-white bg-[#FFFFFF40] px-[18px] py-[9px] opacity-100 max-sm:w-fit max-sm:max-w-full"
               data-gsap-hero="badge"
@@ -72,7 +79,14 @@ export default function Home() {
 
       <div data-gsap-section="certifications"><Certifications /></div>
       <div data-gsap-section="about"><AboutUs /></div>
-      <div data-gsap-section="services"><Services limit={4} overlapCards /></div>
+      <div data-gsap-section="services">
+        <Services
+          limit={4}
+          background="white"
+          overlapCards
+          overlapStyle="dividers"
+        />
+      </div>
       <div data-gsap-section="team"><OurTeam /></div>
       <div data-gsap-section="testimonials"><Testimonials /></div>
       <div data-gsap-section="logos"><ClientLogoStrip /></div>

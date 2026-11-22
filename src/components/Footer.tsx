@@ -113,38 +113,52 @@ function SocialIcon({ name }: { name: (typeof socialLinks)[number]["name"] }) {
   }
 }
 
-function ContactIcon({ kind }: { kind: "whatsapp" | "phone" | "email" }) {
-  if (kind === "email") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          fill="currentColor"
-          d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"
-        />
-      </svg>
-    );
-  }
+type ContactLink = {
+  href: string;
+  text: string;
+  external?: boolean;
+};
 
-  if (kind === "whatsapp") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          fill="currentColor"
-          d="M12 2a9.7 9.7 0 0 0-8.3 14.7L2.4 22l5.5-1.3A9.8 9.8 0 1 0 12 2zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-3.3.8.9-3.2-.2-.3A8 8 0 1 1 12 19.8zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5.1a6.6 6.6 0 0 1-1.9-1.2 7.1 7.1 0 0 1-1.3-1.6c-.1-.2 0-.3.1-.4l.4-.5.3-.4v-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3s-.8.8-.8 1.9.8 2.2.9 2.3a9.2 9.2 0 0 0 3.5 3.1c.5.2.9.4 1.2.4.5.2 1 .1 1.3.1.4-.1 1.4-.6 1.6-1.1.2-.6.2-1 .2-1.1s-.1-.2-.3-.3z"
-        />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1l-2.2 2.2z"
-      />
-    </svg>
-  );
-}
+const contactGroups: {
+  icon: string;
+  label: string;
+  links: ContactLink[];
+}[] = [
+  {
+    icon: "/call.svg",
+    label: "Call",
+    links: [
+      { href: "tel:+9718008725", text: "+971 800 8725" },
+      { href: "tel:+97143756435", text: "+971 4 375 6435" },
+    ],
+  },
+  {
+    icon: "/whastapp.svg",
+    label: "WhatsApp",
+    links: [
+      {
+        href: "https://wa.me/971524496173",
+        text: "+971 52 449 6173",
+        external: true,
+      },
+      {
+        href: "https://wa.me/971521528725",
+        text: "+971 52 152 8725",
+        external: true,
+      },
+    ],
+  },
+  {
+    icon: "/email.svg",
+    label: "Email",
+    links: [
+      {
+        href: "mailto:info@accuratepestcontrol.ae",
+        text: "info@accuratepestcontrol.ae",
+      },
+    ],
+  },
+];
 
 export default function Footer() {
   return (
@@ -219,27 +233,42 @@ export default function Footer() {
         <div className={styles.contactSection}>
           <hr className={styles.divider} />
           <div className={styles.contactLinks}>
-            <a href="tel:+9718008725" className={styles.contactLink}>
-              <span className={styles.contactIcon}>
-                <ContactIcon kind="phone" />
-              </span>
-              <span>+971 800 8725,&nbsp; +971 4 375 6435</span>
-            </a>
-            <a href="tel:+971524496173" className={styles.contactLink}>
-              <span className={styles.contactIcon}>
-                <ContactIcon kind="whatsapp" />
-              </span>
-              <span>+971 52 449 6173,&nbsp; +971 52 152 8725</span>
-            </a>
-            <a
-              href="mailto:info@accuratepestcontrol.ae"
-              className={styles.contactLink}
-            >
-              <span className={styles.contactIcon}>
-                <ContactIcon kind="email" />
-              </span>
-              <span>info@accuratepestcontrol.ae</span>
-            </a>
+            {contactGroups.map((group) => (
+              <div key={group.label} className={styles.contactLink}>
+                <a
+                  href={group.links[0].href}
+                  className={styles.contactIcon}
+                  aria-label={group.label}
+                  {...(group.links[0].external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                >
+                  <Image
+                    src={group.icon}
+                    alt=""
+                    width={17}
+                    height={17}
+                    className={styles.contactIconImage}
+                  />
+                </a>
+                <span className={styles.contactNumbers}>
+                  {group.links.map((link, index) => (
+                    <span key={link.href}>
+                      {index > 0 ? <>,&nbsp;</> : null}
+                      <a
+                        href={link.href}
+                        className={styles.contactNumber}
+                        {...(link.external
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                      >
+                        {link.text}
+                      </a>
+                    </span>
+                  ))}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowDot } from "@/components/ArrowButton";
+import { getBlogListingPosts } from "@/data/blogs";
 import styles from "./InsightsSection.module.css";
 
 type Post = {
@@ -10,29 +11,13 @@ type Post = {
 
 type InsightCardProps = Post;
 
-const POSTS: Post[] = [
-  {
-    title: "Effective Ways to Keep Your Home Pest-Free",
-    href: "/blog/keep-home-pest-free",
-    image: "",
-  },
-  {
-    title: "Why Regular Pest Control Matters for Businesses",
-    href: "/blog/pest-control-for-businesses",
-    image: "",
-  },
-  {
-    title: "Understanding Integrated Pest Management (IPM)",
-    href: "/blog/understanding-ipm",
-    image: "",
-  },
-];
+const POSTS: Post[] = getBlogListingPosts().slice(0, 3);
 
 export function InsightCard({ title, href, image }: InsightCardProps) {
   return (
     <article
       className={styles.card}
-      style={image ? { backgroundImage: `url(${image})` } : undefined}
+      style={image ? { backgroundImage: `url("${image}")` } : undefined}
       data-gsap-card
     >
       <h3 className={styles.cardTitle}>{title}</h3>

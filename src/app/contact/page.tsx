@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Inter } from "next/font/google";
+import BannerMedia, { bannerImages } from "@/components/BannerMedia";
+import ContactPageForm from "@/components/ContactPageForm";
 import HomeAnimations from "@/components/HomeAnimations";
 import Navbar from "@/components/Navbar";
 import { locations } from "@/data/locations";
@@ -41,116 +43,21 @@ const contactMethods = [
   },
 ];
 
-const pestConcerns = [
-  "Ants",
-  "Cockroaches",
-  "Bed Bugs",
-  "Rodents",
-  "Flies",
-  "Mosquitoes",
-  "Spiders",
-  "Termites",
-  "Birds",
-  "Other",
-];
-
-const pestTypes = ["Residential", "Commercial", "Industrial", "Other"];
-
-function ContactForm() {
-  return (
-    <section className={styles.formCard} aria-labelledby="contact-form-heading">
-      <h2 className={styles.formHeading} id="contact-form-heading">
-        Get in Touch
-      </h2>
-      <form
-        className={styles.form}
-        action="mailto:info@accuratepestcontrol.ae?subject=Website%20Contact%20Request"
-        method="post"
-        encType="text/plain"
-      >
-        <div className={styles.fields}>
-          <label className={styles.field}>
-            <span>First Name</span>
-            <input name="First Name" type="text" placeholder="First Name" required />
-          </label>
-          <label className={styles.field}>
-            <span>Last Name</span>
-            <input name="Last Name" type="text" placeholder="Last Name" required />
-          </label>
-          <label className={styles.field}>
-            <span>Phone No.</span>
-            <input
-              name="Phone Number"
-              type="tel"
-              placeholder="Phone No"
-              autoComplete="tel"
-              required
-            />
-          </label>
-          <label className={styles.field}>
-            <span>Email Address</span>
-            <input
-              name="Email Address"
-              type="email"
-              placeholder="Email Address"
-              autoComplete="email"
-              required
-            />
-          </label>
-          <label className={styles.field}>
-            <span>Select Pest Concern</span>
-            <select name="Pest Concern" defaultValue="" required>
-              <option value="" disabled>
-                Select...
-              </option>
-              {pestConcerns.map((concern) => (
-                <option key={concern} value={concern}>
-                  {concern}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className={styles.field}>
-            <span>Select Pest Type</span>
-            <select name="Pest Type" defaultValue="" required>
-              <option value="" disabled>
-                Select...
-              </option>
-              {pestTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className={`${styles.field} ${styles.messageField}`}>
-            <span>Message</span>
-            <textarea name="Message" placeholder="Write your message" required />
-          </label>
-        </div>
-        <button className={styles.submitButton} type="submit">
-          <span>Send Message</span>
-          <span className={styles.submitArrow} aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M7 17 17 7M9 7h8v8" />
-            </svg>
-          </span>
-        </button>
-      </form>
-    </section>
-  );
-}
-
 export default function ContactPage() {
   return (
     <HomeAnimations>
       <div className={inter.className}>
         <section className={styles.hero} data-gsap-section="hero">
           <div className={styles.heroShell} data-gsap-hero="shell">
-            <div data-gsap-hero="nav">
+            <BannerMedia
+              src={bannerImages.contact}
+              alt="Customer reaching out on a smartphone"
+              priority
+            />
+            <div className="relative z-10" data-gsap-hero="nav">
               <Navbar activeHref="/contact" />
             </div>
-            <div className={styles.heroCopy} data-gsap-hero="copy">
+            <div className={`${styles.heroCopy} z-10`} data-gsap-hero="copy">
               <p className={styles.eyebrow}>We&apos;re here to help</p>
               <h1 data-gsap-split>Contact Us</h1>
               <p className={styles.heroDescription}>
@@ -205,7 +112,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <ContactForm />
+            <ContactPageForm />
           </div>
         </section>
 

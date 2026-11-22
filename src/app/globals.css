@@ -52,6 +52,19 @@ body {
   line-height: var(--line-height-normal);
 }
 
+/* Native select highlight: brand green instead of browser blue */
+select {
+  accent-color: #32a849;
+}
+
+select option:checked,
+select option:hover,
+select option:focus {
+  background-color: #32a849;
+  background: #32a849 linear-gradient(0deg, #32a849 0%, #32a849 100%);
+  color: #ffffff;
+}
+
 .page-loader {
   position: fixed;
   z-index: 1000;

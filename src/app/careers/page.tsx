@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Image from "next/image";
 import Link from "next/link";
+import BannerMedia, { bannerImages } from "@/components/BannerMedia";
+import CareersForm from "@/components/CareersForm";
 import HomeAnimations from "@/components/HomeAnimations";
 import Navbar from "@/components/Navbar";
 import styles from "./CareersPage.module.css";
@@ -25,16 +26,21 @@ export default function CareersPage() {
         data-gsap-section="hero"
       >
         <div
-          className="relative h-[420px] w-full rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]"
+          className="relative h-[420px] w-full overflow-hidden rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]"
           data-gsap-hero="shell"
         >
-          <div data-gsap-hero="nav">
+          <BannerMedia
+            src={bannerImages.careers}
+            alt="Professionals collaborating on career opportunities"
+            priority
+          />
+          <div className="relative z-10" data-gsap-hero="nav">
             <Navbar activeHref="/careers" />
           </div>
           <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
 
           <div
-            className="absolute top-[235px] right-16 left-16 text-white max-sm:relative max-sm:top-auto max-sm:right-auto max-sm:left-auto max-sm:px-6"
+            className="absolute top-[235px] right-16 left-16 z-10 text-white max-sm:relative max-sm:top-auto max-sm:right-auto max-sm:left-auto max-sm:px-6"
             data-gsap-hero="copy"
           >
             <h1
@@ -65,136 +71,7 @@ export default function CareersPage() {
             Let&apos;s Grow Together
           </h2>
 
-          <form className={styles.form}>
-            <div className={styles.fieldGrid}>
-              <label className={styles.field}>
-                <span className={styles.label}>First Name *</span>
-                <input
-                  className={styles.input}
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  required
-                />
-              </label>
-
-              <label className={styles.field}>
-                <span className={styles.label}>Last Name *</span>
-                <input
-                  className={styles.input}
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  required
-                />
-              </label>
-
-              <label className={styles.field}>
-                <span className={styles.label}>Phone Number *</span>
-                <input
-                  className={styles.input}
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone No"
-                  required
-                />
-              </label>
-
-              <label className={styles.field}>
-                <span className={styles.label}>Email Address *</span>
-                <input
-                  className={styles.input}
-                  type="email"
-                  name="email"
-                  placeholder="E-mail"
-                  required
-                />
-              </label>
-
-              <label className={styles.field}>
-                <span className={styles.label}>Position of Interest *</span>
-                <select
-                  className={`${styles.input} ${styles.select}`}
-                  name="position"
-                  defaultValue=""
-                  required
-                >
-                  <option value="" disabled>
-                    Select
-                  </option>
-                  <option value="Pest Control Technician">Pest Control Technician</option>
-                  <option value="Sales Executive">Sales Executive</option>
-                  <option value="Operations">Operations</option>
-                  <option value="Customer Service">Customer Service</option>
-                  <option value="Other">Other</option>
-                </select>
-              </label>
-
-              <label className={styles.field}>
-                <span className={styles.label}>Years of Experience *</span>
-                <select
-                  className={`${styles.input} ${styles.select}`}
-                  name="experience"
-                  defaultValue=""
-                  required
-                >
-                  <option value="" disabled>
-                    Select
-                  </option>
-                  <option value="No experience">No experience</option>
-                  <option value="1-2 years">1-2 years</option>
-                  <option value="3-5 years">3-5 years</option>
-                  <option value="6-10 years">6-10 years</option>
-                  <option value="10+ years">10+ years</option>
-                </select>
-              </label>
-            </div>
-
-            <label className={styles.resumeField}>
-              <span className={styles.label}>Upload Your Resume / CV *</span>
-              <span className={styles.uploadArea}>
-                <Image
-                  src="/upload.svg"
-                  alt=""
-                  width={32}
-                  height={40}
-                  className={styles.uploadIcon}
-                />
-                <strong className={styles.uploadTitle}>
-                  Upload Your Resume / CV
-                </strong>
-                <span className={styles.uploadHint}>
-                  PDF or DOCX, Maximum 10 MB
-                </span>
-                <input
-                  className={styles.fileInput}
-                  type="file"
-                  name="resume"
-                  accept=".pdf,.docx"
-                  required
-                />
-              </span>
-            </label>
-
-            <label className={styles.field}>
-              <span className={styles.label}>Short Introduction (Optional)</span>
-              <textarea
-                className={styles.textarea}
-                name="introduction"
-                placeholder="Tell us a little about yourself..."
-                rows={5}
-              />
-            </label>
-
-            <button className={styles.submitButton} type="submit">
-              <span>Submit Application</span>
-              <span className={styles.submitArrow} aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M7 17 17 7M9 7h8v8" />
-                </svg>
-              </span>
-            </button>
-          </form>
+          <CareersForm />
         </section>
       </main>
     </HomeAnimations>

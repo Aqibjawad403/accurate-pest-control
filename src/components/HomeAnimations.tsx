@@ -88,12 +88,33 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
           );
         });
 
+      const fromIf = (
+        targets: gsap.TweenTarget | null | undefined,
+        vars: gsap.TweenVars,
+      ) => {
+        const list = gsap.utils.toArray(targets ?? []);
+        if (!list.length) return;
+        gsap.from(list, vars);
+      };
+
       /* Hero entrance — title handled by SplitText above */
       if (mainRef.current?.querySelector("[data-gsap-hero='shell']")) {
-        const heroButton =
-          mainRef.current.querySelector<HTMLElement>(
-            "[data-gsap-hero='button']",
-          );
+        const root = mainRef.current;
+        const heroShell = root.querySelector<HTMLElement>(
+          "[data-gsap-hero='shell']",
+        );
+        const heroNav = root.querySelector<HTMLElement>(
+          "[data-gsap-hero='nav']",
+        );
+        const heroBadge = root.querySelector<HTMLElement>(
+          "[data-gsap-hero='badge']",
+        );
+        const heroCopy = root.querySelector<HTMLElement>(
+          "[data-gsap-hero='copy']",
+        );
+        const heroButton = root.querySelector<HTMLElement>(
+          "[data-gsap-hero='button']",
+        );
 
         const hero = gsap.timeline({
           defaults: { ease: "power3.out" },
@@ -108,9 +129,10 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
             }
           },
         });
-        hero
-          .fromTo(
-            "[data-gsap-hero='shell']",
+
+        if (heroShell) {
+          hero.fromTo(
+            heroShell,
             { opacity: 0, scale: 1.04 },
             {
               opacity: 1,
@@ -118,9 +140,11 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
               duration: 1.1,
               clearProps: "transform",
             },
-          )
-          .fromTo(
-            "[data-gsap-hero='nav']",
+          );
+        }
+        if (heroNav) {
+          hero.fromTo(
+            heroNav,
             { y: -40, opacity: 0 },
             {
               y: 0,
@@ -129,21 +153,27 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
               clearProps: "transform",
             },
             "-=0.75",
-          )
-          .fromTo(
-            "[data-gsap-hero='badge']",
+          );
+        }
+        if (heroBadge) {
+          hero.fromTo(
+            heroBadge,
             { x: -30, opacity: 0 },
             { x: 0, opacity: 1, duration: 0.55, clearProps: "transform" },
             "-=0.35",
-          )
-          .fromTo(
-            "[data-gsap-hero='copy']",
+          );
+        }
+        if (heroCopy) {
+          hero.fromTo(
+            heroCopy,
             { y: 35, opacity: 0 },
             { y: 0, opacity: 1, duration: 0.75, clearProps: "transform" },
             "-=0.2",
-          )
-          .fromTo(
-            "[data-gsap-hero='button']",
+          );
+        }
+        if (heroButton) {
+          hero.fromTo(
+            heroButton,
             { scale: 0.85, opacity: 0 },
             {
               scale: 1,
@@ -153,6 +183,7 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
             },
             "-=0.35",
           );
+        }
       }
 
       /* Scroll sections */
@@ -263,9 +294,17 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
                           : 96 + (index + 1) * 12
                       }px`,
                     scrub: true,
+                    invalidateOnRefresh: true,
                   },
                 });
               });
+
+              const refresh = () => ScrollTrigger.refresh();
+              overlapStack.querySelectorAll("img").forEach((img) => {
+                if (img.complete) return;
+                img.addEventListener("load", refresh, { once: true });
+              });
+              requestAnimationFrame(refresh);
             } else {
               gsap.utils
                 .toArray<HTMLElement>(
@@ -286,34 +325,60 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
                 });
             }
           } else if (name === "team") {
-            gsap.from(section.querySelector("[data-gsap-badge]"), {
-              scrollTrigger: trigger,
-              y: 24,
-              opacity: 0,
-              duration: 0.55,
-              ease: "power3.out",
-            });
+            const teamCards = gsap.utils.toArray<HTMLElement>(
+              section.querySelectorAll("[data-gsap-card]"),
+            );
 
-            gsap.from(section.querySelectorAll("[data-gsap-copy]"), {
-              scrollTrigger: trigger,
-              y: 24,
-              opacity: 0,
-              duration: 0.65,
-              ease: "power3.out",
-            });
-
-            gsap.from(section.querySelectorAll("[data-gsap-card]"), {
-              scrollTrigger: {
-                trigger: section,
-                start: "top 78%",
-                once: true,
-              },
-              y: 60,
-              opacity: 0,
-              stagger: 0.14,
-              duration: 0.85,
-              ease: "power3.out",
-            });
+            gsap
+              .timeline({
+                scrollTrigger: {
+                  trigger: section,
+                  start: "top 78%",
+                  once: true,
+                },
+              })
+              .from(section.querySelector("[data-gsap-badge]"), {
+                y: 20,
+                opacity: 0,
+                scale: 0.9,
+                duration: 0.5,
+                ease: "back.out(1.6)",
+              })
+              .from(
+                section.querySelectorAll("[data-gsap-copy]"),
+                {
+                  y: 28,
+                  opacity: 0,
+                  duration: 0.65,
+                  ease: "power3.out",
+                },
+                "-=0.2",
+              )
+              .from(
+                teamCards,
+                {
+                  y: 70,
+                  opacity: 0,
+                  scale: 0.9,
+                  filter: "blur(8px)",
+                  duration: 0.9,
+                  ease: "power3.out",
+                  stagger: 0.16,
+                },
+                "-=0.25",
+              )
+              .from(
+                teamCards
+                  .map((card) => card.querySelector("img"))
+                  .filter(Boolean),
+                {
+                  scale: 1.12,
+                  duration: 1.1,
+                  ease: "power2.out",
+                  stagger: 0.16,
+                },
+                "-=0.85",
+              );
           } else if (name === "official-licenses") {
             gsap
               .timeline({ scrollTrigger: trigger })
@@ -359,12 +424,11 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
                 ease: "power3.out",
               });
           } else if (name === "logos") {
-            gsap.from(section.querySelectorAll("[data-gsap-card]"), {
+            gsap.from(section.querySelector("[data-gsap-logos]"), {
               scrollTrigger: trigger,
-              y: 30,
+              y: 28,
               opacity: 0,
-              stagger: 0.1,
-              duration: 0.65,
+              duration: 0.75,
               ease: "power3.out",
             });
           } else if (name === "clients") {
@@ -423,7 +487,7 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
                 "-=0.45",
               );
           } else if (name === "insights") {
-            gsap.from(section.querySelector("[data-gsap-badge]"), {
+            fromIf(section.querySelector("[data-gsap-badge]"), {
               scrollTrigger: trigger,
               y: 20,
               opacity: 0,
@@ -431,7 +495,7 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
               ease: "power3.out",
             });
 
-            gsap.from(section.querySelectorAll("[data-gsap-card]"), {
+            fromIf(section.querySelectorAll("[data-gsap-card]"), {
               scrollTrigger: {
                 trigger: section,
                 start: "top 78%",

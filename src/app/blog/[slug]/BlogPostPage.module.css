@@ -117,8 +117,35 @@
 }
 
 .articleSection ul {
-  margin: 4px 0 0;
+  margin: 4px 0 12px;
   padding-left: 20px;
+}
+
+.articleSection h3 {
+  margin: 16px 0 8px;
+  color: #222222;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.subsection {
+  scroll-margin-top: 24px;
+}
+
+.inlineFrame {
+  width: 100%;
+  margin: 14px 0 16px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.inlineImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
 }
 
 .reply {

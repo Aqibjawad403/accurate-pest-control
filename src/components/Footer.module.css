@@ -76,7 +76,8 @@
 
 .socialLink:focus-visible,
 .linkList a:focus-visible,
-.contactLink:focus-visible {
+.contactNumber:focus-visible,
+.contactIcon:focus-visible {
   outline: 2px solid #ffffff;
   outline-offset: 4px;
 }
@@ -113,14 +114,16 @@
 }
 
 .linkList a,
-.contactLink {
+.contactNumber,
+.contactIcon {
   color: inherit;
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
 
 .linkList a:hover,
-.contactLink:hover {
+.contactNumber:hover,
+.contactIcon:hover {
   opacity: 0.78;
 }
 
@@ -182,13 +185,23 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #ffffff;
-  color: #005f13;
+  background: #32a849;
 }
 
-.contactIcon svg {
+.contactIconImage {
   width: 17px;
   height: 17px;
+  object-fit: contain;
+}
+
+.contactNumbers {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.contactNumber {
+  color: inherit;
 }
 
 .copyright {

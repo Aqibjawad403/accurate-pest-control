@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import Navbar from "@/components/Navbar";
 import {
   formatPestTypeName,
@@ -16,15 +18,11 @@ function parseIndex(raw: string | null, max: number): number | null {
   return index;
 }
 
-export default function ServicesHero({
-  pest: pestParam,
-  type: typeParam,
-  service: serviceParam = null,
-}: {
-  pest: string | null;
-  type: string | null;
-  service?: string | null;
-}) {
+export default function ServicesHero() {
+  const searchParams = useSearchParams();
+  const pestParam = searchParams.get("pest");
+  const typeParam = searchParams.get("type");
+  const serviceParam = searchParams.get("service");
   const pestIndex = parseIndex(pestParam, pestTreatments.length);
   const pest = pestIndex != null ? pestTreatments[pestIndex] : null;
   const types = pest?.types ?? [];
@@ -40,6 +38,11 @@ export default function ServicesHero({
   const pestTitle = pest?.title ?? null;
   const serviceTitle = service?.title ?? null;
   const bannerTitle = typeTitle ?? pestTitle ?? serviceTitle ?? "Services";
+  const bannerImage =
+    activeType?.image ||
+    pest?.image ||
+    service?.image ||
+    bannerImages.services;
 
   const pestShort = pest ? getPestShortName(pest.title) : null;
   const pestCrumb = pestShort
@@ -52,16 +55,22 @@ export default function ServicesHero({
       data-gsap-section="hero"
     >
       <div
-        className="relative h-[420px] w-full rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]"
+        className="relative h-[420px] w-full overflow-hidden rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]"
         data-gsap-hero="shell"
       >
-        <div data-gsap-hero="nav">
+        <BannerMedia
+          src={bannerImage}
+          alt={bannerTitle}
+          priority
+          overlayOpacity={70}
+        />
+        <div className="relative z-10" data-gsap-hero="nav">
           <Navbar activeHref="/services" />
         </div>
         <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
 
         <div
-          className="absolute top-[270px] right-16 left-16 text-white max-sm:relative max-sm:top-auto max-sm:right-auto max-sm:left-auto max-sm:px-6"
+          className="absolute top-[270px] right-16 left-16 z-10 text-white max-sm:relative max-sm:top-auto max-sm:right-auto max-sm:left-auto max-sm:px-6"
           data-gsap-hero="copy"
         >
           <h1

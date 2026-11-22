@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MagicCursor from "@/components/MagicCursor";
+import PdfViewerProvider from "@/components/pdf/PdfViewerProvider";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -15,6 +16,9 @@ export const metadata: Metadata = {
   title: "Accurate Pest Control Services LLC",
   description:
     "Dubai Municipality approved pest control services across the UAE.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -25,10 +29,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       style={{ overflowX: "clip" }}
     >
       <body className="flex min-h-full flex-col" style={{ overflowX: "clip" }}>
-        <MagicCursor />
-        <Header />
-        {children}
-        <Footer />
+        <PdfViewerProvider>
+          <MagicCursor />
+          <Header />
+          {children}
+          <Footer />
+        </PdfViewerProvider>
       </body>
     </html>
   );

@@ -8,6 +8,20 @@ export type ServiceFaq = {
   answer: string;
 };
 
+export type ServiceAboutBenefit = {
+  title: string;
+  description: string;
+};
+
+export type ServiceAboutSection = {
+  title: string;
+  intro?: string;
+  /** Arrow-list items (Types / Where used) */
+  items?: string[];
+  /** Bold-label benefit rows */
+  benefits?: ServiceAboutBenefit[];
+};
+
 export type PestTypeSection = {
   heading: string;
   paragraphs?: string[];
@@ -41,6 +55,16 @@ export type ServiceDetail = {
   guideItems?: string[];
   /** Subtype image cards for pest detail view */
   types?: PestType[];
+  /** Service detail intro heading (e.g. Fumigation layout) */
+  introTitle?: string;
+  /** About panel heading (e.g. Fumigation layout) */
+  aboutTitle?: string;
+  /** About panel body paragraphs */
+  aboutParagraphs?: string[];
+  /** Extra blocks inside the about panel (types, usage, benefits) */
+  aboutSections?: ServiceAboutSection[];
+  /** Use the alternate service detail layout (image + intro + about) */
+  alternateLayout?: boolean;
   offeredServices?: string[];
   stepsIntro?: string;
   steps?: ServiceStep[];
@@ -3586,43 +3610,61 @@ export const serviceOptions: ServiceDetail[] = [
   },
   {
     title: "Fumigation Services",
+    alternateLayout: true,
+    image: "/Fumigants.svg",
+    introTitle: "Introduction",
     paragraphs: [
-      "Fumigation is one of the surest methods of killing deeply rooted pests within residential and commercial premises. No matter what critters they are, termites, cockroaches, bed bugs, or other little something or others, Accurate Pest Control Services LLC can recure your place ensuring it is processed by a certified fumigation.",
-      "Practical technicians of our company start the whole process of work by a full site inspection and determine the type of pests, access ways and the level of infestation. In case anyone is looking for house fumigation near me, we have special treatment packages that serve villas, apartments, and townhouses. It aims at complete eradication without disturbing the routine of your days.",
-      "We are employing repellents as well as approved chemicals and specialized equipment to make their way into closed spaces, with the help of which we are doing efficient treatment. Be they residential, commercial or warehousing, our procedure is planned around adopting the Dubai Municipality requirement in ensuring the safeguarding of health and property.",
-      "Since its inception, our professional fumigation services in Sharjah have assisted many families as well as businesses to regain peace of mind in Sharjah. Every treatment is followed by the support of the ventilation, post-service inspection, and the practical recommendation on the prevention of reinfestation. Whether it is a one-off task or an ongoing yearly contract, Accurate Pest Control Services LLC offers quality pest management in the UAE.",
+      "Fumigation is considered to be one of the most reliable methods in terms of pest control, especially at times when the regular treatment measures fail to deliver any long-term and significant results. Professional fumigation services in the UAE are designed to eliminate a wide range of pests, including termites, bed bugs and cockroaches. The method is effective in invading locations in cracks where furniture is located, storage facilities and others in which pests can occupy in order to eliminate them at every point of their life cycle. Well-trained technicians apply sophisticated fumigants and implement safety protocols, and therefore, treatment applies to warehouses, food facilities, offices, and homes. Families and businesses also trust our fumigation services in Dubai, Sharjah, and Ajman to maintain hygienic, pest-free environments with long-term protection.",
     ],
-    offeredServices: [
-      "Structural fumigation of buildings/homes",
-      "Stored product pest fumigation (gas, chemical)",
-      "Pre/post construction pest control",
-      "Tailored schemes for homes, restaurants, offices, storage facilities",
+    aboutTitle: "About the Event",
+    aboutParagraphs: [
+      "Fumigation is considered to be one of the most reliable methods in terms of pest control, especially at times when the regular treatment measures fail to deliver any long-term and significant results. Professional fumigation services in the UAE are designed to eliminate a wide range of pests, including termites, bed bugs and cockroaches. The method is effective in invading locations in cracks where furniture is located, storage facilities and others in which pests can occupy in order to eliminate them at every point of their life cycle. Well-trained technicians apply sophisticated fumigants and implement safety protocols, and therefore, treatment applies to warehouses, food facilities, offices, and homes. Families and businesses also trust our fumigation services in Dubai, Sharjah, and Ajman to maintain hygienic, pest-free environments with long-term protection.",
     ],
-    stepsIntro: "These steps guarantee us long-term results in the following manner:",
-    steps: [
+    aboutSections: [
       {
-        title: "Identification",
-        description: "",
+        title: "Types of Fumigants",
+        intro: "The most commonly used fumigants gasses in the world market include:",
+        items: [
+          "Methyl Bromide (CH₃Br)",
+          "Phosphine or Hydrogen Phosphide (PH₃)",
+          "Sulfuryl Fluoride (SO₂F₂)",
+        ],
       },
       {
-        title: "Monitoring",
-        description: "",
+        title: "Where Fumigation is used",
+        items: [
+          "Warehouse & Storage Facilities",
+          "Commercial Buildings",
+          "Industrial Facilities",
+          "Shipping Containers",
+          "Agricultural Storage Areas",
+          "Other Suitable Enclosed Spaces",
+        ],
       },
       {
-        title: "Sanitation",
-        description: "",
-      },
-      {
-        title: "Exclusion",
-        description: "",
-      },
-      {
-        title: "Targeted Treatment",
-        description: "",
-      },
-      {
-        title: "Documentation",
-        description: "",
+        title: "Benefits of Professional Fumigation",
+        benefits: [
+          {
+            title: "Targeted Pest Control",
+            description: "Addresses specific pest infestations effectively.",
+          },
+          {
+            title: "Specialized Treatment",
+            description: "Suitable for certain hard-to-reach pest activity.",
+          },
+          {
+            title: "Professional Handling",
+            description: "Conducted by trained fumigation professionals.",
+          },
+          {
+            title: "Safety Procedures",
+            description: "Follows appropriate treatment and re-entry guidelines.",
+          },
+          {
+            title: "Preventive Support",
+            description: "Helps reduce the risk of recurring infestations.",
+          },
+        ],
       },
     ],
     faqs: [

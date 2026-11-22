@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ArrowDot } from "@/components/ArrowButton";
@@ -16,8 +16,67 @@ import {
   pestTreatments,
   serviceOptions,
   type PestType,
+  type ServiceAboutSection,
   type ServiceDetail,
 } from "@/data/pest-services";
+
+function AboutArrowList({ items }: { items: string[] }) {
+  return (
+    <ul className="mt-5 flex flex-col gap-3">
+      {items.map((item) => (
+        <li
+          key={item}
+          className="flex items-center gap-3 font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-[1.4] font-normal text-[#444444] max-sm:text-[16px]"
+        >
+          <Image
+            src="/selector.png"
+            alt=""
+            width={16}
+            height={16}
+            className="h-4 w-4 shrink-0 -rotate-90 opacity-100"
+            aria-hidden
+          />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function AboutSectionBlock({ section }: { section: ServiceAboutSection }) {
+  const items = section.items ?? [];
+  const benefits = section.benefits ?? [];
+
+  return (
+    <div className="mt-10">
+      <h3 className="font-['Inter',var(--font-plus-jakarta),sans-serif] text-[32px] leading-none font-bold tracking-[0.2px] text-black max-sm:text-[24px]">
+        {section.title}
+      </h3>
+
+      {section.intro ? (
+        <p className="mt-4 font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-[1.5] font-normal text-[#444444] max-sm:text-[16px]">
+          {section.intro}
+        </p>
+      ) : null}
+
+      {items.length > 0 ? <AboutArrowList items={items} /> : null}
+
+      {benefits.length > 0 ? (
+        <ul className="mt-5 flex flex-col gap-3">
+          {benefits.map((benefit) => (
+            <li
+              key={benefit.title}
+              className="font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-[1.5] font-normal text-[#444444] max-sm:text-[16px]"
+            >
+              <span className="font-bold text-black">{benefit.title}:</span>{" "}
+              {benefit.description}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
 
 function parseIndex(raw: string | null, max: number): number | null {
   if (raw == null || raw === "") return null;
@@ -260,8 +319,91 @@ function PestDetailContent({
   );
 }
 
+/** Fumigation-style service detail: image + intro + about panel */
+function AlternateServiceDetailContent({ item }: { item: ServiceDetail }) {
+  const detailRef = useDetailReveal(item.title);
+  const introTitle = item.introTitle?.trim() || "Introduction";
+  const aboutTitle = item.aboutTitle?.trim() || "About";
+  const aboutParagraphs =
+    item.aboutParagraphs && item.aboutParagraphs.length > 0
+      ? item.aboutParagraphs
+      : item.paragraphs;
+  const aboutSections = item.aboutSections ?? [];
+
+  return (
+    <article ref={detailRef} className="w-full max-w-[929px]">
+      {item.image ? (
+        <div
+          className="relative aspect-[865/400] w-full overflow-hidden rounded-[25px] bg-[#E0E0E0]"
+          data-gsap-reveal
+        >
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, 929px"
+            className="object-cover"
+            unoptimized
+          />
+        </div>
+      ) : (
+        <div
+          className="h-[320px] w-full rounded-[25px] bg-[#E0E0E0] max-sm:h-[220px]"
+          data-gsap-reveal
+        />
+      )}
+
+      <div className="mt-10" data-gsap-detail="body">
+        <h2 className="font-['Inter',var(--font-plus-jakarta),sans-serif] text-[45px] leading-none font-bold tracking-normal text-black max-sm:text-[28px]">
+          {introTitle}
+        </h2>
+
+        <div className="mt-5 flex flex-col gap-4">
+          {item.paragraphs.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-[1.5] font-normal text-[#444444] max-sm:text-[16px]"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </div>
+
+      <section
+        className="mt-12 w-full rounded-[20px] bg-[#F2F2F2] px-10 py-12 max-md:mt-8 max-md:rounded-[16px] max-md:px-5 max-md:py-8"
+        aria-labelledby="service-about-heading"
+        data-gsap-detail="about"
+      >
+        <h2
+          id="service-about-heading"
+          className="font-['Inter',var(--font-plus-jakarta),sans-serif] text-[45px] leading-none font-bold tracking-[0.2px] text-black max-sm:text-[28px]"
+        >
+          {aboutTitle}
+        </h2>
+
+        <div className="mt-6 flex flex-col gap-4">
+          {aboutParagraphs.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="font-['Inter',var(--font-plus-jakarta),sans-serif] text-[18px] leading-[1.5] font-normal text-[#444444] max-sm:text-[16px]"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        {aboutSections.map((section) => (
+          <AboutSectionBlock key={section.title} section={section} />
+        ))}
+      </section>
+    </article>
+  );
+}
+
 /** Services detail: image + title + body (existing design) */
-function ServiceDetailContent({ item }: { item: ServiceDetail }) {
+function DefaultServiceDetailContent({ item }: { item: ServiceDetail }) {
   const detailRef = useDetailReveal(item.title);
 
   return (
@@ -328,16 +470,20 @@ function ServiceDetailContent({ item }: { item: ServiceDetail }) {
   );
 }
 
-export default function ServicesDirectory({
-  pest: pestParam,
-  type: typeParam,
-  service: serviceParam = null,
-}: {
-  pest: string | null;
-  type: string | null;
-  service?: string | null;
-}) {
+function ServiceDetailContent({ item }: { item: ServiceDetail }) {
+  if (item.alternateLayout) {
+    return <AlternateServiceDetailContent item={item} />;
+  }
+
+  return <DefaultServiceDetailContent item={item} />;
+}
+
+export default function ServicesDirectory() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pestParam = searchParams.get("pest");
+  const typeParam = searchParams.get("type");
+  const serviceParam = searchParams.get("service");
   const pestFromUrl = parseIndex(pestParam, pestTreatments.length);
   const serviceFromUrl = parseIndex(serviceParam, serviceOptions.length);
   const pestQuery = pestParam;
