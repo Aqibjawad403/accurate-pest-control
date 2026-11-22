@@ -101,11 +101,11 @@ export default function OurTeam({
         )}
       </div>
 
-      <div className="mt-14 grid grid-cols-1 justify-items-center gap-6 md:grid-cols-2 xl:grid-cols-3 xl:justify-items-stretch">
+      <div className="mt-14 grid grid-cols-1 justify-items-center gap-6 md:grid-cols-2 xl:grid-cols-3">
         {team.map((member, index) => (
           <article
             key={`${member.name}-${index}`}
-            className="group relative flex h-[400px] w-full max-w-[420px] flex-col justify-end gap-2 overflow-hidden rounded-[20px] bg-[#D9D9D9] px-6 pb-6 opacity-100 max-sm:h-[340px] xl:max-w-none"
+            className="group relative flex aspect-[21/20] w-full max-w-[420px] flex-col justify-end gap-2 overflow-hidden rounded-[20px] bg-[#D9D9D9] px-6 pb-6 opacity-100"
             data-gsap-card
           >
             <Image
@@ -113,15 +113,15 @@ export default function OurTeam({
               alt={member.name}
               fill
               unoptimized
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 420px"
+              className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
             />
 
             <div
               className="pointer-events-none absolute inset-0 rounded-[20px]"
               style={{
                 background:
-                  "linear-gradient(180deg, rgba(0, 0, 0, 0) 28.37%, rgba(0, 0, 0, 0.28) 66.35%, #000000 100%)",
+                  "linear-gradient(180deg, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0.22) 68%, rgba(0, 0, 0, 0.92) 100%)",
               }}
               aria-hidden
             />

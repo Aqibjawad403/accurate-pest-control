@@ -7,7 +7,7 @@ import { ArrowDot } from "@/components/ArrowButton";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Pest & Services", href: "/pests" },
+  { label: "Pests & Services", href: "/pests" },
   { label: "Sectors", href: "/sectors" },
   { label: "About Us", href: "/about" },
   { label: "Clients", href: "/clients" },

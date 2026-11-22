@@ -1,22 +1,24 @@
 .section {
   box-sizing: border-box;
   display: grid;
-  min-height: 681px;
-  grid-template-columns: minmax(0, 1fr) 627px;
-  align-items: start;
-  gap: 60px;
-  padding: 80px 64px;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 560px);
+  align-items: center;
+  gap: 40px 48px;
+  padding: 64px;
   background: #f2f2f2;
   font-family: "Inter", var(--font-plus-jakarta), sans-serif;
 }
 
 .copy {
+  display: flex;
   min-width: 0;
-  padding-top: 8px;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .badge {
   display: inline-flex;
+  width: fit-content;
   align-items: center;
   padding: 6px 14px;
   border: 1px solid #d5d5d5;
@@ -30,36 +32,142 @@
 }
 
 .heading {
-  margin: 22px 0 20px;
+  margin: 18px 0 16px;
   color: #222222;
-  font-size: 45px;
+  font-size: 42px;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.05;
+}
+
+.copyBody {
+  display: flex;
+  max-width: 540px;
+  flex-direction: column;
+  gap: 22px;
 }
 
 .description {
-  max-width: 560px;
   margin: 0;
   color: #666666;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 400;
   line-height: var(--line-height-normal);
+}
+
+.highlights {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+}
+
+.highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #333333;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.highlightIcon {
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: #e8f7ec;
+  color: #32a849;
+}
+
+.highlightIcon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.contactLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 4px;
+  border-top: 1px solid #d9d9d9;
+}
+
+.contactLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.contactLink:hover {
+  opacity: 0.8;
+}
+
+.contactLink:focus-visible {
+  outline: 2px solid #1fa34a;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.contactIcon {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+}
+
+.contactText {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contactLabel {
+  color: #888888;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.contactDetail {
+  color: #222222;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  word-break: break-word;
 }
 
 .card {
   box-sizing: border-box;
   width: 100%;
-  min-height: 521px;
-  padding: 16px 29px 30px;
+  padding: 28px 28px 30px;
   border: 1px solid #d5d5d5;
   border-radius: 20px;
   background: #ffffff;
 }
 
 .formHeading {
-  margin: 0 0 56px;
+  margin: 0 0 28px;
   color: #222222;
-  font-size: 45px;
+  font-size: 36px;
   font-weight: 600;
   line-height: 1;
 }
@@ -172,7 +280,7 @@
 
 .message {
   grid-column: 1 / -1;
-  height: 140px;
+  height: 120px;
   padding-top: 12px;
   resize: vertical;
   line-height: var(--line-height-normal);
@@ -185,7 +293,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin-top: 58px;
+  margin-top: 24px;
   padding: 12px;
   padding-left: 20px;
   border: 0;
@@ -202,6 +310,11 @@
 
 .submitButton:hover {
   opacity: 0.9;
+}
+
+.submitButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .submitButton:focus-visible,
@@ -242,39 +355,40 @@
 @media (max-width: 1100px) {
   .section {
     grid-template-columns: minmax(0, 1fr);
-    gap: 48px;
-    padding: 64px 48px;
+    gap: 36px;
+    padding: 56px 48px;
   }
 
   .card {
-    max-width: 627px;
+    max-width: 560px;
   }
 }
 
 @media (max-width: 640px) {
   .section {
-    min-height: 0;
-    gap: 36px;
-    padding: 56px 20px;
+    gap: 28px;
+    padding: 48px 20px;
   }
 
   .heading {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   .description {
     font-size: 16px;
-    line-height: var(--line-height-normal);
+  }
+
+  .copyBody {
+    gap: 18px;
   }
 
   .card {
-    min-height: 0;
     padding: 24px 18px 28px;
   }
 
   .formHeading {
-    margin-bottom: 28px;
-    font-size: 34px;
+    margin-bottom: 22px;
+    font-size: 30px;
   }
 
   .fields {
@@ -284,10 +398,10 @@
 
   .message {
     grid-column: auto;
-    height: 120px;
+    height: 110px;
   }
 
   .submitButton {
-    margin-top: 22px;
+    margin-top: 20px;
   }
 }

@@ -60,11 +60,17 @@ export default function AboutOverview() {
           </div>
 
           <div
-            className="h-[400px] w-full rounded-[20px] bg-[#D9D9D9] max-sm:h-[240px]"
-            role="img"
-            aria-label="Company profile image placeholder"
+            className="relative h-[400px] w-full overflow-hidden rounded-[20px] bg-[#D9D9D9] max-sm:h-[240px]"
             data-gsap-reveal
-          />
+          >
+            <Image
+              src="/about/overview.webp"
+              alt="Accurate Pest Control technician treating a property"
+              fill
+              sizes="(max-width: 1024px) 100vw, 641px"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 

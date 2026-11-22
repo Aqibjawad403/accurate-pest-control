@@ -204,21 +204,33 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
               ease: "power3.out",
             });
           } else if (name === "about") {
-            gsap
-              .timeline({ scrollTrigger: trigger })
-              .from(section.querySelector("[data-gsap-badge]"), {
+            const countEls = gsap.utils.toArray<HTMLElement>(
+              section.querySelectorAll("[data-gsap-count]"),
+            );
+            const aboutBadge = section.querySelector("[data-gsap-badge]");
+            const aboutCopy = section.querySelector("[data-gsap-copy]");
+            const aboutCards = section.querySelectorAll("[data-gsap-card]");
+
+            const aboutTl = gsap.timeline({ scrollTrigger: trigger });
+
+            if (aboutBadge) {
+              aboutTl.from(aboutBadge, {
                 x: -40,
                 opacity: 0,
                 duration: 0.65,
                 ease: "power3.out",
-              })
-              .from(
-                section.querySelector("[data-gsap-copy]"),
+              });
+            }
+            if (aboutCopy) {
+              aboutTl.from(
+                aboutCopy,
                 { y: 40, opacity: 0, duration: 0.8, ease: "power3.out" },
-                "-=0.35",
-              )
-              .from(
-                section.querySelectorAll("[data-gsap-card]"),
+                aboutBadge ? "-=0.35" : 0,
+              );
+            }
+            if (aboutCards.length) {
+              aboutTl.from(
+                aboutCards,
                 {
                   y: 50,
                   opacity: 0,
@@ -226,8 +238,29 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
                   duration: 0.65,
                   ease: "power3.out",
                 },
-                "-=0.3",
+                aboutBadge || aboutCopy ? "-=0.3" : 0,
               );
+            }
+            if (countEls.length) {
+              aboutTl.add(() => {
+                countEls.forEach((el, index) => {
+                  const end = Number(el.dataset.gsapCount ?? 0);
+                  const suffix = el.dataset.gsapSuffix ?? "";
+                  const proxy = { val: 0 };
+                  el.textContent = `0${suffix}`;
+
+                  gsap.to(proxy, {
+                    val: end,
+                    duration: 1.6,
+                    delay: index * 0.12,
+                    ease: "power2.out",
+                    onUpdate: () => {
+                      el.textContent = `${Math.round(proxy.val)}${suffix}`;
+                    },
+                  });
+                });
+              }, aboutCards.length ? "-=0.45" : 0);
+            }
           } else if (name === "about-overview") {
             gsap
               .timeline({ scrollTrigger: trigger })
@@ -364,20 +397,9 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
                   duration: 0.9,
                   ease: "power3.out",
                   stagger: 0.16,
+                  clearProps: "filter",
                 },
                 "-=0.25",
-              )
-              .from(
-                teamCards
-                  .map((card) => card.querySelector("img"))
-                  .filter(Boolean),
-                {
-                  scale: 1.12,
-                  duration: 1.1,
-                  ease: "power2.out",
-                  stagger: 0.16,
-                },
-                "-=0.85",
               );
           } else if (name === "official-licenses") {
             gsap

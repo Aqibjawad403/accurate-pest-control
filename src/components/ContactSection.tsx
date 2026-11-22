@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import FormStatusMessage from "@/components/FormStatusMessage";
 import { useMailForm } from "@/hooks/useMailForm";
 import styles from "./ContactSection.module.css";
@@ -18,6 +19,33 @@ const pestConcerns = [
 ];
 
 const propertyTypes = ["Residential", "Commercial", "Industrial", "Other"];
+
+const highlights = [
+  "Same-day inspection slots across Dubai & the UAE",
+  "Licensed technicians for homes, offices & industrial sites",
+  "Safe treatments with clear follow-up and prevention tips",
+];
+
+const contactLinks = [
+  {
+    label: "Call",
+    detail: "+971 52 449 6173",
+    href: "tel:+971524496173",
+    icon: "/call.svg",
+  },
+  {
+    label: "WhatsApp",
+    detail: "+971 800 8725",
+    href: "https://wa.me/971524496173",
+    icon: "/whastapp.svg",
+  },
+  {
+    label: "Email",
+    detail: "info@accuratepestcontrol.ae",
+    href: "mailto:info@accuratepestcontrol.ae",
+    icon: "/email.svg",
+  },
+];
 
 function ChevronIcon() {
   return (
@@ -51,6 +79,21 @@ function ArrowIcon() {
   );
 }
 
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <path
+        d="M3.5 8.5 6.5 11.5 12.5 4.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function ContactSection() {
   const { status, isSubmitting, handleSubmit, clearStatus } = useMailForm({
     subject: "Website Contact Request",
@@ -75,11 +118,51 @@ export default function ContactSection() {
           <br />
           Pest-Free
         </h2>
-        <p className={styles.description} data-gsap-copy>
-          Looking for reliable pest control solutions? Our expert team is ready
-          to help protect your home or business with professional and effective
-          services across the UAE.
-        </p>
+        <div className={styles.copyBody} data-gsap-copy>
+          <p className={styles.description}>
+            Looking for reliable pest control solutions? Our expert team is
+            ready to help protect your home or business with professional and
+            effective services across the UAE. Tell us what you&apos;re dealing
+            with and we&apos;ll get back with a clear next step.
+          </p>
+
+          <ul className={styles.highlights}>
+            {highlights.map((item) => (
+              <li key={item}>
+                <span className={styles.highlightIcon}>
+                  <CheckIcon />
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className={styles.contactLinks}>
+            {contactLinks.map((link) => (
+              <a
+                key={link.label}
+                className={styles.contactLink}
+                href={link.href}
+                {...(link.href.startsWith("http")
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+              >
+                <span className={styles.contactIcon}>
+                  <Image
+                    src={link.icon}
+                    alt=""
+                    width={20}
+                    height={20}
+                  />
+                </span>
+                <span className={styles.contactText}>
+                  <span className={styles.contactLabel}>{link.label}</span>
+                  <span className={styles.contactDetail}>{link.detail}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className={styles.card} data-gsap-card>
