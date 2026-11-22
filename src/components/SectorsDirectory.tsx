@@ -183,13 +183,13 @@ export default function SectorsDirectory() {
           aria-live="polite"
           data-gsap-sector-content
         >
-          <div className="relative h-[320px] w-full overflow-hidden rounded-[20px] bg-[#D9D9D9] max-sm:h-[220px]">
+          <div className="relative aspect-[2/1] w-full overflow-hidden rounded-[20px] bg-[#D9D9D9]">
             <Image
               src={activeSector.image}
               alt={`${activeSector.title} pest control`}
               fill
               sizes="(max-width: 768px) 100vw, 60vw"
-              className="object-cover"
+              className="object-cover object-center"
               priority={activeIndex === 0}
             />
           </div>

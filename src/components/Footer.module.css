@@ -192,6 +192,8 @@
   width: 17px;
   height: 17px;
   object-fit: contain;
+  /* SVGs are brand-green; invert so they read on the green icon tile */
+  filter: brightness(0) invert(1);
 }
 
 .contactNumbers {

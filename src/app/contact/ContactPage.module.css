@@ -109,6 +109,8 @@
   width: 28px;
   height: 28px;
   object-fit: contain;
+  /* SVGs are brand-green; invert so they read on the green icon tile */
+  filter: brightness(0) invert(1);
 }
 
 .contactTitle {
@@ -351,8 +353,10 @@
 
 .locationCard {
   box-sizing: border-box;
-  height: 316px;
-  padding: 12px;
+  display: flex;
+  min-height: 316px;
+  flex-direction: column;
+  padding: 12px 12px 20px;
   overflow: hidden;
   border: 1px solid #c3c3c3;
   border-radius: 20px;
@@ -368,6 +372,7 @@
   display: block;
   width: 100%;
   height: 232px;
+  flex-shrink: 0;
   border: 0;
   border-radius: 12px;
   background: #e7e7e7;
@@ -378,7 +383,7 @@
   color: #666666;
   font-size: 18px;
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.35;
   transition: color 180ms ease;
 }
 
@@ -565,8 +570,8 @@
   }
 
   .locationCard {
-    height: auto;
     min-height: 280px;
+    padding-bottom: 20px;
   }
 
   .locationMap {
@@ -576,7 +581,7 @@
   .locationAddress {
     margin-top: 14px;
     font-size: 16px;
-    line-height: 1.15;
+    line-height: 1.3;
   }
 }
 

@@ -11,9 +11,9 @@ export const locations: Location[] = [
     address:
       "Warehouse No. 1, Plot No. 247-289, Al Qusais Industrial Area 4, Dubai - UAE",
     mapUrl:
-      "https://maps.google.com/maps?ll=25.293945,55.396995&z=12&t=m&hl=en&gl=US&mapclient=embed&cid=2752184997120416155",
+      "https://maps.google.com/maps?cid=2752184997120416155&ll=25.293945,55.396995&z=14&output=embed",
     mapLink:
-      "https://www.google.com/maps?ll=25.293945,55.396995&z=12&t=m&hl=en&gl=US&mapclient=embed&cid=2752184997120416155",
+      "https://www.google.com/maps?cid=2752184997120416155&ll=25.293945,55.396995&z=14",
   },
   {
     name: "Abu Dhabi",
