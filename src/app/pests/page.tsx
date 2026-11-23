@@ -12,13 +12,13 @@ export default function PestsPage() {
         className="relative w-full pt-5 has-[#mobile-navigation-menu]:z-[100]"
         data-gsap-section="hero"
       >
-        <div className="relative h-[420px] w-full overflow-hidden rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]">
+        <div className="relative h-[420px] w-full overflow-visible rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]">
           <BannerMedia
             src={bannerImages.pests}
             alt="Close-up of a German cockroach on sugar crystals"
             priority
           />
-          <div className="relative z-10">
+          <div className="relative z-30">
             <Navbar activeHref="/pests" />
           </div>
           <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />

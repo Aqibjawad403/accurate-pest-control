@@ -96,7 +96,7 @@ export default function Big5EventPage() {
             alt="Construction and trade exhibition at Big 5 Global"
             priority
           />
-          <div className="relative z-10" data-gsap-hero="nav">
+          <div className="relative z-30" data-gsap-hero="nav">
             <Navbar activeHref="/events" />
           </div>
           <h1 className={`${styles.bannerTitle} z-10`} data-gsap-split>

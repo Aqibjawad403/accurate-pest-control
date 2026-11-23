@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description:
     "Dubai Municipality approved pest control services across the UAE.",
   icons: {
-    icon: "/favicon.png",
+    icon: "/Accurate_Pest_Control_Services_LLC_Official_Favicon.png",
   },
 };
 

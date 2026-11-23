@@ -54,7 +54,7 @@ export default function ContactPage() {
               alt="Customer reaching out on a smartphone"
               priority
             />
-            <div className="relative z-10" data-gsap-hero="nav">
+            <div className="relative z-30" data-gsap-hero="nav">
               <Navbar activeHref="/contact" />
             </div>
             <div className={`${styles.heroCopy} z-10`} data-gsap-hero="copy">

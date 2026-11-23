@@ -1,4 +1,5 @@
 import Image from "next/image";
+import styles from "./Certifications.module.css";
 
 const certificates = [
   {
@@ -23,6 +24,46 @@ const certificates = [
   },
 ];
 
+function CertCard({
+  src,
+  alt,
+  gsap = false,
+}: {
+  src: string;
+  alt: string;
+  gsap?: boolean;
+}) {
+  return (
+    <div
+      className={
+        gsap
+          ? "flex h-[110px] w-full max-w-[260px] items-center justify-center rounded-[15px] border border-[#E7E7E7] bg-[#F2F2F2] px-5 py-4"
+          : styles.card
+      }
+      data-gsap-card={gsap ? true : undefined}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        width={182}
+        height={70}
+        unoptimized
+        className="h-[70px] w-[182px] object-contain opacity-100"
+      />
+    </div>
+  );
+}
+
+function CertTrack({ ariaHidden = false }: { ariaHidden?: boolean }) {
+  return (
+    <div className={styles.track} aria-hidden={ariaHidden || undefined}>
+      {certificates.map((cert) => (
+        <CertCard key={`${ariaHidden ? "dup" : "main"}-${cert.src}`} {...cert} />
+      ))}
+    </div>
+  );
+}
+
 export default function Certifications() {
   return (
     <section className="w-full px-5 py-12 sm:px-16 sm:py-16">
@@ -33,23 +74,19 @@ export default function Certifications() {
         Recognized, Certified & Approved by UAE Authorities
       </h2>
 
-      <div className="mt-10 grid grid-cols-2 items-center justify-items-center gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:justify-between">
+      {/* Desktop / tablet grid */}
+      <div className={styles.desktopGrid}>
         {certificates.map((cert) => (
-          <div
-            key={cert.src}
-            className="flex h-[110px] w-full max-w-[260px] items-center justify-center rounded-[15px] border border-[#E7E7E7] bg-[#F2F2F2] px-5 py-4"
-            data-gsap-card
-          >
-            <Image
-              src={cert.src}
-              alt={cert.alt}
-              width={182}
-              height={70}
-              unoptimized
-              className="h-[70px] w-[182px] object-contain opacity-100"
-            />
-          </div>
+          <CertCard key={cert.src} {...cert} gsap />
         ))}
+      </div>
+
+      {/* Mobile auto-scroll carousel */}
+      <div className={styles.viewport}>
+        <div className={styles.marquee}>
+          <CertTrack />
+          <CertTrack ariaHidden />
+        </div>
       </div>
     </section>
   );

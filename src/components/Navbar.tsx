@@ -205,7 +205,7 @@ export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
       {isMenuOpen && (
         <div
           id="mobile-navigation-menu"
-          className="absolute top-[calc(100%+12px)] right-0 w-[360px] max-w-[calc(100vw-32px)] rounded-[24px] border border-black/10 bg-white p-3 shadow-[0_16px_40px_rgba(0,0,0,0.16)] xl:hidden"
+          className="absolute top-[calc(100%+12px)] right-0 z-[60] w-[360px] max-w-[calc(100vw-32px)] rounded-[24px] border border-black/10 bg-white p-3 shadow-[0_16px_40px_rgba(0,0,0,0.16)] isolate xl:hidden"
         >
           <ul className="flex flex-col">
             {navLinks.map((link) => {

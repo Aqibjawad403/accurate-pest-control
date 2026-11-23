@@ -144,7 +144,7 @@ async function BlogPostContent({ params }: BlogPostPageProps) {
         data-gsap-section="hero"
       >
         <div
-          className="relative h-[420px] w-full overflow-hidden rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]"
+          className="relative h-[420px] w-full overflow-visible rounded-[28px] bg-[#005F13] max-sm:h-auto max-sm:pb-8 sm:rounded-[40px]"
           data-gsap-hero="shell"
         >
           <BannerMedia
@@ -152,7 +152,7 @@ async function BlogPostContent({ params }: BlogPostPageProps) {
             alt="Pest control blog and insights"
             priority
           />
-          <div className="relative z-10" data-gsap-hero="nav">
+          <div className="relative z-30" data-gsap-hero="nav">
             <Navbar activeHref="/blog" />
           </div>
           <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />

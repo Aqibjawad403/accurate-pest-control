@@ -25,7 +25,7 @@ export default function EventsPage() {
             alt="Industry conference and exhibition hall"
             priority
           />
-          <div className="relative z-10" data-gsap-hero="nav">
+          <div className="relative z-30" data-gsap-hero="nav">
             <Navbar activeHref="/events" />
           </div>
           <h1 className={`${styles.heroTitle} z-10`} data-gsap-split>

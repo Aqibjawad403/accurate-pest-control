@@ -7,7 +7,7 @@
   box-sizing: border-box;
   height: 570px;
   margin: 0 20px;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 40px;
   background: #005f13;
 }

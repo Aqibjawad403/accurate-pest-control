@@ -29,7 +29,7 @@ export default function Home() {
             priority
             overlayOpacity={68}
           />
-          <div className="relative z-10" data-gsap-hero="nav">
+          <div className="relative z-30" data-gsap-hero="nav">
             <Navbar activeHref="/" />
           </div>
 

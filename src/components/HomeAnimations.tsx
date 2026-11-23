@@ -31,7 +31,11 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
     gsap.ticker.add(tickerCb);
     gsap.ticker.lagSmoothing(0);
 
-    const ctx = gsap.context(() => {
+    // Defer until after hydration so GSAP inline styles don't mismatch SSR HTML
+    // (especially Suspense children like SectorsDirectory / useSearchParams).
+    let ctx: gsap.Context | undefined;
+    const initId = requestAnimationFrame(() => {
+      ctx = gsap.context(() => {
       requestAnimationFrame(() => ScrollTrigger.refresh());
 
       /* Bugfree-style SplitText heading animation (style-3) */
@@ -429,10 +433,19 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
                 opacity: 0,
                 duration: 0.75,
                 ease: "power3.out",
+                immediateRender: false,
+                clearProps: "transform,opacity",
               })
               .from(
                 section.querySelector("[data-gsap-sector-content]"),
-                { x: 45, opacity: 0, duration: 0.8, ease: "power3.out" },
+                {
+                  x: 45,
+                  opacity: 0,
+                  duration: 0.8,
+                  ease: "power3.out",
+                  immediateRender: false,
+                  clearProps: "transform,opacity",
+                },
                 "-=0.5",
               );
           } else if (name === "testimonials") {
@@ -531,12 +544,14 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
             });
           }
         });
-    }, mainRef);
+      }, mainRef);
+    });
 
     return () => {
+      cancelAnimationFrame(initId);
       gsap.ticker.remove(tickerCb);
       lenis.destroy();
-      ctx.revert();
+      ctx?.revert();
     };
   }, []);
 
