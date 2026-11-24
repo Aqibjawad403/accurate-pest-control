@@ -43,7 +43,6 @@
 .grid {
   display: grid;
   width: 100%;
-  max-width: 1308px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
   justify-content: center;
@@ -53,9 +52,8 @@
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  max-width: 420px;
   height: 460px;
-  justify-self: center;
+  justify-self: stretch;
   border-radius: 20px;
   opacity: 1;
   padding: 32px;

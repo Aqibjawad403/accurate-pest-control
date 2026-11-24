@@ -30,7 +30,7 @@ const socialLinks = [
   },
   {
     name: "YouTube",
-    href: "https://youtube.com/@AccuratePestControlServices",
+    href: "https://www.youtube.com/@AccuratePestControlServices",
     icon: "/header/you.svg",
   },
   {

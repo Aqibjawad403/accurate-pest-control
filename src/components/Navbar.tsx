@@ -25,6 +25,7 @@ export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const [useLightLogo, setUseLightLogo] = useState(false);
   const normalizedActiveHref =
     activeHref === "/services" ? "/pests" : activeHref;
   const isMoreActive = moreLinks.some(
@@ -34,13 +35,37 @@ export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
   );
 
   useEffect(() => {
-    const onScroll = () => {
-      setIsSticky(window.scrollY > 8);
+    const updateLogoForBackground = () => {
+      const sticky = window.scrollY > 8;
+      setIsSticky(sticky);
+
+      if (!sticky) {
+        setUseLightLogo(false);
+        return;
+      }
+
+      const darkRegions = [
+        ...document.querySelectorAll<HTMLElement>("[data-gsap-hero='shell']"),
+        ...document.querySelectorAll<HTMLElement>("footer"),
+      ];
+
+      const overlapsDark = darkRegions.some((el) => {
+        const rect = el.getBoundingClientRect();
+        return rect.top < 110 && rect.bottom > 20;
+      });
+
+      setUseLightLogo(overlapsDark);
     };
 
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    updateLogoForBackground();
+    window.addEventListener("scroll", updateLogoForBackground, {
+      passive: true,
+    });
+    window.addEventListener("resize", updateLogoForBackground);
+    return () => {
+      window.removeEventListener("scroll", updateLogoForBackground);
+      window.removeEventListener("resize", updateLogoForBackground);
+    };
   }, []);
 
   return (
@@ -58,7 +83,9 @@ export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
           alt="Accurate Pest Control"
           width={139}
           height={70}
-          className="h-[70px] w-[139px] object-contain max-sm:h-[52px] max-sm:w-[92px] max-[360px]:h-[44px] max-[360px]:w-[80px]"
+          className={`h-[70px] w-[139px] object-contain max-sm:h-[52px] max-sm:w-[92px] max-[360px]:h-[44px] max-[360px]:w-[80px] ${
+            useLightLogo ? "brightness-0 invert" : ""
+          }`}
           priority
         />
       </Link>

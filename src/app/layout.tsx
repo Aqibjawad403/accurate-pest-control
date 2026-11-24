@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MagicCursor from "@/components/MagicCursor";
 import PdfViewerProvider from "@/components/pdf/PdfViewerProvider";
+import TawkTo from "@/components/TawkTo";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -28,12 +30,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${plusJakarta.variable} h-full antialiased`}
       style={{ overflowX: "clip" }}
     >
+      <GoogleTagManager gtmId="GTM-M5CVQFZP" />
       <body className="flex min-h-full flex-col" style={{ overflowX: "clip" }}>
         <PdfViewerProvider>
           <MagicCursor />
           <Header />
           {children}
           <Footer />
+          <TawkTo />
         </PdfViewerProvider>
       </body>
     </html>

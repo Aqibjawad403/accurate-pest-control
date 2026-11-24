@@ -17,17 +17,17 @@ const companyLinks = [
 ];
 
 const pestLinks = [
-  { label: "Ants", href: "/pests/ants" },
-  { label: "Cockroaches", href: "/pests/cockroaches" },
-  { label: "Bed Bugs", href: "/pests/bed-bugs" },
-  { label: "Rodents", href: "/pests/rodents" },
-  { label: "Flies", href: "/pests/flies" },
-  { label: "Mosquitoes", href: "/pests/mosquitoes" },
-  { label: "Spiders", href: "/pests/spiders" },
-  { label: "Termites", href: "/pests/termites" },
-  { label: "Venomous", href: "/pests/venomous" },
-  { label: "Birds", href: "/pests/birds" },
-  { label: "Fumigation", href: "/services/fumigation" },
+  { label: "Ants", href: "/ant" },
+  { label: "Cockroaches", href: "/cockroach" },
+  { label: "Bed Bugs", href: "/bedbug" },
+  { label: "Rodents", href: "/rodents" },
+  { label: "Flies", href: "/flies" },
+  { label: "Mosquitoes", href: "/mosquito" },
+  { label: "Spiders", href: "/spider" },
+  { label: "Termites", href: "/termites" },
+  { label: "Venomous", href: "/snake" },
+  { label: "Birds", href: "/bird" },
+  { label: "Fumigation", href: "/fumigation" },
 ];
 
 const socialLinks = [
@@ -35,7 +35,7 @@ const socialLinks = [
   { name: "Instagram", href: "https://www.instagram.com/accuratepestcontrolservices" },
   { name: "TikTok", href: "https://www.tiktok.com/@accuratepestcontrol" },
   { name: "X", href: "https://twitter.com/AccuratePestC" },
-  { name: "YouTube", href: "https://youtube.com/@AccuratePestControlServices" },
+  { name: "YouTube", href: "https://www.youtube.com/@AccuratePestControlServices" },
   { name: "Pinterest", href: "https://www.pinterest.com/accuratepestcontrolservice/" },
 ] as const;
 

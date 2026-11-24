@@ -101,6 +101,19 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
         gsap.from(list, vars);
       };
 
+      const tlFromIf = (
+        tl: gsap.core.Timeline,
+        targets: gsap.TweenTarget | null | undefined,
+        vars: gsap.TweenVars,
+        position?: gsap.Position,
+      ) => {
+        const list = gsap.utils.toArray(targets ?? []);
+        if (!list.length) return tl;
+        return position === undefined
+          ? tl.from(list, vars)
+          : tl.from(list, vars, position);
+      };
+
       /* Hero entrance — title handled by SplitText above */
       if (mainRef.current?.querySelector("[data-gsap-hero='shell']")) {
         const root = mainRef.current;
@@ -198,7 +211,7 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
           const trigger = { trigger: section, start: "top 82%", once: true };
 
           if (name === "certifications") {
-            gsap.from(section.querySelectorAll("[data-gsap-card]"), {
+            fromIf(section.querySelectorAll("[data-gsap-card]"), {
               scrollTrigger: trigger,
               y: 40,
               opacity: 0,
@@ -266,21 +279,21 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
               }, aboutCards.length ? "-=0.45" : 0);
             }
           } else if (name === "about-overview") {
-            gsap
-              .timeline({ scrollTrigger: trigger })
-              .from(section.querySelector("[data-gsap-copy]"), {
-                y: 30,
-                opacity: 0,
-                duration: 0.7,
-                ease: "power3.out",
-              })
-              .from(
-                section.querySelector("[data-gsap-action]"),
-                { y: 24, opacity: 0, duration: 0.6, ease: "power3.out" },
-                "-=0.25",
-              );
+            const aboutOverviewTl = gsap.timeline({ scrollTrigger: trigger });
+            tlFromIf(aboutOverviewTl, section.querySelector("[data-gsap-copy]"), {
+              y: 30,
+              opacity: 0,
+              duration: 0.7,
+              ease: "power3.out",
+            });
+            tlFromIf(
+              aboutOverviewTl,
+              section.querySelector("[data-gsap-action]"),
+              { y: 24, opacity: 0, duration: 0.6, ease: "power3.out" },
+              "-=0.25",
+            );
           } else if (name === "principles") {
-            gsap.from(section.querySelectorAll("[data-gsap-card]"), {
+            fromIf(section.querySelectorAll("[data-gsap-card]"), {
               scrollTrigger: trigger,
               y: 55,
               opacity: 0,
@@ -289,7 +302,7 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
               ease: "power3.out",
             });
           } else if (name === "ceo-message") {
-            gsap.from(section.querySelectorAll("[data-gsap-copy]"), {
+            fromIf(section.querySelectorAll("[data-gsap-copy]"), {
               scrollTrigger: trigger,
               y: 24,
               opacity: 0,
@@ -298,7 +311,7 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
               ease: "power3.out",
             });
           } else if (name === "services") {
-            gsap.from(section.querySelector("[data-gsap-badge]"), {
+            fromIf(section.querySelector("[data-gsap-badge]"), {
               scrollTrigger: trigger,
               scale: 0.75,
               opacity: 0,
@@ -366,32 +379,35 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
               section.querySelectorAll("[data-gsap-card]"),
             );
 
-            gsap
-              .timeline({
-                scrollTrigger: {
-                  trigger: section,
-                  start: "top 78%",
-                  once: true,
-                },
-              })
-              .from(section.querySelector("[data-gsap-badge]"), {
-                y: 20,
+            const teamTl = gsap.timeline({
+              scrollTrigger: {
+                trigger: section,
+                start: "top 78%",
+                once: true,
+              },
+            });
+
+            // Home page omits description, so [data-gsap-copy] may be absent
+            tlFromIf(teamTl, section.querySelector("[data-gsap-badge]"), {
+              y: 20,
+              opacity: 0,
+              scale: 0.9,
+              duration: 0.5,
+              ease: "back.out(1.6)",
+            });
+            tlFromIf(
+              teamTl,
+              section.querySelectorAll("[data-gsap-copy]"),
+              {
+                y: 28,
                 opacity: 0,
-                scale: 0.9,
-                duration: 0.5,
-                ease: "back.out(1.6)",
-              })
-              .from(
-                section.querySelectorAll("[data-gsap-copy]"),
-                {
-                  y: 28,
-                  opacity: 0,
-                  duration: 0.65,
-                  ease: "power3.out",
-                },
-                "-=0.2",
-              )
-              .from(
+                duration: 0.65,
+                ease: "power3.out",
+              },
+              "-=0.2",
+            );
+            if (teamCards.length) {
+              teamTl.from(
                 teamCards,
                 {
                   y: 70,
@@ -405,61 +421,65 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
                 },
                 "-=0.25",
               );
+            }
           } else if (name === "official-licenses") {
-            gsap
-              .timeline({ scrollTrigger: trigger })
-              .from(section.querySelector("[data-gsap-action]"), {
-                y: 20,
+            const licensesTl = gsap.timeline({ scrollTrigger: trigger });
+            tlFromIf(licensesTl, section.querySelector("[data-gsap-action]"), {
+              y: 20,
+              opacity: 0,
+              duration: 0.55,
+              ease: "power3.out",
+            });
+            tlFromIf(
+              licensesTl,
+              section.querySelectorAll("[data-gsap-card]"),
+              {
+                y: 40,
                 opacity: 0,
-                duration: 0.55,
+                stagger: 0.12,
+                duration: 0.7,
                 ease: "power3.out",
-              })
-              .from(
-                section.querySelectorAll("[data-gsap-card]"),
-                {
-                  y: 40,
-                  opacity: 0,
-                  stagger: 0.12,
-                  duration: 0.7,
-                  ease: "power3.out",
-                },
-                "-=0.2",
-              );
+              },
+              "-=0.2",
+            );
           } else if (name === "sectors-directory") {
-            gsap
-              .timeline({ scrollTrigger: trigger })
-              .from(section.querySelector("[data-gsap-sector-sidebar]"), {
+            const sectorsTl = gsap.timeline({ scrollTrigger: trigger });
+            tlFromIf(
+              sectorsTl,
+              section.querySelector("[data-gsap-sector-sidebar]"),
+              {
                 x: -45,
                 opacity: 0,
                 duration: 0.75,
                 ease: "power3.out",
                 immediateRender: false,
                 clearProps: "transform,opacity",
-              })
-              .from(
-                section.querySelector("[data-gsap-sector-content]"),
-                {
-                  x: 45,
-                  opacity: 0,
-                  duration: 0.8,
-                  ease: "power3.out",
-                  immediateRender: false,
-                  clearProps: "transform,opacity",
-                },
-                "-=0.5",
-              );
-          } else if (name === "testimonials") {
-            gsap
-              .timeline({ scrollTrigger: trigger })
-              .from(section.querySelectorAll("[data-gsap-copy]"), {
-                y: 36,
+              },
+            );
+            tlFromIf(
+              sectorsTl,
+              section.querySelector("[data-gsap-sector-content]"),
+              {
+                x: 45,
                 opacity: 0,
-                stagger: 0.12,
-                duration: 0.7,
+                duration: 0.8,
                 ease: "power3.out",
-              });
+                immediateRender: false,
+                clearProps: "transform,opacity",
+              },
+              "-=0.5",
+            );
+          } else if (name === "testimonials") {
+            fromIf(section.querySelectorAll("[data-gsap-copy]"), {
+              scrollTrigger: trigger,
+              y: 36,
+              opacity: 0,
+              stagger: 0.12,
+              duration: 0.7,
+              ease: "power3.out",
+            });
           } else if (name === "logos") {
-            gsap.from(section.querySelector("[data-gsap-logos]"), {
+            fromIf(section.querySelector("[data-gsap-logos]"), {
               scrollTrigger: trigger,
               y: 28,
               opacity: 0,
@@ -471,21 +491,22 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
               section.querySelectorAll("[data-gsap-card]"),
             );
 
-            gsap
-              .timeline({ scrollTrigger: trigger })
-              .from(section.querySelector("[data-gsap-badge]"), {
-                y: 18,
-                opacity: 0,
-                scale: 0.92,
-                duration: 0.5,
-                ease: "back.out(1.6)",
-              })
-              .from(
-                section.querySelector("[data-gsap-copy]"),
-                { y: 28, opacity: 0, duration: 0.65, ease: "power3.out" },
-                "-=0.2",
-              )
-              .from(
+            const clientsTl = gsap.timeline({ scrollTrigger: trigger });
+            tlFromIf(clientsTl, section.querySelector("[data-gsap-badge]"), {
+              y: 18,
+              opacity: 0,
+              scale: 0.92,
+              duration: 0.5,
+              ease: "back.out(1.6)",
+            });
+            tlFromIf(
+              clientsTl,
+              section.querySelector("[data-gsap-copy]"),
+              { y: 28, opacity: 0, duration: 0.65, ease: "power3.out" },
+              "-=0.2",
+            );
+            if (cards.length) {
+              clientsTl.from(
                 cards,
                 {
                   opacity: 0,
@@ -502,25 +523,27 @@ export default function HomeAnimations({ children }: { children: ReactNode }) {
                 },
                 "-=0.25",
               );
+            }
           } else if (name === "contact") {
-            gsap
-              .timeline({ scrollTrigger: trigger })
-              .from(section.querySelector("[data-gsap-badge]"), {
-                y: 20,
-                opacity: 0,
-                duration: 0.5,
-                ease: "power3.out",
-              })
-              .from(
-                section.querySelector("[data-gsap-copy]"),
-                { y: 36, opacity: 0, duration: 0.75, ease: "power3.out" },
-                "-=0.25",
-              )
-              .from(
-                section.querySelector("[data-gsap-card]"),
-                { y: 50, opacity: 0, duration: 0.85, ease: "power3.out" },
-                "-=0.45",
-              );
+            const contactTl = gsap.timeline({ scrollTrigger: trigger });
+            tlFromIf(contactTl, section.querySelector("[data-gsap-badge]"), {
+              y: 20,
+              opacity: 0,
+              duration: 0.5,
+              ease: "power3.out",
+            });
+            tlFromIf(
+              contactTl,
+              section.querySelector("[data-gsap-copy]"),
+              { y: 36, opacity: 0, duration: 0.75, ease: "power3.out" },
+              "-=0.25",
+            );
+            tlFromIf(
+              contactTl,
+              section.querySelector("[data-gsap-card]"),
+              { y: 50, opacity: 0, duration: 0.85, ease: "power3.out" },
+              "-=0.45",
+            );
           } else if (name === "insights") {
             fromIf(section.querySelector("[data-gsap-badge]"), {
               scrollTrigger: trigger,

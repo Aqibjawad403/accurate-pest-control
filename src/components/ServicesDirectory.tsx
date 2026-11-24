@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ArrowDot } from "@/components/ArrowButton";
@@ -10,10 +10,15 @@ import DirectorySidebarList from "@/components/DirectorySidebarList";
 import ServicesFaq from "@/components/ServicesFaq";
 import {
   formatPestTypeName,
+  getPestDisplayName,
+  getPestHref,
   getPestShortName,
   getPestTypeHeadline,
   getPestTypeParagraphs,
+  getServiceHref,
   pestTreatments,
+  resolvePestSlug,
+  resolveServiceSlug,
   serviceOptions,
   type PestType,
   type ServiceAboutSection,
@@ -275,7 +280,7 @@ function PestDetailContent({
             {types.map((type, typeIndex) => (
               <Link
                 key={type.name}
-                href={`/services?pest=${pestIndex}&type=${typeIndex}`}
+                href={getPestHref(pestIndex, typeIndex)}
                 className="image-zoom group relative aspect-[16/10] overflow-hidden rounded-[20px] bg-[#E0E0E0]"
                 aria-label={`View ${formatPestTypeName(type.name)} details`}
               >
@@ -480,12 +485,24 @@ function ServiceDetailContent({ item }: { item: ServiceDetail }) {
 
 export default function ServicesDirectory() {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+  const pathSlug =
+    pathname && pathname !== "/services"
+      ? pathname.replace(/^\/+/, "")
+      : null;
+  const pestSlugMatch = pathSlug ? resolvePestSlug(pathSlug) : null;
+  const serviceSlugMatch =
+    !pestSlugMatch && pathSlug ? resolveServiceSlug(pathSlug) : null;
+
   const pestParam = searchParams.get("pest");
   const typeParam = searchParams.get("type");
   const serviceParam = searchParams.get("service");
-  const pestFromUrl = parseIndex(pestParam, pestTreatments.length);
-  const serviceFromUrl = parseIndex(serviceParam, serviceOptions.length);
+  const pestFromUrl =
+    pestSlugMatch?.pestIndex ?? parseIndex(pestParam, pestTreatments.length);
+  const serviceFromUrl =
+    serviceSlugMatch?.serviceIndex ??
+    parseIndex(serviceParam, serviceOptions.length);
   const pestQuery = pestParam;
   const typeQuery = typeParam;
   const serviceQuery = serviceParam;
@@ -493,18 +510,21 @@ export default function ServicesDirectory() {
   const pestForTypes =
     pestFromUrl != null ? pestTreatments[pestFromUrl] : null;
   const types = pestForTypes?.types ?? [];
-  const typeFromUrl = parseIndex(typeQuery, types.length);
+  const typeFromUrl =
+    pestSlugMatch != null
+      ? pestSlugMatch.typeIndex
+      : parseIndex(typeQuery, types.length);
 
-  // Type detail mode: only when a pest has types and type= is valid
+  // Type detail mode: only when a pest has types and type is valid
   const isTypeDetail =
     pestFromUrl != null && typeFromUrl != null && types.length > 0;
 
-  // Manual sidebar clicks override URL until the query string changes
+  // Manual sidebar clicks override URL until the route changes
   const [override, setOverride] = useState<ActiveSelection | null>(null);
 
   useEffect(() => {
     setOverride(null);
-  }, [pestQuery, typeQuery, serviceQuery]);
+  }, [pathname, pestQuery, typeQuery, serviceQuery]);
 
   if (isTypeDetail && pestForTypes) {
     const shortName = getPestShortName(pestForTypes.title);
@@ -532,7 +552,7 @@ export default function ServicesDirectory() {
                 items={typeItems}
                 activeIndex={typeFromUrl}
                 onSelect={(index) => {
-                  router.push(`/services?pest=${pestFromUrl}&type=${index}`, {
+                  router.push(getPestHref(pestFromUrl, index), {
                     scroll: false,
                   });
                 }}
@@ -583,11 +603,13 @@ export default function ServicesDirectory() {
               Pest Treatments
             </h2>
             <DirectorySidebarList
-              items={pestTreatments}
+              items={pestTreatments.map((pest) => ({
+                title: getPestDisplayName(pest.title),
+              }))}
               activeIndex={active.group === "pest" ? active.index : null}
               onSelect={(index) => {
                 setOverride({ group: "pest", index });
-                router.push(`/services?pest=${index}`, { scroll: false });
+                router.push(getPestHref(index), { scroll: false });
               }}
             />
           </nav>
@@ -601,7 +623,7 @@ export default function ServicesDirectory() {
               activeIndex={active.group === "service" ? active.index : null}
               onSelect={(index) => {
                 setOverride({ group: "service", index });
-                router.push(`/services?service=${index}`, { scroll: false });
+                router.push(getServiceHref(index), { scroll: false });
               }}
             />
           </nav>
@@ -629,7 +651,14 @@ export default function ServicesDirectory() {
           className="mt-16 -mb-2 ml-auto w-full max-w-[929px] max-md:mt-10"
           data-gsap-section="faq"
         >
-          <ServicesFaq title={activeItem.title} faqs={activeItem.faqs!} />
+          <ServicesFaq
+            title={
+              active.group === "pest"
+                ? getPestDisplayName(activeItem.title)
+                : activeItem.title
+            }
+            faqs={activeItem.faqs!}
+          />
         </div>
       ) : null}
     </section>

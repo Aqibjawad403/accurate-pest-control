@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDot } from "@/components/ArrowButton";
-import { pestTreatments } from "@/data/pest-services";
+import {
+  getPestDisplayName,
+  getPestHref,
+  pestTreatments,
+} from "@/data/pest-services";
 
 export default function Services({
   showViewAll = true,
@@ -20,7 +24,7 @@ export default function Services({
     (service, index) => ({
       ...service,
       number: `${String(index + 1).padStart(2, "0")}.`,
-      href: `/services?pest=${index}`,
+      href: getPestHref(index),
     }),
   );
   const useDividers = !overlapCards || overlapStyle === "dividers";
@@ -79,9 +83,14 @@ export default function Services({
               <span className="text-[28px] leading-none font-bold text-[#111111]">
                 {service.number}
               </span>
-              <h3 className="max-w-[280px] text-[32px] leading-none font-semibold text-[#111111] max-sm:text-[24px]">
-                {service.title}
-              </h3>
+              <div className="max-w-[280px]">
+                <h3 className="text-[32px] leading-none font-semibold text-[#111111] max-sm:text-[24px]">
+                  {getPestDisplayName(service.title)}
+                </h3>
+                <p className="mt-2 text-[18px] leading-none font-normal text-[#666666] max-sm:text-[16px]">
+                  Treatment
+                </p>
+              </div>
             </div>
 
             <div
@@ -93,7 +102,7 @@ export default function Services({
               {service.image ? (
                 <Image
                   src={service.image}
-                  alt={service.title}
+                  alt={getPestDisplayName(service.title)}
                   fill
                   sizes="(max-width: 1024px) 100vw, 640px"
                   className="object-cover"

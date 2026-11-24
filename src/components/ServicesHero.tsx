@@ -1,13 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import Navbar from "@/components/Navbar";
 import {
   formatPestTypeName,
+  getPestDisplayName,
+  getPestHref,
   getPestShortName,
   pestTreatments,
+  resolvePestSlug,
+  resolveServiceSlug,
   serviceOptions,
 } from "@/data/pest-services";
 
@@ -19,23 +23,38 @@ function parseIndex(raw: string | null, max: number): number | null {
 }
 
 export default function ServicesHero() {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+  const pathSlug =
+    pathname && pathname !== "/services"
+      ? pathname.replace(/^\/+/, "")
+      : null;
+  const pestSlugMatch = pathSlug ? resolvePestSlug(pathSlug) : null;
+  const serviceSlugMatch =
+    !pestSlugMatch && pathSlug ? resolveServiceSlug(pathSlug) : null;
+
   const pestParam = searchParams.get("pest");
   const typeParam = searchParams.get("type");
   const serviceParam = searchParams.get("service");
-  const pestIndex = parseIndex(pestParam, pestTreatments.length);
+  const pestIndex =
+    pestSlugMatch?.pestIndex ?? parseIndex(pestParam, pestTreatments.length);
   const pest = pestIndex != null ? pestTreatments[pestIndex] : null;
   const types = pest?.types ?? [];
-  const typeIndex = parseIndex(typeParam, types.length);
+  const typeIndex =
+    pestSlugMatch != null
+      ? pestSlugMatch.typeIndex
+      : parseIndex(typeParam, types.length);
   const activeType = pest && typeIndex != null ? types[typeIndex] : null;
-  const serviceIndex = parseIndex(serviceParam, serviceOptions.length);
+  const serviceIndex =
+    serviceSlugMatch?.serviceIndex ??
+    parseIndex(serviceParam, serviceOptions.length);
   const service =
     pest == null && serviceIndex != null
       ? serviceOptions[serviceIndex]
       : null;
 
   const typeTitle = activeType ? formatPestTypeName(activeType.name) : null;
-  const pestTitle = pest?.title ?? null;
+  const pestTitle = pest ? getPestDisplayName(pest.title) : null;
   const serviceTitle = service?.title ?? null;
   const bannerTitle = typeTitle ?? pestTitle ?? serviceTitle ?? "Services";
   const bannerImage =
@@ -65,7 +84,7 @@ export default function ServicesHero() {
           overlayOpacity={70}
         />
         <div className="relative z-30" data-gsap-hero="nav">
-          <Navbar activeHref="/services" />
+          <Navbar activeHref={pest ? "/pests" : "/services"} />
         </div>
         <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
 
@@ -87,14 +106,14 @@ export default function ServicesHero() {
             {activeType && pestCrumb != null && pestIndex != null ? (
               <>
                 <Link
-                  href="/services"
+                  href="/pests"
                   className="transition-opacity hover:opacity-80"
                 >
-                  Services
+                  Pests
                 </Link>
                 <span aria-hidden="true"> &gt; </span>
                 <Link
-                  href={`/services?pest=${pestIndex}`}
+                  href={getPestHref(pestIndex)}
                   className="transition-opacity hover:opacity-80"
                 >
                   {pestCrumb}
@@ -105,13 +124,13 @@ export default function ServicesHero() {
             ) : pestTitle ? (
               <>
                 <Link
-                  href="/services"
+                  href="/pests"
                   className="transition-opacity hover:opacity-80"
                 >
-                  Services
+                  Pests
                 </Link>
                 <span aria-hidden="true"> &gt; </span>
-                <span aria-current="page">{pestTitle}</span>
+                <span aria-current="page">{pestCrumb ?? pestTitle}</span>
               </>
             ) : serviceTitle ? (
               <>

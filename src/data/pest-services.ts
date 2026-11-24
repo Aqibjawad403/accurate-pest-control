@@ -71,9 +71,14 @@ export type ServiceDetail = {
   faqs?: ServiceFaq[];
 };
 
+/** "ANTS (Treatment)" → "ANTS" (keeps live-site casing) */
+export function getPestDisplayName(title: string): string {
+  return title.replace(/\s*\(Treatment\)\s*/i, "").trim();
+}
+
 /** "ANT (Treatment)" → "Ant" */
 export function getPestShortName(title: string): string {
-  const raw = title.replace(/\s*\(Treatment\)\s*/i, "").trim().toLowerCase();
+  const raw = getPestDisplayName(title).toLowerCase();
   return raw.replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
@@ -83,6 +88,171 @@ export function formatPestTypeName(name: string): string {
     .trim()
     .toLowerCase()
     .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+/** Live-site pest page slugs — order matches `pestTreatments` */
+export const PEST_PAGE_SLUGS = [
+  "ant",
+  "cockroach",
+  "bedbug",
+  "rodents",
+  "flies",
+  "mosquito",
+  "spider",
+  "termites",
+  "snake",
+  "bird",
+  "lizard",
+  "tick",
+  "earwig",
+  "wasp",
+  "fumigation",
+] as const;
+
+/** Live-site subtype slugs keyed by `PestType.name` */
+export const PEST_TYPE_SLUGS: Record<string, string> = {
+  "ARGENTINE ANTS": "argentine-ant",
+  "PAVEMENT ANTS": "pavement-ant",
+  "PHARAOH ANTS": "pharaoh-ant",
+  "CARPENTER ANTS": "carpenter-ant",
+  "GERMAN COCKROACH": "german-cockroach",
+  "BROWN-BANDED COCKROACH": "brown-banded-cockroach",
+  "SMOKY BROWN COCKROACH": "smoky-brown-cockroach",
+  "ORIENTAL COCKROACH": "oriental-cockroach",
+  "CIMEX LECTULARIUS": "cimex-lectularius",
+  "CIMEX HEMIPTERUS": "cimex-hemipterus",
+  "BAT BUGS": "bat-bug",
+  "HOUSE MOUSE": "house-mouse",
+  "ROOF RAT": "roof-rat",
+  "BANDICOOT RAT": "bandicoot-rat",
+  "NORWAY RAT": "norway-rat",
+  "HOUSE FLY": "housefly",
+  "CLUSTER FLY": "clusterfly",
+  "FRUIT FLY": "fruitfly",
+  "AEDES MOSQUITO": "aedes-mosquito",
+  "ANOPHELES MOSQUITO": "anopheles-mosquito",
+  "CULEX MOSQUITO": "culex-mosquito",
+  "HOUSE SPIDER": "house-spider",
+  "JUMPING SPIDER": "jumping-spider",
+  "BLACK WIDOW SPIDER": "black-widow-spider",
+  "SUBTERRANEAN TERMITES": "subterranean-termites",
+  "DRYWOOD TERMITES": "drywood-termites",
+  "FORMOSAN TERMITES": "formosan-termites",
+  "DAMPWOOD TERMITES": "dampwood-termites",
+  "ARABIAN COBRA": "arabian-cobra",
+  "SAND BOA": "sand-boa",
+  "ARABIAN HORNED VIPER": "arabian-horned-viper",
+  "COMMON MYNA": "common-myna",
+  "HOUSE SPARROW": "house-sparrow",
+  PIGEONS: "pigeons",
+  "HOUSE GECKO": "house-gecko",
+  "MEDITERRANEAN GECKO": "mediterranean-gecko",
+  "YELLOW-BELLIED HOUSE GECKO": "yellow-bellied-house-gecko",
+  "DEER TICK": "deer-tick",
+  "LONE STAR TICK": "lone-star-tick",
+  "BROWN DOG TICK": "brown-dog-tick",
+  "EUROPEAN EARWIG": "european-earwig",
+  "DESERT EARWIG": "desert-earwig",
+  "PERISSIA EARWIG": "perissia-earwig",
+  "PAPER WASP NEST": "paper-wasp-nest",
+  "YELLOW JACKET WASP": "yellow-jacket-wasp",
+  "HORNETS WASP": "hornet-wasp",
+  "ARABIAN PAPER WASP": "arabian-paper-wasp",
+  "RESIDENTIAL FUMIGATION": "residential-fumigation",
+  "COMMERCIAL FUMIGATION": "commercial-fumigation",
+  "WAREHOUSE FUMIGATION": "warehouse-fumigation",
+  "CONTAINER FUMIGATION": "container-fumigation",
+};
+
+export function getPestPageSlug(pestIndex: number): string {
+  return PEST_PAGE_SLUGS[pestIndex] ?? "";
+}
+
+export function getPestTypePageSlug(typeName: string): string {
+  return (
+    PEST_TYPE_SLUGS[typeName] ??
+    typeName
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "")
+  );
+}
+
+/** `/ant` or `/argentine-ant` */
+export function getPestHref(pestIndex: number, typeIndex?: number): string {
+  const pest = pestTreatments[pestIndex];
+  if (!pest) return "/services";
+  if (typeIndex != null && pest.types?.[typeIndex]) {
+    return `/${getPestTypePageSlug(pest.types[typeIndex].name)}`;
+  }
+  const slug = getPestPageSlug(pestIndex);
+  return slug ? `/${slug}` : "/services";
+}
+
+export function resolvePestSlug(
+  slug: string,
+): { pestIndex: number; typeIndex: number | null } | null {
+  const normalized = slug.replace(/^\/+|\/+$/g, "").toLowerCase();
+  if (!normalized) return null;
+
+  const pestIndex = (PEST_PAGE_SLUGS as readonly string[]).indexOf(normalized);
+  if (pestIndex >= 0) return { pestIndex, typeIndex: null };
+
+  for (let i = 0; i < pestTreatments.length; i++) {
+    const types = pestTreatments[i].types ?? [];
+    for (let j = 0; j < types.length; j++) {
+      if (getPestTypePageSlug(types[j].name) === normalized) {
+        return { pestIndex: i, typeIndex: j };
+      }
+    }
+  }
+  return null;
+}
+
+/** Live-site style service page slugs — order matches `serviceOptions` */
+export const SERVICE_PAGE_SLUGS = [
+  "residential-commercial-pest-control",
+  "general-pest-control",
+  "emergency-pest-control",
+  "specialized-pest-extermination",
+  "fumigation-services",
+  "wasp-control",
+] as const;
+
+export function getServicePageSlug(serviceIndex: number): string {
+  return SERVICE_PAGE_SLUGS[serviceIndex] ?? "";
+}
+
+/** `/fumigation-services`, `/wasp-control`, … */
+export function getServiceHref(serviceIndex: number): string {
+  const slug = getServicePageSlug(serviceIndex);
+  return slug ? `/${slug}` : "/services";
+}
+
+export function resolveServiceSlug(
+  slug: string,
+): { serviceIndex: number } | null {
+  const normalized = slug.replace(/^\/+|\/+$/g, "").toLowerCase();
+  if (!normalized) return null;
+  const serviceIndex = (SERVICE_PAGE_SLUGS as readonly string[]).indexOf(
+    normalized,
+  );
+  if (serviceIndex < 0) return null;
+  return { serviceIndex };
+}
+
+export function getAllPestPageSlugs(): string[] {
+  const slugs = new Set<string>([
+    ...PEST_PAGE_SLUGS,
+    ...SERVICE_PAGE_SLUGS,
+  ]);
+  for (const pest of pestTreatments) {
+    for (const type of pest.types ?? []) {
+      slugs.add(getPestTypePageSlug(type.name));
+    }
+  }
+  return [...slugs];
 }
 
 /** Subtype cards + detail copy; pass images in the same order as names */
