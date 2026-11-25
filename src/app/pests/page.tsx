@@ -2,7 +2,6 @@ import Link from "next/link";
 import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import ContactSection from "@/components/ContactSection";
 import HomeAnimations from "@/components/HomeAnimations";
-import Navbar from "@/components/Navbar";
 import Services from "@/components/Services";
 
 export default function PestsPage() {
@@ -18,9 +17,6 @@ export default function PestsPage() {
             alt="Close-up of a German cockroach on sugar crystals"
             priority
           />
-          <div className="relative z-30">
-            <Navbar activeHref="/pests" />
-          </div>
           <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
 
           <div className="absolute top-[270px] right-16 left-16 z-10 text-white max-sm:relative max-sm:top-auto max-sm:right-auto max-sm:left-auto max-sm:px-6">

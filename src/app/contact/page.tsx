@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import ContactPageForm from "@/components/ContactPageForm";
 import HomeAnimations from "@/components/HomeAnimations";
-import Navbar from "@/components/Navbar";
 import { locations } from "@/data/locations";
 import styles from "./ContactPage.module.css";
 
@@ -54,9 +53,6 @@ export default function ContactPage() {
               alt="Customer reaching out on a smartphone"
               priority
             />
-            <div className="relative z-30" data-gsap-hero="nav">
-              <Navbar activeHref="/contact" />
-            </div>
             <div className={`${styles.heroCopy} z-10`} data-gsap-hero="copy">
               <p className={styles.eyebrow}>We&apos;re here to help</p>
               <h1 data-gsap-split>Contact Us</h1>

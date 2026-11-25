@@ -5,14 +5,15 @@ import styles from "./Footer.module.css";
 
 const companyLinks = [
   { label: "Home", href: "/" },
-  { label: "Pest & Services", href: "/pests" },
+  { label: "Pests", href: "/pests" },
+  { label: "Services", href: "/services" },
   { label: "Sectors", href: "/sectors" },
-  { label: "About Us", href: "/about" },
+  { label: "About Us", href: "/About" },
   { label: "Documents", href: "/documents" },
   { label: "Clients", href: "/clients" },
   { label: "Careers", href: "/careers" },
   { label: "Events", href: "/events" },
-  { label: "Blogs", href: "/blog" },
+  { label: "Blogs", href: "/blogs" },
   { label: "Contact Us", href: "/contact" },
 ];
 

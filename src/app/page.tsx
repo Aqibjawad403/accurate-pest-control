@@ -6,7 +6,6 @@ import Certifications from "@/components/Certifications";
 import ClientLogoStrip from "@/components/ClientLogoStrip";
 import ContactSection from "@/components/ContactSection";
 import InsightsSection from "@/components/InsightsSection";
-import Navbar from "@/components/Navbar";
 import OurTeam from "@/components/OurTeam";
 import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
@@ -29,10 +28,6 @@ export default function Home() {
             priority
             overlayOpacity={68}
           />
-          <div className="relative z-30" data-gsap-hero="nav">
-            <Navbar activeHref="/" />
-          </div>
-
           <div className="absolute right-16 bottom-12 left-16 z-10 flex flex-col gap-4 max-sm:right-5 max-sm:bottom-6 max-sm:left-5">
             <div
               className="flex min-h-[38px] w-[370px] items-center justify-center gap-2.5 rounded-[30px] border-[0.5px] border-white bg-[#FFFFFF40] px-[18px] py-[9px] opacity-100 max-sm:w-fit max-sm:max-w-full"

@@ -4,7 +4,6 @@ import Link from "next/link";
 import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import CareersForm from "@/components/CareersForm";
 import HomeAnimations from "@/components/HomeAnimations";
-import Navbar from "@/components/Navbar";
 import styles from "./CareersPage.module.css";
 
 const inter = Inter({
@@ -34,9 +33,6 @@ export default function CareersPage() {
             alt="Professionals collaborating on career opportunities"
             priority
           />
-          <div className="relative z-30" data-gsap-hero="nav">
-            <Navbar activeHref="/careers" />
-          </div>
           <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
 
           <div

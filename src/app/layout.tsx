@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Header from "@/components/Header";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MagicCursor from "@/components/MagicCursor";
 import PdfViewerProvider from "@/components/pdf/PdfViewerProvider";
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <PdfViewerProvider>
           <MagicCursor />
           <Header />
+          <Navbar />
           {children}
           <Footer />
           <TawkTo />

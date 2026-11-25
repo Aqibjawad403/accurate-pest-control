@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import HomeAnimations from "@/components/HomeAnimations";
 import InsightsSection from "@/components/InsightsSection";
-import Navbar from "@/components/Navbar";
 import { getBlogListingPosts } from "@/data/blogs";
 
 export const metadata: Metadata = {
@@ -30,9 +29,6 @@ export default function BlogPage() {
             alt="Writing and research for pest control insights"
             priority
           />
-          <div className="relative z-30" data-gsap-hero="nav">
-            <Navbar activeHref="/blog" />
-          </div>
           <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
 
           <div

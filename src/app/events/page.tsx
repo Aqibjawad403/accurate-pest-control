@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import HomeAnimations from "@/components/HomeAnimations";
-import Navbar from "@/components/Navbar";
 import EventsContent from "./EventsContent";
 import styles from "./EventsPage.module.css";
 
@@ -25,9 +24,6 @@ export default function EventsPage() {
             alt="Industry conference and exhibition hall"
             priority
           />
-          <div className="relative z-30" data-gsap-hero="nav">
-            <Navbar activeHref="/events" />
-          </div>
           <h1 className={`${styles.heroTitle} z-10`} data-gsap-split>
             Pest Control Events in UAE
           </h1>

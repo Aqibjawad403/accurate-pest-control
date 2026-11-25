@@ -2,7 +2,7 @@
 
 import FormStatusMessage from "@/components/FormStatusMessage";
 import { useMailForm } from "@/hooks/useMailForm";
-import styles from "@/app/blog/[slug]/BlogPostPage.module.css";
+import styles from "@/app/blogs/[slug]/BlogPostPage.module.css";
 
 type BlogMailFormsProps = {
   categories: string[];

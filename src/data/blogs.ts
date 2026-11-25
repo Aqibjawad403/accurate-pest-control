@@ -48,7 +48,7 @@ export function getBlogPost(slug: string) {
 export function getBlogListingPosts() {
   return blogPosts.map((post) => ({
     title: post.cardTitle,
-    href: `/blog/${post.slug}`,
+    href: `/blogs/${post.slug}`,
     image: post.image,
   }));
 }

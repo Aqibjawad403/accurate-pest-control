@@ -2,7 +2,6 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import HomeAnimations from "@/components/HomeAnimations";
-import Navbar from "@/components/Navbar";
 import styles from "./Big5EventPage.module.css";
 
 export const metadata: Metadata = {
@@ -96,9 +95,6 @@ export default function Big5EventPage() {
             alt="Construction and trade exhibition at Big 5 Global"
             priority
           />
-          <div className="relative z-30" data-gsap-hero="nav">
-            <Navbar activeHref="/events" />
-          </div>
           <h1 className={`${styles.bannerTitle} z-10`} data-gsap-split>
             Pest Control Events in UAE
           </h1>

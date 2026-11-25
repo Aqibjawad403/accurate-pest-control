@@ -5,7 +5,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import HomeAnimations from "@/components/HomeAnimations";
-import Navbar from "@/components/Navbar";
 import { getOfficialDocuments } from "@/data/official-documents";
 import styles from "./DocumentsPage.module.css";
 
@@ -108,9 +107,6 @@ export default function DocumentsPage() {
             alt="Official documents and paperwork on a desk"
             priority
           />
-          <div className="relative z-30" data-gsap-hero="nav">
-            <Navbar activeHref="/documents" />
-          </div>
           <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
 
           <div

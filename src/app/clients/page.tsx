@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import HomeAnimations from "@/components/HomeAnimations";
-import Navbar from "@/components/Navbar";
 import styles from "./ClientsDirectory.module.css";
 
 export const metadata = {
@@ -46,9 +45,6 @@ export default function ClientsPage() {
             alt="Business partners shaking hands"
             priority
           />
-          <div className="relative z-30" data-gsap-hero="nav">
-            <Navbar activeHref="/clients" />
-          </div>
           <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
 
           <div

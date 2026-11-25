@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import BannerMedia, { bannerImages } from "@/components/BannerMedia";
-import Navbar from "@/components/Navbar";
 import {
   formatPestTypeName,
   getPestDisplayName,
@@ -83,9 +82,6 @@ export default function ServicesHero() {
           priority
           overlayOpacity={70}
         />
-        <div className="relative z-30" data-gsap-hero="nav">
-          <Navbar activeHref={pest ? "/pests" : "/services"} />
-        </div>
         <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
 
         <div

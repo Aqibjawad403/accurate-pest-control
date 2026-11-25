@@ -9,7 +9,6 @@ import {
   BlogReplyForm,
 } from "@/components/BlogMailForms";
 import HomeAnimations from "@/components/HomeAnimations";
-import Navbar from "@/components/Navbar";
 import {
   blogCategories,
   blogTags,
@@ -152,9 +151,6 @@ async function BlogPostContent({ params }: BlogPostPageProps) {
             alt="Pest control blog and insights"
             priority
           />
-          <div className="relative z-30" data-gsap-hero="nav">
-            <Navbar activeHref="/blog" />
-          </div>
           <div className="hidden h-[120px] max-sm:block" aria-hidden="true" />
 
           <div
@@ -173,7 +169,7 @@ async function BlogPostContent({ params }: BlogPostPageProps) {
               </Link>
               <span aria-hidden="true"> &gt; </span>
               <Link
-                href="/blog"
+                href="/blogs"
                 className="transition-opacity hover:opacity-80"
               >
                 Blogs
@@ -261,7 +257,7 @@ async function BlogPostContent({ params }: BlogPostPageProps) {
           </div>
 
           <aside className={styles.sidebar} aria-label="Blog sidebar">
-            <form className={styles.search} action="/blog" role="search">
+            <form className={styles.search} action="/blogs" role="search">
               <label className={styles.visuallyHidden} htmlFor="blog-search">
                 Search blog posts
               </label>
@@ -286,7 +282,7 @@ async function BlogPostContent({ params }: BlogPostPageProps) {
               <ul className={styles.recentPosts}>
                 {recentPosts.map((recentPost) => (
                   <li key={recentPost.slug}>
-                    <Link href={`/blog/${recentPost.slug}`}>
+                    <Link href={`/blogs/${recentPost.slug}`}>
                       <span className={`${styles.recentThumb} image-zoom`}>
                         <Image
                           src={recentPost.image}

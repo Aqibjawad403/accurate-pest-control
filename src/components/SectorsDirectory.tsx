@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import gsap from "gsap";
 import { ArrowDot } from "@/components/ArrowButton";
 import DirectorySidebarList from "@/components/DirectorySidebarList";
@@ -116,17 +116,24 @@ function InspectionForm() {
 
 export default function SectorsDirectory() {
   const router = useRouter();
+  const pathname = usePathname() || "/sectors";
   const searchParams = useSearchParams();
   const sectorParam = searchParams.get("sector");
-  const sectorFromUrl = parseIndex(sectorParam, sectors.length) ?? 0;
-  const [activeIndex, setActiveIndex] = useState(sectorFromUrl);
+  const sectorFromQuery = parseIndex(sectorParam, sectors.length);
+  const [activeIndex, setActiveIndex] = useState(sectorFromQuery ?? 0);
   const activeSector = sectors[activeIndex];
   const sectorContentRef = useRef<HTMLElement>(null);
   const previousActiveIndex = useRef(activeIndex);
 
   useEffect(() => {
-    setActiveIndex(sectorFromUrl);
-  }, [sectorFromUrl]);
+    if (sectorFromQuery == null) return;
+    setActiveIndex(sectorFromQuery);
+  }, [sectorFromQuery]);
+
+  useEffect(() => {
+    if (pathname === "/sectors" && sectorParam == null) return;
+    router.replace("/sectors", { scroll: false });
+  }, [pathname, router, sectorParam]);
 
   useEffect(() => {
     if (previousActiveIndex.current === activeIndex) return;
@@ -167,7 +174,9 @@ export default function SectorsDirectory() {
               activeIndex={activeIndex}
               onSelect={(index) => {
                 setActiveIndex(index);
-                router.push(`/sectors?sector=${index}`, { scroll: false });
+                if (pathname !== "/sectors" || sectorParam != null) {
+                  router.replace("/sectors", { scroll: false });
+                }
               }}
             />
           </nav>

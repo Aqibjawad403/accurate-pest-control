@@ -2,14 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { ArrowDot } from "@/components/ArrowButton";
+import { resolvePestSlug, resolveServiceSlug } from "@/data/pest-services";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Pests & Services", href: "/pests" },
+  { label: "Pests", href: "/pests" },
+  { label: "Service", href: "/services" },
   { label: "Sectors", href: "/sectors" },
-  { label: "About Us", href: "/about" },
+  { label: "About Us", href: "/About" },
   { label: "Clients", href: "/clients" },
   { label: "Events", href: "/events" },
   { label: "Contact Us", href: "/contact" },
@@ -18,64 +21,127 @@ const navLinks = [
 const moreLinks = [
   { label: "Documents", href: "/documents" },
   { label: "Careers", href: "/careers" },
-  { label: "Blogs", href: "/blog" },
+  { label: "Blogs", href: "/blogs" },
 ];
 
-export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
+function isNavLinkActive(href: string, activeHref: string) {
+  if (href === "/") return activeHref === "/";
+  return activeHref === href || activeHref.startsWith(`${href}/`);
+}
+
+function activeHrefFromPath(pathname: string) {
+  const path = pathname || "/";
+  if (path === "/") return "/";
+
+  const slug = path.replace(/^\/+|\/+$/g, "");
+  if (path === "/pests" || path.startsWith("/pests/") || resolvePestSlug(slug)) {
+    return "/pests";
+  }
+  if (
+    path === "/services" ||
+    path.startsWith("/services/") ||
+    resolveServiceSlug(slug)
+  ) {
+    return "/services";
+  }
+  if (path.startsWith("/sectors")) return "/sectors";
+  if (path.toLowerCase().startsWith("/about")) return "/About";
+  if (path.startsWith("/clients")) return "/clients";
+  if (path.startsWith("/events")) return "/events";
+  if (path.startsWith("/contact")) return "/contact";
+  if (path.startsWith("/documents")) return "/documents";
+  if (path.startsWith("/careers")) return "/careers";
+  if (path.startsWith("/blogs")) return "/blogs";
+  return path;
+}
+
+function heroShell() {
+  return (
+    document.querySelector<HTMLElement>("[data-gsap-hero='shell']") ??
+    document.querySelector<HTMLElement>("[data-gsap-section='hero'] > div")
+  );
+}
+
+function restingTop() {
+  const shell = heroShell();
+  const offset = window.matchMedia("(max-width: 1279px)").matches ? 20 : 40;
+  const base = shell ? shell.getBoundingClientRect().top : 62;
+  return Math.max(8, Math.round(base + offset));
+}
+
+export default function Navbar() {
+  const pathname = usePathname() || "/";
+  const activeHref = activeHrefFromPath(pathname);
+  const navRef = useRef<HTMLElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const [restTop, setRestTop] = useState(102);
   const [useLightLogo, setUseLightLogo] = useState(false);
-  const normalizedActiveHref =
-    activeHref === "/services" ? "/pests" : activeHref;
-  const isMoreActive = moreLinks.some(
-    (link) =>
-      normalizedActiveHref === link.href ||
-      normalizedActiveHref.startsWith(`${link.href}/`),
+  const isMoreActive = moreLinks.some((link) =>
+    isNavLinkActive(link.href, activeHref),
   );
 
   useEffect(() => {
-    const updateLogoForBackground = () => {
+    setIsMenuOpen(false);
+    setIsMoreOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const apply = () => {
+      const nav = navRef.current;
+      if (!nav) return;
+
       const sticky = window.scrollY > 8;
-      setIsSticky(sticky);
+      const top = sticky ? 20 : restingTop();
+      nav.style.top = `${top}px`;
+      nav.style.backgroundColor = sticky ? "rgba(255,255,255,0.3)" : "#ffffff";
+      nav.style.backdropFilter = sticky ? "blur(15px)" : "none";
+      nav.style.setProperty(
+        "-webkit-backdrop-filter",
+        sticky ? "blur(15px)" : "none",
+      );
+
+      setIsSticky((current) => (current === sticky ? current : sticky));
+      setRestTop((current) => (sticky || current === top ? current : top));
 
       if (!sticky) {
-        setUseLightLogo(false);
+        setUseLightLogo((current) => (current ? false : current));
         return;
       }
 
-      const darkRegions = [
-        ...document.querySelectorAll<HTMLElement>("[data-gsap-hero='shell']"),
-        ...document.querySelectorAll<HTMLElement>("footer"),
-      ];
-
-      const overlapsDark = darkRegions.some((el) => {
+      const darkRegions = document.querySelectorAll<HTMLElement>(
+        "[data-gsap-hero='shell'], [data-gsap-section='hero'] > div, footer",
+      );
+      const overlapsDark = [...darkRegions].some((el) => {
         const rect = el.getBoundingClientRect();
         return rect.top < 110 && rect.bottom > 20;
       });
-
-      setUseLightLogo(overlapsDark);
+      setUseLightLogo((current) =>
+        current === overlapsDark ? current : overlapsDark,
+      );
     };
 
-    updateLogoForBackground();
-    window.addEventListener("scroll", updateLogoForBackground, {
-      passive: true,
-    });
-    window.addEventListener("resize", updateLogoForBackground);
+    apply();
+    window.addEventListener("scroll", apply, { passive: true });
+    window.addEventListener("resize", apply);
     return () => {
-      window.removeEventListener("scroll", updateLogoForBackground);
-      window.removeEventListener("resize", updateLogoForBackground);
+      window.removeEventListener("scroll", apply);
+      window.removeEventListener("resize", apply);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <nav
+      ref={navRef}
       aria-label="Main navigation"
-      className={`${
-        isSticky
-          ? "fixed top-5 bg-[#FFFFFF4D] backdrop-blur-[15px]"
-          : "absolute top-10 bg-white max-xl:top-5"
-      } right-16 left-16 z-50 flex h-[100px] items-center justify-between gap-4 rounded-[50px] border border-black/10 px-[30px] max-xl:right-4 max-xl:left-4 max-xl:h-[76px] max-xl:gap-2 max-xl:px-4 max-[360px]:right-3 max-[360px]:left-3`}
+      style={{
+        top: isSticky ? 20 : restTop,
+        backgroundColor: isSticky ? "rgba(255,255,255,0.3)" : "#ffffff",
+        backdropFilter: isSticky ? "blur(15px)" : "none",
+        WebkitBackdropFilter: isSticky ? "blur(15px)" : "none",
+      }}
+      className="fixed right-16 left-16 z-[200] flex h-[100px] items-center justify-between gap-4 rounded-[50px] border border-black/10 px-[30px] max-xl:right-4 max-xl:left-4 max-xl:h-[76px] max-xl:gap-2 max-xl:px-4 max-[360px]:right-3 max-[360px]:left-3"
     >
       <Link href="/" className="shrink-0">
         <Image
@@ -92,11 +158,12 @@ export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
 
       <ul className="hidden flex-1 items-center justify-center gap-[18px] xl:flex">
         {navLinks.map((link) => {
-          const isActive = link.href === normalizedActiveHref;
+          const isActive = isNavLinkActive(link.href, activeHref);
           return (
             <li key={link.href}>
               <Link
                 href={link.href}
+                aria-current={isActive ? "page" : undefined}
                 className={`text-center text-[18px] leading-none font-normal whitespace-nowrap transition-colors ${
                   isActive ? "text-[#32A849]" : "text-[#444444] hover:text-[#32A849]"
                 }`}
@@ -163,9 +230,7 @@ export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
           >
             <ul className="rounded-2xl border border-black/10 bg-white p-2 shadow-[0_16px_40px_rgba(0,0,0,0.16)]">
               {moreLinks.map((link) => {
-                const isActive =
-                  normalizedActiveHref === link.href ||
-                  normalizedActiveHref.startsWith(`${link.href}/`);
+                const isActive = isNavLinkActive(link.href, activeHref);
                 return (
                   <li key={link.href} role="none">
                     <Link
@@ -232,11 +297,11 @@ export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
       {isMenuOpen && (
         <div
           id="mobile-navigation-menu"
-          className="absolute top-[calc(100%+12px)] right-0 z-[60] w-[360px] max-w-[calc(100vw-32px)] rounded-[24px] border border-black/10 bg-white p-3 shadow-[0_16px_40px_rgba(0,0,0,0.16)] isolate xl:hidden"
+          className="absolute top-[calc(100%+12px)] right-0 z-[60] max-h-[min(70vh,640px)] w-[360px] max-w-[calc(100vw-32px)] overflow-y-auto rounded-[24px] border border-black/10 bg-white p-3 shadow-[0_16px_40px_rgba(0,0,0,0.16)] isolate xl:hidden"
         >
           <ul className="flex flex-col">
             {navLinks.map((link) => {
-              const isActive = link.href === normalizedActiveHref;
+              const isActive = isNavLinkActive(link.href, activeHref);
               return (
                 <li key={link.href}>
                   <Link
@@ -260,9 +325,7 @@ export default function Navbar({ activeHref = "/" }: { activeHref?: string }) {
               </p>
               <ul className="flex flex-col">
                 {moreLinks.map((link) => {
-                  const isActive =
-                    normalizedActiveHref === link.href ||
-                    normalizedActiveHref.startsWith(`${link.href}/`);
+                  const isActive = isNavLinkActive(link.href, activeHref);
                   return (
                     <li key={link.href}>
                       <Link
