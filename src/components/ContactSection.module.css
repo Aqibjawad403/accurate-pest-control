@@ -91,6 +91,49 @@
   height: 12px;
 }
 
+.whatsappBar {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 18px 8px 8px;
+  border-radius: 999px;
+  background: #005f13;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.whatsappBar:hover {
+  background: #004d10;
+}
+
+.whatsappBar:focus-visible {
+  outline: 2px solid #1fa34a;
+  outline-offset: 3px;
+}
+
+.whatsappIcon {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.whatsappIcon img {
+  width: 22px;
+  height: 22px;
+}
+
 .contactLinks {
   display: flex;
   flex-direction: column;

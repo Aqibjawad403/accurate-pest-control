@@ -34,12 +34,6 @@ const contactLinks = [
     icon: "/call.svg",
   },
   {
-    label: "WhatsApp",
-    detail: "+971 800 8725",
-    href: "https://wa.me/9718008725",
-    icon: "/whastapp.svg",
-  },
-  {
     label: "Email",
     detail: "info@accuratepestcontrol.ae",
     href: "mailto:info@accuratepestcontrol.ae",
@@ -136,6 +130,19 @@ export default function ContactSection() {
               </li>
             ))}
           </ul>
+
+          <a
+            className={styles.whatsappBar}
+            href="https://wa.me/9718008725"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp +971 800 8725"
+          >
+            <span className={styles.whatsappIcon}>
+              <Image src="/whastapp.svg" alt="" width={22} height={22} />
+            </span>
+            <span>+971 800 8725</span>
+          </a>
 
           <div className={styles.contactLinks}>
             {contactLinks.map((link) => (

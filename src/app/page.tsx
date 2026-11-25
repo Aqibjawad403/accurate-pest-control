@@ -5,7 +5,6 @@ import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import Certifications from "@/components/Certifications";
 import ClientLogoStrip from "@/components/ClientLogoStrip";
 import ContactSection from "@/components/ContactSection";
-import InsightsSection from "@/components/InsightsSection";
 import OurTeam from "@/components/OurTeam";
 import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
@@ -86,7 +85,6 @@ export default function Home() {
       <div data-gsap-section="testimonials"><Testimonials /></div>
       <div data-gsap-section="logos"><ClientLogoStrip /></div>
       <div data-gsap-section="contact"><ContactSection /></div>
-      <div data-gsap-section="insights"><InsightsSection /></div>
     </HomeAnimations>
   );
 }

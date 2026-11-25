@@ -2,8 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import BannerMedia, { bannerImages } from "@/components/BannerMedia";
 import HomeAnimations from "@/components/HomeAnimations";
-import InsightsSection from "@/components/InsightsSection";
-import { getBlogListingPosts } from "@/data/blogs";
 
 export const metadata: Metadata = {
   title: "Blogs | Accurate Pest Control Services LLC",
@@ -12,8 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const posts = getBlogListingPosts();
-
   return (
     <HomeAnimations>
       <section
@@ -51,7 +47,6 @@ export default function BlogPage() {
           </div>
         </div>
       </section>
-      <InsightsSection posts={posts} showBadge={false} pageVariant />
     </HomeAnimations>
   );
 }

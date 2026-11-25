@@ -32,27 +32,15 @@ export function InsightCard({ title, href, image }: InsightCardProps) {
 
 export default function InsightsSection({
   posts = POSTS,
-  showBadge = true,
   pageVariant = false,
 }: {
   posts?: Post[];
-  showBadge?: boolean;
   pageVariant?: boolean;
 }) {
   return (
     <section
       className={`${styles.section} ${pageVariant ? styles.pageVariant : ""}`}
     >
-      {showBadge && (
-        <span className={styles.badge} data-gsap-badge>
-          Insights
-        </span>
-      )}
-      <h2 className={styles.heading} data-gsap-split>
-        Insights &amp; Tips for a <br className={styles.br} />
-        Pest-Free Environment
-      </h2>
-
       <div className={styles.grid}>
         {posts.map((post, index) => (
           <InsightCard key={`${post.href}-${index}`} {...post} />
