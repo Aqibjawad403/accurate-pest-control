@@ -138,8 +138,8 @@ const contactGroups: {
     label: "WhatsApp",
     links: [
       {
-        href: "https://wa.me/971524496173",
-        text: "+971 52 449 6173",
+        href: "https://wa.me/9718008725",
+        text: "+971 800 8725",
         external: true,
       },
       {

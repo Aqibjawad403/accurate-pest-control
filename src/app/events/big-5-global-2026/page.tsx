@@ -145,7 +145,7 @@ export default function Big5EventPage() {
             <div className={styles.contactButtons}>
               <a
                 className={styles.contactButton}
-                href="https://wa.me/971524496173"
+                href="https://wa.me/9718008725"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -159,7 +159,7 @@ export default function Big5EventPage() {
                 </span>
                 <span className={styles.contactCopy}>
                   <span className={styles.contactLabel}>WHATSAPP</span>
-                  <span className={styles.contactValue}>+971 52 449 6173</span>
+                  <span className={styles.contactValue}>+971 800 8725</span>
                 </span>
                 <Image
                   src="/arrow-white.svg"

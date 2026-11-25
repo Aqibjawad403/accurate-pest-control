@@ -36,7 +36,7 @@ const contactLinks = [
   {
     label: "WhatsApp",
     detail: "+971 800 8725",
-    href: "https://wa.me/971524496173",
+    href: "https://wa.me/9718008725",
     icon: "/whastapp.svg",
   },
   {

@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import type { FormStatus } from "@/lib/send-mail";
 
 const WHATSAPP_URL =
-  "https://wa.me/971524496173?text=" +
+  "https://wa.me/9718008725?text=" +
   encodeURIComponent(
     "Hi Accurate Pest Control, I just submitted a request on your website.",
   );
