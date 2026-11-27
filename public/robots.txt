@@ -1,0 +1,56 @@
+# Auto-generated — official pages are listed in sitemap.xml only
+# Submit https://accuratepestcontrol.ae/sitemap.xml in Google Search Console
+User-agent: *
+Disallow: /admin
+Disallow: /cgi-bin/
+# Block spam / old CMS / foreign-shop paths (not part of this site)
+Disallow: /wp-admin
+Disallow: /wp-content
+Disallow: /wp-includes
+Disallow: /wordpress
+Disallow: /*.php$
+Disallow: /hiroshi.php
+Disallow: /godsend.php
+Disallow: /shopdetail/
+Disallow: /category/
+Disallow: /shop/
+Disallow: /search
+Disallow: /product/
+Disallow: /contents/
+Disallow: /feature/
+Disallow: /man/
+Disallow: /toreka/
+Disallow: /hobby/
+Disallow: /pcmypage
+Disallow: /venomous-pests
+Disallow: /*casino*
+Disallow: /*kazino*
+Disallow: /*kumar*
+Disallow: /*loyalty-program*
+Disallow: /affiliate
+Disallow: /recruit
+Disallow: /hg
+Disallow: /pw
+Disallow: /kaden.html
+Disallow: /avsoft.html
+Disallow: /game.html
+Disallow: /books.html
+Disallow: /boyslove.html
+Disallow: /cd.html
+Disallow: /pcsp.html
+Disallow: /product_archives
+Disallow: /jukyuban
+Disallow: /toreka
+Disallow: /toyu
+Disallow: /cargo
+Disallow: /reserve
+Disallow: /information
+Disallow: /contents
+Disallow: /feature
+Disallow: /man
+Disallow: /shopdetail
+Disallow: /top-5-signs-you-have-a-termite
+Disallow: /home/blogs/article7
+Disallow: /deep-tick
+
+Sitemap: https://accuratepestcontrol.ae/sitemap.xml
